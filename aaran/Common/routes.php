@@ -18,6 +18,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/department', Aaran\Common\Livewire\department\DepartmentList::class)->name('department');
     Route::get('/transports', Aaran\Common\Livewire\transport\TransportList::class)->name('transports');
     Route::get('/banks', Aaran\Common\Livewire\bank\BankList::class)->name('banks');
+    Route::get('/gst-percent', Aaran\Common\Livewire\gst\GstList::class)->name('gst-percent');
     Route::get('/receipt-types', Aaran\Common\Livewire\receipttype\ReceiptTypeList::class)->name('receipt-types');
     Route::get('/dispatches', Aaran\Common\Livewire\dispatch\DispatchList::class)->name('dispatches');
 
