@@ -7,7 +7,7 @@
 <x-menu.base.route-menuitem  href="{{route('categories')}}" :label="'Categories'"/>
 <x-menu.base.route-menuitem  href="{{route('colours')}}" :label="'Colours'"/>
 <x-menu.base.route-menuitem  href="{{route('sizes')}}" :label="'Sizes'"/>
-{{--<x-menu.base.route-menuitem  href="{{route('gst-percent')}}" :label="'Gst Percent'"/>--}}
+<x-menu.base.route-menuitem  href="{{route('gst-percent')}}" :label="'Gst Percent'"/>
 <x-menu.base.route-menuitem  href="{{route('department')}}" :label="'Departments'"/>
 <x-menu.base.route-menuitem  href="{{route('transports')}}" :label="'Transports'"/>
 <x-menu.base.route-menuitem  href="{{route('banks')}}" :label="'Banks'"/>
