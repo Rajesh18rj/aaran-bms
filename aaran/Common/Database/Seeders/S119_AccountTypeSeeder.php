@@ -10,6 +10,10 @@ class S119_AccountTypeSeeder extends Seeder
     public static function run(): void
     {
         AccountType::create([
+            'vname' => '-',
+            'active_id' => '1'
+        ]);
+        AccountType::create([
             'vname' => 'Savings',
             'active_id' => '1'
         ]);

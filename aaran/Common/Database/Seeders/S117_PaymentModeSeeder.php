@@ -9,6 +9,10 @@ class S117_PaymentModeSeeder extends Seeder
 {
     public static function run(): void
     {
+        PaymentMode::create([
+            'vname' => '-',
+            'active_id' => '1'
+        ]);
 
         PaymentMode::create([
             'vname' => 'Paytm',
