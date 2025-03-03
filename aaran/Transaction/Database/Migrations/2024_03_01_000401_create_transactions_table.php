@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->string('vdate');
             $table->decimal('vname', 15, 2);
 
-            $table->foreignId('receipttype_id')->references('id')->on('receipttypes');
+            $table->foreignId('receipttype_id')->references('id')->on('receipt_types');
             $table->string('remarks');
             $table->string('chq_no')->nullable();
             $table->string('chq_date')->nullable();
