@@ -37,22 +37,22 @@ class Index extends Component
     #region[Validation]
     public function rules(): array
     {
-        if ($this->trans_type_id == 108) {
+//        if ($this->trans_type_id == 108) {
+//            return [
+//                'common.vname' => 'required',
+//            ];
+//        } elseif ($this->trans_type_id == 136) {
+//            return [
+//                'common.vname' => 'required',
+//                'bank_id' => 'required',
+//            ];
+//        } else
             return [
-                'common.vname' => 'required',
-            ];
-        } elseif ($this->trans_type_id == 136) {
-            return [
-                'common.vname' => 'required',
-                'bank_id' => 'required',
-            ];
-        } else
-            return [
-                'common.vname' => 'required',
-                'account_no' => 'required',
-                'ifsc_code' => 'required',
-                'bank_id' => 'required',
-                'account_type_id' => 'required',
+//                'common.vname' => 'required',
+//                'account_no' => 'required',
+//                'ifsc_code' => 'required',
+//                'bank_id' => 'required',
+//                'account_type_id' => 'required',
             ];
     }
 
@@ -385,8 +385,8 @@ class Index extends Component
             'transactions.trans_type_id'
         )
             ->join('account_books', 'transactions.account_book_id', '=', 'account_books.id')
-            ->where('account_books.active_id', '=', 1);
-//            ->get();
+            ->where('account_books.active_id', '=', 1)
+            ->get();
     }
 
     #region[render]
@@ -408,17 +408,13 @@ class Index extends Component
 //                } else {
 //                    return $query->get();
 //                }
-
 //            }
+
+
             ),
             'transaction' => $this->getTransactions(),
 
         ]);
-
-
-
-
-
     }
     #endregion
 }

@@ -10,32 +10,12 @@ class S117_PaymentModeSeeder extends Seeder
     public static function run(): void
     {
         PaymentMode::create([
-            'vname' => '-',
+            'vname' => 'Payment',
             'active_id' => '1'
         ]);
 
         PaymentMode::create([
-            'vname' => 'Paytm',
-            'active_id' => '1'
-        ]);
-
-        PaymentMode::create([
-            'vname' => 'Google Pay',
-            'active_id' => '1'
-        ]);
-
-        PaymentMode::create([
-            'vname' => 'C O D',
-            'active_id' => '1'
-        ]);
-
-        PaymentMode::create([
-            'vname' => 'Credit Card',
-            'active_id' => '1'
-        ]);
-
-        PaymentMode::create([
-            'vname' => 'Debit Card',
+            'vname' => 'Receipt',
             'active_id' => '1'
         ]);
 

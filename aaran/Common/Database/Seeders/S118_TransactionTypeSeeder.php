@@ -15,12 +15,17 @@ class S118_TransactionTypeSeeder extends Seeder
         ]);
 
         TransactionType::create([
-            'vname' => 'Receipt',
+            'vname' => 'UPI',
             'active_id' => '1'
         ]);
 
         TransactionType::create([
-            'vname' => 'Payment',
+            'vname' => 'Credit Card',
+            'active_id' => '1'
+        ]);
+
+        TransactionType::create([
+            'vname' => 'Debit Card',
             'active_id' => '1'
         ]);
 

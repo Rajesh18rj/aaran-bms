@@ -3,9 +3,14 @@
 namespace Aaran\Entries\Livewire\Payment;
 
 use Aaran\Assets\Trait\CommonTraitNew;
+use Aaran\Common\Models\Bank;
 use Aaran\Common\Models\PaymentMode;
+use Aaran\Common\Models\ReceiptType;
+use Aaran\Common\Models\TransactionType;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
+use Aaran\Transaction\Models\AccountBook;
+use Aaran\Transaction\Models\Transaction;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Livewire\Attributes\On;
@@ -45,12 +50,12 @@ class Index extends Component
     public function mount($id)
     {
         if ($id == 1) {
-            $this->mode_id = 111;
-            $this->mode_name = PaymentMode::find()->vname;
+//            $this->mode_id = 111;
+            $this->mode_name = PaymentMode::find($id)->vname;
             $this->vch_no = Transaction::nextNo($this->mode_id);
         } elseif ($id == 2) {
-            $this->mode_id = 110;
-            $this->mode_name = PaymentMode::find(110)->vname;
+//            $this->mode_id = 110;
+            $this->mode_name = PaymentMode::find($id)->vname;
             $this->vch_no = Transaction::nextNo($this->mode_id);
         }
 //        $this->trans_type_id = 108;
@@ -108,7 +113,7 @@ class Index extends Component
                 ];
                 $this->common->save($Transaction, $extraFields);
 
-                $this->common->logEntry($this->vch_no, $this->mode_name, 'create', $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been created.');
+//                $this->common->logEntry($this->vch_no, $this->mode_name, 'create', $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been created.');
 
                 $this->contactUpdate();
                 $message = "Saved";
@@ -282,8 +287,7 @@ class Index extends Component
 
     public function bankSave($name)
     {
-        $obj = Common::create([
-            'label_id' => 9,
+        $obj = Bank::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -294,10 +298,8 @@ class Index extends Component
     public function getBankList(): void
     {
         $this->bankCollection = $this->bank_name ?
-            Common::search(trim($this->bank_name))->where('label_id', '=', '9')->get() :
-            Common::where('label_id', '=', '9')
-                ->Orwhere('id', '=', '1')
-                ->get();
+            Bank::search(trim($this->bank_name))->get() :
+            Bank::all();
 
     }
 #endregion
@@ -355,8 +357,7 @@ class Index extends Component
 
     public function receiptTypeSave($name)
     {
-        $obj = Common::create([
-            'label_id' => 14,
+        $obj = ReceiptType::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -367,8 +368,8 @@ class Index extends Component
     public function getReceiptTypeList(): void
     {
         $this->receipt_typeCollection = $this->receipt_type_name ?
-            Common::search(trim($this->receipt_type_name))->where('label_id', '=', '14')->get() :
-            Common::where('label_id', '=', '14')->Orwhere('id', '=', '1')->get();
+            ReceiptType::search(trim($this->receipt_type_name))->get() :
+            ReceiptType::all();
     }
 #endregion
 
@@ -489,8 +490,7 @@ class Index extends Component
 
     public function transTypeSave($name)
     {
-        $obj = Common::create([
-            'label_id' => 19,
+        $obj = TransactionType::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -501,8 +501,8 @@ class Index extends Component
     public function getTransTypeList(): void
     {
         $this->trans_typeCollection = $this->trans_type_name ?
-            Common::search(trim($this->trans_type_name))->where('label_id', '=', '19')->get() :
-            Common::where('label_id', '=', '19')->get();
+            TransactionType::search(trim($this->trans_type_name))->get() :
+            TransactionType::all();
     }
 #endregion
 
@@ -559,8 +559,7 @@ class Index extends Component
 
     public function instrumentBankSave($name)
     {
-        $obj = Common::create([
-            'label_id' => 25,
+        $obj = Bank::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -572,10 +571,8 @@ class Index extends Component
     public function getInstrumentBankList(): void
     {
         $this->instrumentBankCollection = $this->instrument_bank_name ?
-            Common::search(trim($this->instrument_bank_name))->where('label_id', '=', '25')->get() :
-            Common::where('label_id', '=', '25')
-                ->Orwhere('id', '=', '1')
-                ->get();
+            Bank::search(trim($this->instrument_bank_name))->get() :
+            Bank::all();
     }
 #endregion
 
@@ -632,8 +629,7 @@ class Index extends Component
 
     public function modeSave($name)
     {
-        $obj = Common::create([
-            'label_id' => 20,
+        $obj = PaymentMode::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -644,8 +640,8 @@ class Index extends Component
     public function getModeList(): void
     {
         $this->modeCollection = $this->mode_name ?
-            Common::search(trim($this->mode_name))->where('label_id', '=', '20')->get() :
-            Common::where('label_id', '=', '20')->get();
+            PaymentMode::search(trim($this->mode_name))->get() :
+            PaymentMode::all();
     }
 
 #endregion
@@ -667,19 +663,19 @@ class Index extends Component
             $this->order_id = $Transaction->order_id;
             $this->order_name = $Transaction->order_id ? Order::find($Transaction->order_id)->vname : '';
             $this->trans_type_id = $Transaction->trans_type_id;
-            $this->trans_type_name = $Transaction->trans_type_id ? Common::find($Transaction->trans_type_id)->vname : '';
+            $this->trans_type_name = $Transaction->trans_type_id ? TransactionType::find($Transaction->trans_type_id)->vname : '';
             $this->opening_bal = $Transaction->opening_bal;
             $this->mode_id = $Transaction->mode_id;
-            $this->mode_name = $Transaction->mode_id ? Common::find($Transaction->mode_id)->vname : '';
+            $this->mode_name = $Transaction->mode_id ? PaymentMode::find($Transaction->mode_id)->vname : '';
             $this->vdate = $Transaction->vdate;
             $this->amount = $Transaction->amount;
             $this->receipt_type_id = $Transaction->receipttype_id;
-            $this->receipt_type_name = $Transaction->receipttype_id ? Common::find($Transaction->receipttype_id)->vname : '';
+            $this->receipt_type_name = $Transaction->receipttype_id ? ReceiptType::find($Transaction->receipttype_id)->vname : '';
             $this->remarks = $Transaction->remarks;
             $this->chq_no = $Transaction->chq_no;
             $this->chq_date = $Transaction->chq_date;
             $this->instrument_bank_id = $Transaction->instrument_bank_id;
-            $this->instrument_bank_name = $Transaction->instrument_bank_id ? Common::find($Transaction->instrument_bank_id)->vname : '';
+            $this->instrument_bank_name = $Transaction->instrument_bank_id ? Bank::find($Transaction->instrument_bank_id)->vname : '';
             $this->deposit_on = $Transaction->deposit_on;
             $this->realised_on = $Transaction->realised_on;
             $this->ref_no = $Transaction->ref_no;
@@ -740,9 +736,9 @@ class Index extends Component
         $this->getModeList();
         $this->getOrderList();
         $this->getInstrumentBankList();
-        $this->log = Logbook::where('model_name', $this->mode_name)->take(5)->get();
+//        $this->log = Logbook::where('model_name', $this->mode_name)->take(5)->get();
 
-        return view('livewire.entries.payment.index')->with([
+        return view('entries::Payment.index')->with([
             'list' => $this->getListForm->getList(Transaction::class, function ($query) {
                 return $query->where('mode_id', $this->mode_id)
                     ->where('acyear', session()->get('acyear'))
