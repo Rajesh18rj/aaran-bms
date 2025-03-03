@@ -14,8 +14,8 @@ return new class extends Migration
             $table->string('vname')->unique();
             $table->string('account_no')->nullable();
             $table->string('ifsc_code')->nullable();
-            $table->foreignId('bank_id')->references('id')->on('commons');
-            $table->foreignId('account_type_id')->references('id')->on('commons');
+            $table->foreignId('bank_id')->references('id')->on('banks');
+            $table->foreignId('account_type_id')->references('id')->on('account_types');
             $table->string('branch')->nullable();
             $table->decimal('opening_balance', 10, 3)->default(0);
             $table->date('opening_date')->nullable();

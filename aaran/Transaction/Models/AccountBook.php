@@ -2,7 +2,9 @@
 
 namespace Aaran\Transaction\Models;
 
-use Aaran\Common\Models\Common;
+use Aaran\Common\Models\AccountType;
+use Aaran\Common\Models\Bank;
+use Aaran\Common\Models\TransactionType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,24 +21,19 @@ class AccountBook extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function common($id)
-    {
-        return Common::find($id)->vname;
-    }
-
     public function bank(): BelongsTo
     {
-        return $this->belongsTo(Common::class);
+        return $this->belongsTo(Bank::class);
     }
 
     public function accountType(): BelongsTo
     {
-        return $this->belongsTo(Common::class);
+        return $this->belongsTo(AccountType::class);
     }
 
     public function transType(): BelongsTo
     {
-        return $this->belongsTo(Common::class);
+        return $this->belongsTo(TransactionType::class);
 
     }
 

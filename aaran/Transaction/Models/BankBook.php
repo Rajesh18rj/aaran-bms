@@ -2,7 +2,8 @@
 
 namespace Aaran\Transaction\Models;
 
-use Aaran\Common\Models\Common;
+use Aaran\Common\Models\AccountType;
+use Aaran\Common\Models\Bank;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,12 +19,12 @@ class BankBook extends Model
 
     public function bank(): BelongsTo
     {
-        return $this->belongsTo(Common::class);
+        return $this->belongsTo(Bank::class);
     }
 
     public function accountType(): BelongsTo
     {
-        return $this->belongsTo(Common::class);
+        return $this->belongsTo(AccountType::class);
     }
 
         public function accountBook(): BelongsTo
