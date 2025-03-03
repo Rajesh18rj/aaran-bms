@@ -2,9 +2,11 @@
 
 namespace Aaran\Transaction\Database\Factories;
 
-use Aaran\Common\Models\Common;
+use Aaran\Common\Models\Bank;
+use Aaran\Common\Models\PaymentMode;
+use Aaran\Common\Models\ReceiptType;
+use Aaran\Common\Models\TransactionType;
 use Aaran\Master\Models\Contact;
-use Aaran\Master\Models\ContactDetail;
 use Aaran\Master\Models\Order;
 use Aaran\Transaction\Models\Transaction;
 use App\Models\User;
@@ -18,10 +20,10 @@ class TransactionFactory extends Factory
     {
         $users = User::pluck('id');
         $orders = Order::pluck('id');
-        $trans = Common::where('label_id', '=', '19')->pluck('id');
-        $receipttypes = Common::where('label_id', '=', '14')->pluck('id');
-        $modes = Common::where('label_id', '=', '20')->pluck('id');
-        $banks = Common::where('label_id', '=', '9')->pluck('id');
+        $trans = TransactionType::pluck('id');
+        $receipttypes = ReceiptType::pluck('id');
+        $modes = PaymentMode::pluck('id');
+        $banks = Bank::pluck('id');
         $contacts = Contact::pluck('id')->random();
 
         return [
