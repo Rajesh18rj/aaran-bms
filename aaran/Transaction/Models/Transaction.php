@@ -50,7 +50,7 @@ class Transaction extends Model
 
     public function mode(): BelongsTo
     {
-        return $this->belongsTo(PaymentMode::class);
+        return $this->belongsTo(PaymentMode::class, 'mode_id');
 
     }
 

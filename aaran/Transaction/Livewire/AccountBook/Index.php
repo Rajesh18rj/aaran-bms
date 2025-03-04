@@ -5,7 +5,6 @@ namespace Aaran\Transaction\Livewire\AccountBook;
 use Aaran\Assets\Trait\CommonTraitNew;
 use Aaran\Common\Models\AccountType;
 use Aaran\Common\Models\Bank;
-use Aaran\Common\Models\TransactionType;
 use Aaran\Transaction\Models\AccountBook;
 use Aaran\Transaction\Models\Transaction;
 use Illuminate\Database\Eloquent\Collection;
@@ -80,72 +79,22 @@ class Index extends Component
     #endregion
 
     #region[Get-Save]
-//    public function getSave(): void
-//    {
-//        $this->validate($this->rules());
-//
-//        if ($this->common->vname != '') {
-//            if ($this->common->vid == '') {
-//                $AccountBook = new AccountBook();
-//                $extraFields = [
-//                    'trans_type_id' => $this->trans_type_id ?: null,
-//                    'opening_balance' => $this->opening_balance ?: 0,
-//                    'opening_balance_date' => $this->opening_balance_date,
-//                    'notes' => $this->notes,
-//                    'account_no' => $this->account_no ?: '0',
-//                    'ifsc_code' => $this->ifsc_code ?: '0',
-//                    'bank_id' => $this->bank_id ?: '1',
-//                    'account_type_id' => $this->account_type_id ?: '1',
-//                    'branch' => $this->branch ?: '-',
-//                    'user_id' => auth()->id(),
-//                    'company_id' => session()->get('company_id'),
-//                ];
-//                $this->common->save($AccountBook, $extraFields);
-//                $message = "Saved";
-//            } else {
-//                $AccountBook = AccountBook::find($this->common->vid);
-//                $extraFields = [
-//                    'trans_type_id' => $this->trans_type_id,
-//                    'opening_balance' => $this->opening_balance,
-//                    'opening_balance_date' => $this->opening_balance_date,
-//                    'notes' => $this->notes,
-//                    'account_no' => $this->account_no,
-//                    'ifsc_code' => $this->ifsc_code,
-//                    'bank_id' => $this->bank_id,
-//                    'account_type_id' => $this->account_type_id,
-//                    'branch' => $this->branch,
-//                    'user_id' => auth()->id(),
-//                    'company_id' => session()->get('company_id'),
-//                ];
-//                $this->common->edit($AccountBook, $extraFields);
-//                $message = "Updated";
-//            }
-//            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
-//        }
-//    }
-
     public function getSave(): void
     {
         $this->validate($this->rules());
 
         if ($this->common->vname != '') {
-            // Check if trans_type_id exists in transaction_types table
-//            if (!TransactionType::find($this->trans_type_id)) {
-//                $this->dispatch('notify', ...['type' => 'error', 'content' => 'Invalid Transaction Type ID']);
-//                return;
-//            }
-
             if ($this->common->vid == '') {
                 $AccountBook = new AccountBook();
                 $extraFields = [
-                    'trans_type_id' => $this->trans_type_id,
+                    'trans_type_id' => $this->trans_type_id ?: 109,
                     'opening_balance' => $this->opening_balance ?: 0,
                     'opening_balance_date' => $this->opening_balance_date,
                     'notes' => $this->notes,
                     'account_no' => $this->account_no ?: '0',
                     'ifsc_code' => $this->ifsc_code ?: '0',
-                    'bank_id' => $this->bank_id ?: 1,
-                    'account_type_id' => $this->account_type_id ?: 1,
+                    'bank_id' => $this->bank_id ?: '1',
+                    'account_type_id' => $this->account_type_id ?: '1',
                     'branch' => $this->branch ?: '-',
                     'user_id' => auth()->id(),
                     'company_id' => session()->get('company_id'),
@@ -154,15 +103,8 @@ class Index extends Component
                 $message = "Saved";
             } else {
                 $AccountBook = AccountBook::find($this->common->vid);
-
-                // Ensure AccountBook exists before updating
-                if (!$AccountBook) {
-                    $this->dispatch('notify', ...['type' => 'error', 'content' => 'Account Book not found']);
-                    return;
-                }
-
                 $extraFields = [
-                    'trans_type_id' => $this->trans_type_id,
+                    'trans_type_id' => $this->trans_type_id ?: 109,
                     'opening_balance' => $this->opening_balance,
                     'opening_balance_date' => $this->opening_balance_date,
                     'notes' => $this->notes,
@@ -180,8 +122,6 @@ class Index extends Component
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
-
-
     #endregion
 
     #region[bank]
@@ -390,31 +330,26 @@ class Index extends Component
     }
 
     #region[render]
-
     public function render()
     {
         $this->getBankList();
         $this->getAccountTypeList();
 
         return view('transaction::AccountBook.index')->with([
-            'list' => $this->getListForm->getList(AccountBook::class,
-//                function ($query) {
-//                if ($this->filter == 2) {
-//                    return $query->where('trans_type_id', 109)->get();
-//                } elseif ($this->filter == 3) {
-//                    return $query->where('trans_type_id', 108)->get();
-//                } elseif ($this->filter == 4) {
-//                    return $query->where('trans_type_id', 136)->get();
-//                } else {
-//                    return $query->get();
-//                }
-//            }
+            'list' => $this->getListForm->getList(AccountBook::class, function ($query)
+            {
+                if ($this->filter == 2) {
+                    $query->where('trans_type_id', 109);
+                } elseif ($this->filter == 3) {
+                    $query->where('trans_type_id', 108);
+                }
+                return $query->orderBy('id', 'desc');
+            }),
 
-
-            ),
             'transaction' => $this->getTransactions(),
-
         ]);
     }
     #endregion
+
+
 }

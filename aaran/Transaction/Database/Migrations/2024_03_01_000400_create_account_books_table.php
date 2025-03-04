@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('account_books', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('trans_type_id')->references('id')->on('transaction_types')->onDelete('cascade');
+            $table->foreignId('trans_type_id')->nullable()->constrained('transaction_types')->onDelete('cascade');
             $table->string('vname');
             $table->decimal('opening_balance', 13, 2)->default(0)->nullable();
             $table->date('opening_balance_date');

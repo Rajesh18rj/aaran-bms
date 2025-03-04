@@ -652,12 +652,12 @@ class Trans extends Component
 
             $this->payment_total = Transaction::whereDate('vdate', '<', $this->startDate ?: $this->invoiceDate_first)
                 ->where('contact_id', '=', $this->byParty)
-//                ->where('mode_id', '=', 110)
+                ->where('mode_id', '=', 110)
                 ->sum('vname');
 
             $this->receipt_total = Transaction::whereDate('vdate', '<', $this->startDate ?: $this->invoiceDate_first)
                 ->where('contact_id', '=', $this->byParty)
-//                ->where('mode_id', '=', 111)
+                ->where('mode_id', '=', 111)
                 ->sum('vname');
 
             $this->opening_balance = $this->opening_balance + $this->payment_total - $this->receipt_total;
@@ -681,7 +681,7 @@ class Trans extends Component
         ])
             ->where('active_id', '=', 1)
             ->where('contact_id', '=', $this->byParty)
-//            ->where('mode_id', '=', 110)
+            ->where('mode_id', '=', 110)
             ->whereDate('vdate', '>=', $this->startDate ?: $this->invoiceDate_first)
             ->whereDate('vdate', '<=', $this->endDate ?: Carbon::now()->format('Y-m-d'))
             ->where('company_id', '=', session()->get('company_id'));
@@ -696,7 +696,7 @@ class Trans extends Component
         ])
             ->where('active_id', '=', 1)
             ->where('contact_id', '=', $this->byParty)
-//            ->where('mode_id', '=', 111)
+            ->where('mode_id', '=', 111)
             ->whereDate('vdate', '>=', $this->startDate ?: $this->invoiceDate_first)
             ->whereDate('vdate', '<=', $this->endDate ?: carbon::now()->format('Y-m-d'))
             ->where('company_id', '=', session()->get('company_id'))
