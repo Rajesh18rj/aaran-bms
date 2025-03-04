@@ -73,7 +73,7 @@ class Trans extends Component
 
         $this->accountBook = AccountBook::find($id);
 
-        $this->opening_bal = AccountBook::find($id)->opening_balance;
+        $this->opening_bal = AccountBook::find($id)->opening_balance ;
 
         $this->accountId = $this->accountBook->id;
 

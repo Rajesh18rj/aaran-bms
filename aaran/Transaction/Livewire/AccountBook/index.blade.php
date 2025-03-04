@@ -12,6 +12,7 @@
     </x-slot>
 
     <x-aaran-ui::forms.m-panel>
+        <x-aaran-ui::alerts.notification />
 
         <!-- Top Controls --------------------------------------------------------------------------------------------->
         <x-aaran-ui::forms.top-controls :show-filters="$showFilters"/>
@@ -39,8 +40,8 @@
 
         <div class="grid grid-cols-3 gap-8 justify-items-center py-8">
 
-{{--            <x-aaran-ui::cards.card-4 :list="$list" :data="$transaction" :filter="$filter"/>--}}
-            <x-aaran-ui::cards.card-4 :list="$list" :data="collect($transaction)" :filter="$filter"/>
+            <x-aaran-ui::cards.card-4 :list="$list" :data="$transaction" :filter="$filter"/>
+{{--            <x-aaran-ui::cards.card-4 :list="$list" :data="collect($transaction)" :filter="$filter"/>--}}
 
 
         </div>

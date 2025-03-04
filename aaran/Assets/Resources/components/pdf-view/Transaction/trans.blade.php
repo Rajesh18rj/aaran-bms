@@ -319,7 +319,7 @@
             @endif
 
             @if( $trans_type_id != 108)
-                <td class="center border-r ">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
+                <td class="center border-r ">{{ $row->receiptType->vname ?? 'N/A' }}</td>
             @endif
 
             <td class="p-2 right border-r border-gray-300">  {{  $balance  = $totalReceipt-$totalPayment}}</td>

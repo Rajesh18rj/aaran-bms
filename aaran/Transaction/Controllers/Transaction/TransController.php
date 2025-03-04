@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Transaction;
+namespace Aaran\Transaction\Controllers\Transaction;
 
-use Aaran\Common\Models\Common;
+use Aaran\Common\Models\TransactionType;
 use Aaran\Master\Models\Company;
 use Aaran\Transaction\Models\Transaction;
 use App\Http\Controllers\Controller;
@@ -18,16 +18,16 @@ class TransController extends Controller
     {
         if ($id == 1) {
             $this->trans_type_id = 108;
-            $this->trans_type_name = Common::find(108)->vname;
+            $this->trans_type_name = TransactionType::find(108)->vname;
         } elseif ($id == 2) {
             $this->trans_type_id = 109;
-            $this->trans_type_name = Common::find(109)->vname;
+            $this->trans_type_name = TransactionType::find(109)->vname;
         }
 
 //        return pdf('pdf-view.Transaction.trans', [
         Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
 
-        $pdf = PDF::loadView('pdf-view.Transaction.trans'
+        $pdf = PDF::loadView('aaran-ui::components.pdf-view.Transaction.trans'
             , [
             'list' => $this->getList(),
             'cmp' => Company::printDetails(session()->get('company_id')),

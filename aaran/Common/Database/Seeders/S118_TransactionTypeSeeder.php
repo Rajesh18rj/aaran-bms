@@ -18,5 +18,21 @@ class S118_TransactionTypeSeeder extends Seeder
             ]
         );
 
+        // ✅ Insert or update Payment Modes
+        DB::table('payment_modes')->updateOrInsert(
+            ['id' => 111],
+            ['vname' => 'Bank Transfer', 'active_id' => 1]
+        );
+
+        DB::table('payment_modes')->updateOrInsert(
+            ['id' => 112],
+            ['vname' => 'UPI Payment', 'active_id' => 1]
+        );
+
+        DB::table('payment_modes')->updateOrInsert(
+            ['id' => 113],
+            ['vname' => 'Cash', 'active_id' => 1]
+        );
+
     }
 }

@@ -300,7 +300,7 @@
             <td height="26px" class="center border-r">{{$index+1}}</td>
             <td class="center border-r ">{{ date('d-m-Y', strtotime($row->vdate)) }}</td>
             <td class="center border-r ">{{ $row->contact->vname }}</td>
-            <td class="right border-r ">{{ \Aaran\Transaction\Models\Transaction::common($row->receipttype_id) }}</td>
+            <td class="right border-r ">{{ $row->receipttype_id }}</td>
             <td class="right border-r px-2">
                 @if($row->mode_id == 110)
                 {{$row->vname + 0 }}

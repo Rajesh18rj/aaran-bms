@@ -90,7 +90,9 @@
 
                         <x-aaran-ui::table.cell-text>{{ date('d-m-Y', strtotime($row->vdate)) }}</x-aaran-ui::table.cell-text>
 
-                        <x-aaran-ui::table.cell-text>{{ \Aaran\Transaction\Models\Transaction::common($row->receipttype_id) }}</x-aaran-ui::table.cell-text>
+{{--                        <x-aaran-ui::table.cell-text>{{ \Aaran\Transaction\Models\Transaction::common($row->receipttype_id) }}</x-aaran-ui::table.cell-text>--}}
+                        <x-aaran-ui::table.cell-text>{{ $row->receiptType->vname ?? 'N/A' }}</x-aaran-ui::table.cell-text>
+
 
                         <x-aaran-ui::table.cell-text left>{{ $row->contact->vname }}</x-aaran-ui::table.cell-text>
 
@@ -175,7 +177,7 @@
 
                     <div class="flex flex-row gap-4">
                         <x-aaran-ui::radio.btn wire:model.live="mode_id" value="111">Receipt</x-aaran-ui::radio.btn>
-                        <x-radio.btn wire:model.live="mode_id" value="110">Payment</x-radio.btn>
+                        <x-aaran-ui::radio.btn wire:model.live="mode_id" value="110">Payment</x-aaran-ui::radio.btn>
                     </div>
 
                     <x-aaran-ui::dropdown.wrapper label="Contact Name" type="contactTyped">
@@ -338,7 +340,7 @@
                                                             {{ $order->vname }}
                                                         </x-aaran-ui::dropdown.option>
                                                     @empty
-                                                        @livewire('controls.model.order-model',[$order_name])
+                                                        @livewire('aaran.master.order.lookup.order-model',[$order_name])
                                                     @endforelse
                                                 @endif
                                             </x-aaran-ui::dropdown.select>

@@ -1,20 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Transaction;
+namespace Aaran\Transaction\Controllers\Transaction;
 
-use Aaran\Common\Models\Common;
-use Aaran\Entries\Models\Purchase;
+
+use Aaran\Common\Models\TransactionType;
 use Aaran\Master\Models\Company;
-use Aaran\Master\Models\Contact;
-use Aaran\Master\Models\ContactDetail;
+use Aaran\Master\Models\Contact;;
 use Aaran\Transaction\Models\AccountBook;
 use Aaran\Transaction\Models\Transaction;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-
 class BookReportController extends Controller
 {
     public $byParty;
@@ -39,18 +35,18 @@ class BookReportController extends Controller
         $this->accountId = $this->transaction->id;
         $this->transId = $this->transaction->trans_type_id;
         if ($this->transId == 108) {
-            $this->transName = Common::find(108)->vname;
+            $this->transName = TransactionType::find(108)->vname;
         } elseif ($this->transId == 109) {
-            $this->transName = Common::find(109)->vname;
+            $this->transName = TransactionType::find(109)->vname;
         } else {
-            $this->transName = Common::find(136)->vname;
+            $this->transName = TransactionType::find(136)->vname;
         }
 
         Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif', 'fontDir']);
 
         $this->invoiceDate_first = Carbon::now()->subYear()->format('Y-m-d');
 
-        $pdf = PDF::loadView('pdf-view.Transaction.bookReport'
+        $pdf = PDF::loadView('aaran-ui::components.pdf-view.Transaction.bookReport'
             , [
                 'transaction' => Transaction::where('trans_type_id', $this->transId)
                     ->where('account_book_id', $this->accountId)
