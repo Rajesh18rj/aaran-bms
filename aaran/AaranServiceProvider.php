@@ -17,5 +17,6 @@ class AaranServiceProvider extends ServiceProvider
     protected array $providers = [
         \Aaran\Web\Providers\WebServiceProvider::class,
         \Aaran\Auth\Providers\AuthServiceProvider::class,
+        \Aaran\Setup\Providers\SetupServiceProvider::class,
     ];
 }
