@@ -2,7 +2,7 @@
 
 namespace Aaran\Auth\Livewire\user;
 
-use App\Models\User;
+use Aaran\Auth\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
