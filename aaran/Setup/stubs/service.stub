@@ -1,0 +1,9 @@
+<?php
+namespace Aaran\{{ moduleName }}\Services;
+
+use Aaran\{{ moduleName }}\Interfaces\{{ moduleName }}ServiceInterface;
+
+class {{ moduleName }}Service implements {{ moduleName }}ServiceInterface
+{
+    public function handle() {}
+}

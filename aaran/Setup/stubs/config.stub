@@ -1,0 +1,6 @@
+<?php
+
+return [
+    'setting1' => true,
+    'setting2' => 'default_value',
+];

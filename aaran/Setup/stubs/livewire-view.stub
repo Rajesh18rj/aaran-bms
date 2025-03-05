@@ -1,0 +1,8 @@
+<?php
+namespace Aaran\{{ moduleName }}\Livewire;
+use Livewire\Component;
+class {{ moduleName }} extends Component {
+    public function render() {
+        return view('{{ moduleName }}::livewire.{{ moduleName }}');
+    }
+}

@@ -1,0 +1,7 @@
+<?php
+namespace Aaran\{{ moduleName }}\Interfaces;
+
+interface {{ moduleName }}RepositoryInterface
+{
+    public function getAll();
+}
