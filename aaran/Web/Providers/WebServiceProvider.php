@@ -19,5 +19,8 @@ class WebServiceProvider extends ServiceProvider
             base_path("aaran/Web/Livewire"),
             base_path("aaran/Web/Livewire")
         ]);
+
+        $this->loadViewsFrom(__DIR__ . '/../Livewire', 'web');
+
     }
 }
