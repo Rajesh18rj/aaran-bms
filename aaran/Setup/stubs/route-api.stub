@@ -1,9 +1,0 @@
-<?php
-
-use Illuminate\Support\Facades\Route;
-
-Route::middleware('api')->prefix('api/{{ moduleNameLower }}')->group(function () {
-    Route::get('/', function () {
-        return response()->json(['message' => '{{ moduleName }} API is working!']);
-    });
-});

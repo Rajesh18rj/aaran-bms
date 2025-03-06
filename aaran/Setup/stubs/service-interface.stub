@@ -1,7 +1,0 @@
-<?php
-namespace Aaran\{{ moduleName }}\Interfaces;
-
-interface {{ moduleName }}ServiceInterface
-{
-    public function handle();
-}

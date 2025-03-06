@@ -1,7 +1,0 @@
-<?php
-namespace Aaran\{{ moduleName }}\Models;
-use Illuminate\Database\Eloquent\Model;
-class {{ moduleName }} extends Model
-{
-
-}

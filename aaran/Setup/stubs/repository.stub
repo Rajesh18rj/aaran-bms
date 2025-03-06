@@ -1,9 +1,0 @@
-<?php
-namespace Aaran\{{ moduleName }}\Repositories;
-
-use Aaran\{{ moduleName }}\Interfaces\{{ moduleName }}RepositoryInterface;
-
-class {{ moduleName }}Repository implements {{ moduleName }}RepositoryInterface
-{
-    public function getAll() {}
-}

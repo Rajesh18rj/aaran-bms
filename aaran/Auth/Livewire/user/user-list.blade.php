@@ -1,7 +1,0 @@
-<div>
-    sundar
-
-    {{$List}}
-
-</div>
-
