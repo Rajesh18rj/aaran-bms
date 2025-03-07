@@ -8,7 +8,12 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: [`resources/views/**/*`],
+            refresh: [`resources/views/**/*`,
+                `Aaran/**/Livewire/**/*.blade.php`,
+                `Aaran/**/*.blade.php`,
+                'Aaran/**/*.js',
+                'Aaran/**/*.vue'
+            ],
         }),
         tailwindcss(),
     ],
