@@ -20,17 +20,17 @@ return new class extends Migration {
             $table->string('purpose')->nullable();
             $table->foreignId('order_id')->references('id')->on('orders');
 
-            $table->foreignId('trans_type_id')->references('id')->on('commons');
-            $table->foreignId('mode_id')->references('id')->on('commons');
+            $table->foreignId('trans_type_id')->references('id')->on('transaction_types');
+            $table->foreignId('mode_id')->references('id')->on('payment_modes');
 
             $table->string('vdate');
             $table->decimal('vname', 15, 2);
 
-            $table->foreignId('receipttype_id')->references('id')->on('commons');
+            $table->foreignId('receipttype_id')->references('id')->on('receipt_types');
             $table->string('remarks');
             $table->string('chq_no')->nullable();
             $table->string('chq_date')->nullable();
-            $table->foreignId('instrument_bank_id')->references('id')->on('commons');
+            $table->foreignId('instrument_bank_id')->references('id')->on('banks');
             $table->string('deposit_on')->nullable();
             $table->string('realised_on')->nullable();
 

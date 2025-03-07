@@ -53,6 +53,10 @@
                 <x-aaran-ui::menu.app.sub.entries/>
             @endif
 
+            @if(\Aaran\Assets\Features\Customise::hasTransaction())
+                <x-aaran-ui::menu.app.sub.transaction/>
+            @endif
+
             @if(\Aaran\Assets\Features\Customise::hasCore())
                 <x-aaran-ui::menu.app.sub.core/>
             @endif

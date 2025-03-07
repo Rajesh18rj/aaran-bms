@@ -15,6 +15,11 @@ return new class extends Migration
                 $table->string('vname')->unique();
                 $table->tinyInteger('active_id')->nullable();
             });
+
+            DB::table('transaction_types')->insert([
+                ['id' => 108, 'vname' => 'Sales'],
+                ['id' => 136, 'vname' => 'Purchase'],
+            ]);
         }
     }
 

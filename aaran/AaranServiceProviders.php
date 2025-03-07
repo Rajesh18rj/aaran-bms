@@ -43,7 +43,7 @@ class AaranServiceProviders extends ServiceProvider
 
         $this->app->register(MasterGstServiceProvider::class);
 
-//        $this->app->register(TransactionServiceProvider::class);
+        $this->app->register(TransactionServiceProvider::class);
 
     }
 }
