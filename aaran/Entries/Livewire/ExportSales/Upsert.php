@@ -306,8 +306,9 @@ class Upsert extends Component
 
     public function getStyleList(): void
     {
-        $this->styleCollection = $this->style_name ? Style::search(trim($this->style_name))
-            ->get() : Style::all();
+        $this->styleCollection = $this->style_name ?
+            Style::search(trim($this->style_name))->get() :
+            Style::all();
     }
 
     #endregion
