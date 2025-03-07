@@ -1,4 +1,4 @@
 # 07-03-2025
 
 # TODO:
-- s
+- When clicking the hamburger menu in the dashboard, the background becomes dark.

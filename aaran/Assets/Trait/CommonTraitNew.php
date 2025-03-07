@@ -71,6 +71,8 @@ trait CommonTraitNew
             $obj->delete();
             $this->showDeleteModal = false;
             $this->clearFields();
+            $message = "Deleted Successfully";
+            $this->dispatch('notify', ...['type' => 'success', 'content' => $message]);
         }
     }
 

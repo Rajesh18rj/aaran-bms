@@ -2,7 +2,10 @@
 
 namespace Aaran\Transaction\Models;
 
-use Aaran\Common\Models\Common;
+use Aaran\Common\Models\Bank;
+use Aaran\Common\Models\PaymentMode;
+use Aaran\Common\Models\ReceiptType;
+use Aaran\Common\Models\TransactionType;
 use Aaran\Master\Models\Contact;
 use Aaran\Transaction\Database\Factories\TransactionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,11 +21,6 @@ class Transaction extends Model
     public function contact(): BelongsTo
     {
         return $this->belongsTo(Contact::class);
-    }
-
-    public static function common($id)
-    {
-        return Common::find($id)->vname;
     }
 
     public function account(): BelongsTo
@@ -42,23 +40,23 @@ class Transaction extends Model
 
     public function transType()
     {
-        return $this->belongsTo(Common::class, 'trans_type_id');
+        return $this->belongsTo(TransactionType::class, 'trans_type_id');
     }
 
     public function receiptType()
     {
-        return $this->belongsTo(Common::class, 'receipttype_id');
+        return $this->belongsTo(ReceiptType::class, 'receipttype_id');
     }
 
     public function mode(): BelongsTo
     {
-        return $this->belongsTo(Common::class);
+        return $this->belongsTo(PaymentMode::class, 'mode_id');
 
     }
 
     public function bank(): BelongsTo
     {
-        return $this->belongsTo(Common::class);
+        return $this->belongsTo(Bank::class);
 
     }
 

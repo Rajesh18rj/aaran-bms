@@ -5,6 +5,9 @@ namespace Aaran\Transaction\Providers;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
+use Aaran\Transaction\Livewire\AccountBook;
+
+
 class TransactionServiceProvider extends ServiceProvider
 {
     protected string $moduleName = 'Transaction';
@@ -21,7 +24,10 @@ class TransactionServiceProvider extends ServiceProvider
     {
         $this->loadMigrations();
 
-//        Livewire::component('temp::index', Temp\Index::class);
+        Livewire::component('account-book.index', AccountBook\Index::class);
+        Livewire::component('account-book.trans', AccountBook\Trans::class);
+
+
     }
 
     protected function loadConfigs(): void
