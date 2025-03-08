@@ -3,7 +3,7 @@
 namespace Aaran\Core\Livewire\Tenant;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Core\Models\Tenant;
+use Aaran\Auth\Models\Tenant;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;

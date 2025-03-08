@@ -3,6 +3,7 @@
 namespace Aaran;
 
 use Aaran\Assets\Providers\AssetsServiceProvider;
+use Aaran\Auth\Providers\AuthServiceProvider;
 use Aaran\Blog\Providers\BlogServiceProvider;
 use Aaran\Books\Providers\BooksServiceProvider;
 use Aaran\Common\Providers\CommonServiceProvider;
@@ -25,6 +26,8 @@ class AaranServiceProviders extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
 
         $this->app->register(AssetsServiceProvider::class);
+
+        $this->app->register(AuthServiceProvider::class);
 
         $this->app->register(WebServiceProvider::class);
 

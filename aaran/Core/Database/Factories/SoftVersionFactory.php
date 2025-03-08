@@ -2,7 +2,7 @@
 
 namespace Aaran\Core\Database\Factories;
 
-use Aaran\Core\Models\SoftVersion;
+use Aaran\Auth\Models\SoftVersion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SoftVersionFactory extends Factory

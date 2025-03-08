@@ -2,7 +2,7 @@
 
 namespace Aaran\Core\Database\Seeders;
 
-use Aaran\Core\Models\DefaultCompany;
+use Aaran\Auth\Models\DefaultCompany;
 use Illuminate\Database\Seeder;
 
 class S04_DefaultCompanySeeder extends Seeder

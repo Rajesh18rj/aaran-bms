@@ -2,7 +2,7 @@
 
 namespace Aaran\Core\Database\Seeders;
 
-use Aaran\Core\Models\Tenant;
+use Aaran\Auth\Models\Tenant;
 use Illuminate\Database\Seeder;
 
 class S01_TenantSeeder extends Seeder

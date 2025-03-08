@@ -2,7 +2,7 @@
 
 namespace Aaran\Core\Database\Seeders;
 
-use Aaran\Core\Models\User;
+use Aaran\Auth\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 

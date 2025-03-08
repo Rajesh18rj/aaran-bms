@@ -7,7 +7,7 @@ use Aaran\Common\Models\Common;
 use Aaran\Common\Models\Pincode;
 use Aaran\Common\Models\State;
 use Aaran\Docs\Database\Factories\DocsFactory;
-use Aaran\Core\Models\Tenant;
+use Aaran\Auth\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

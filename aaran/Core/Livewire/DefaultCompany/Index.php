@@ -3,7 +3,7 @@
 namespace Aaran\Core\Livewire\DefaultCompany;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Core\Models\DefaultCompany;
+use Aaran\Auth\Models\DefaultCompany;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;

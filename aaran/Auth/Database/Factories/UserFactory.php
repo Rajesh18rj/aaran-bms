@@ -2,7 +2,7 @@
 
 namespace Aaran\Core\Database\Factories;
 
-use Aaran\Core\Models\User;
+use Aaran\Auth\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;

@@ -8,7 +8,7 @@ use Aaran\Common\Models\City;
 use Aaran\Common\Models\Country;
 use Aaran\Common\Models\Pincode;
 use Aaran\Common\Models\State;
-use Aaran\Core\Models\Tenant;
+use Aaran\Auth\Models\Tenant;
 use Aaran\Master\Models\Company;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;

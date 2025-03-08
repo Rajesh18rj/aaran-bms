@@ -2,7 +2,7 @@
 
 namespace Aaran\Core\Database\Seeders;
 
-use Aaran\Core\Models\Role;
+use Aaran\Auth\Models\Role;
 use Illuminate\Database\Seeder;
 
 class S02_RoleSeeder extends Seeder

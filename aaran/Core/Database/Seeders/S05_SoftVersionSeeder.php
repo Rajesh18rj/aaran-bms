@@ -2,7 +2,7 @@
 
 namespace Aaran\Core\Database\Seeders;
 
-use Aaran\Core\Models\SoftVersion;
+use Aaran\Auth\Models\SoftVersion;
 use Illuminate\Database\Seeder;
 
 class S05_SoftVersionSeeder extends Seeder

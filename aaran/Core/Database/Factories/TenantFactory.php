@@ -2,7 +2,7 @@
 
 namespace Aaran\Core\Database\Factories;
 
-use Aaran\Core\Models\Tenant;
+use Aaran\Auth\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TenantFactory extends Factory

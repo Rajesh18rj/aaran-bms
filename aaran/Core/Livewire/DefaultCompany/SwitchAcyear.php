@@ -3,7 +3,7 @@
 namespace Aaran\Core\Livewire\DefaultCompany;
 
 use Aaran\Assets\Enums\Acyear;
-use Aaran\Core\Models\DefaultCompany;
+use Aaran\Auth\Models\DefaultCompany;
 use Aaran\Master\Models\Company;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
