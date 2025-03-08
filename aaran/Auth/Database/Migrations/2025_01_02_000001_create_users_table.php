@@ -12,13 +12,15 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->foreignId('tenant_id')->nullable();
-            $table->foreignId('role_id')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
+            $table->smallInteger('active_id')->nullable();
             $table->timestamps();
+
+            // Indexing for faster lookups
+            $table->index(['email']);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -12,8 +12,13 @@ return new class extends Migration {
 
             Schema::create('roles', function (Blueprint $table) {
                 $table->id();
-                $table->string('vname')->unique();
+                $table->string('name')->unique(); // Unique role name
+                $table->string('slug')->unique(); // Unique role identifier
+                $table->text('description')->nullable(); // Optional description
                 $table->smallInteger('active_id')->nullable();
+
+                // Indexing for better performance
+                $table->index(['slug']);
             });
         }
     }

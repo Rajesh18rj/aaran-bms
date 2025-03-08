@@ -12,7 +12,7 @@ class Index extends Component
 
     public function getDocs(){
 
-        $md = (__DIR__ . '/../../Markdown/overview.md');
+        $md = (__DIR__ . '/../../Markdown/1-overview.md');
 
         return Str::markdown(file_get_contents($md));
     }

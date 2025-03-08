@@ -1,0 +1,19 @@
+# MIGRATION ORDER
+
+---
+# CORE
+
+- 2025_01_01_000001_create_tenants_table
+- 2025_01_01_000002_create_cache_table
+- 2025_01_01_000003_create_jobs_table
+- 2025_01_01_000004_create_soft_versions_table
+- 2025_01_01_000005_create_default_companies_table
+
+# Auth
+
+- 2025_01_02_000001_create_users_table
+- 2025_01_02_000002_create_roles_table
+- 2025_01_02_000003_create_permissions_table
+- 2025_01_02_000004_create_role_user_table
+- 2025_01_02_000005_create_permission_role_table
+- 2025_01_02_000006_create_personal_access_tokens_table

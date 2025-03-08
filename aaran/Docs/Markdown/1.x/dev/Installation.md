@@ -15,7 +15,7 @@ https://github.com/AARAN-SOFTWARE/aaran-bms
 ---
 
 Click the Fork option, then click Create Fork.
-![img_1.png](img_1.png)
+![img_1.png](../images/img_1.png)
 ---
 
 # 2️⃣ Open the Project in Your Code Editor
