@@ -10,11 +10,6 @@ Route::get('/blogs', Aaran\Web\Livewire\Blog\Index::class)->name('blogs');
 Route::get('/services', Aaran\Web\Livewire\Service\Index::class)->name('services');
 Route::get('/web-contacts', Aaran\Web\Livewire\Contact\Index::class)->name('web-contacts');
 
-//
-//Route::middleware(['auth:sanctum',
-//    config('jetstream.auth_session'), 'verified'])->group(function () {
-
-    Route::get('/dashboard', Aaran\Web\Livewire\Dashboard\Index::class)->name('dashboard');
-
-//});
-
+Route::get('dashboard', Aaran\Web\Livewire\Dashboard\Index::class)
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');

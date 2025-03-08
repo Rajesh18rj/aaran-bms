@@ -1,5 +1,5 @@
 <div x-show="sidebarOpen" x-transition.opacity.duration.600ms @click="sidebarOpen = false"
-     class="fixed inset-0 bg-black bg-opacity-30 z-20 "></div>
+     class="fixed inset-0 bg-black/60 z-20 "></div>
 <nav x-cloak
      class="fixed inset-0 transform duration-500 z-30 w-80 bg-gray-900 text-white h-auto print:hidden"
      :class="{'translate-x-0 ease-in opacity-100':open === true, '-translate-x-full ease-out opacity-0': sidebarOpen === false}">
