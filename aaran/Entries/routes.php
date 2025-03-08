@@ -28,6 +28,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/exportsales/{id}/print', Aaran\Entries\Controllers\ExportSales\ExportInvoiceController::class)->name('exportsales.print');
     Route::get('/exportsales/{id}/packingListPrint', Aaran\Entries\Controllers\ExportSales\ExportPackingListController::class)->name('exportsales.packingListPrint');
 
+    //Reports
+    Route::get('/contactReport/{id}/{month?}/{year?}', Aaran\Reports\Livewire\Contact\PartyReport::class)->name('contactReport');
+    Route::get('/invReport/{id}/{month?}/{year?}', Aaran\Reports\Livewire\Contact\ContactReport::class)->name('invReport');
+
+
 
 //    Route::get('/purchase', \Aaran\Web\Livewire\Home\Index::class)->name('purchase');
 //    Route::get('/transactions', \Aaran\Web\Livewire\Home\Index::class)->name('transactions');
