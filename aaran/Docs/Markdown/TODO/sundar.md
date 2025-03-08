@@ -1,8 +1,8 @@
 # 07-03-2025
 
 # TODO:
-- Dashboard to work ⏳
-- Side Menu is to dark opacity issue  ✅ fixed -by Sundar-08-03-2025
+- Dashboard to work ⏳ progress:-
+- Side Menu is to dark opacity issue  ✅ fixed:-by Sundar-08-03-2025
 - menu and menu items to sort and make according to software to client
 - e-way and e-invoice to complete 🔍
 - activity log to plan 
@@ -18,6 +18,7 @@
 - software permission is to be planned with database version
 - Export sales to check
 - receipt and payment to work 
+- to chek all database migration order flow
 
 
 # emoji
