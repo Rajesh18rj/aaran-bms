@@ -1,10 +1,9 @@
 <?php
 
-namespace Aaran\Core\Livewire\Users;
+namespace Aaran\Auth\User\Livewire\Role;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Auth\User\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Aaran\Auth\User\Models\Role;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -15,35 +14,29 @@ class Index extends Component
     use CommonTrait;
 
     #[Validate]
-    public string $name = '';
-    public string $email = '';
-    public $password = '';
-    public $profile_photo_path = '';
-    public $tenant_id = '';
-    public $role_id ='';
-
+    public string $vname = '';
     public bool $active_id = true;
 
     #region[Validation]
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:users,name',
+            'vname' => 'required|unique:roles,vname',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => ':attribute is missing.',
-            'name.unique' => 'This :attribute is already created.',
+            'vname.required' => ':attribute is missing.',
+            'vname.unique' => 'This :attribute is already created.',
         ];
     }
 
     public function validationAttributes(): array
     {
         return [
-            'name' => 'user name',
+            'vname' => 'role name',
         ];
     }
 
@@ -55,24 +48,16 @@ class Index extends Component
         $this->validate();
 
         if ($this->vid == "") {
-            User::create([
-                'name' => Str::ucfirst($this->name),
-                'email' => $this->email,
-                'password' => Hash::make($this->password),
-                'profile_photo_path' => $this->profile_photo_path,
-                'tenant_id' => $this->tenant_id,
-                'role_id' => $this->role_id,
+            Role::create([
+                'vname' => Str::ucfirst($this->vname),
+                'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = User::find($this->vid);
-            $obj->name = Str::ucfirst($this->name);
-            $obj->email = $this->email;
-            $obj->password = Hash::make($this->password);
-            $obj->profile_photo_path = $this->profile_photo_path;
-            $obj->tenant_id = $this->tenant_id;
-            $obj->role_id = $this->role_id;
+            $obj = Role::find($this->vid);
+            $obj->vname = Str::ucfirst($this->vname);
+            $obj->active_id = $this->active_id;
             $obj->save();
             $message = "Updated";
         }
@@ -85,12 +70,8 @@ class Index extends Component
     public function clearFields(): void
     {
         $this->vid = '';
-        $this->name = '';
-        $this->email = '';
-        $this->password = '';
-        $this->profile_photo_path = '';
-        $this->tenant_id = '';
-        $this->role_id ='';
+        $this->vname = '';
+        $this->active_id = '1';
         $this->searches = '';
     }
     #endregion[Clear Fields]
@@ -99,14 +80,10 @@ class Index extends Component
     public function getObj($id): void
     {
         if ($id) {
-            $obj = User::find($id);
+            $obj = Role::find($id);
             $this->vid = $obj->id;
-            $this->name = $obj->name;
-            $this->email = $obj->email;
-            $this->password = $obj->password;
-            $this->profile_photo_path = $obj->profile_photo_path;
-            $this->tenant_id = $obj->tenant_id;
-            $this->role_id = $obj->role_id;
+            $this->vname = $obj->vname;
+            $this->active_id = $obj->active_id;
         }
     }
     #endregion
@@ -114,8 +91,8 @@ class Index extends Component
     #region[getList]
     public function getList()
     {
-        return User::search($this->searches)
-//            ->where('active_id', '=', $this->activeRecord)
+        return Role::search($this->searches)
+            ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
     }
@@ -125,7 +102,7 @@ class Index extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = User::find($id);
+            $obj = Role::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -138,7 +115,7 @@ class Index extends Component
     #region[render]
     public function render()
     {
-        return view('core::Users.index')->with([
+        return view('core::role.index')->with([
             'list' => $this->getList()
         ]);
     }

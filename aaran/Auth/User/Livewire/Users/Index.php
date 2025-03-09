@@ -1,9 +1,10 @@
 <?php
 
-namespace Aaran\Core\Livewire\Users;
+namespace Aaran\Auth\User\Livewire\Users;
 
 use Aaran\Assets\Trait\CommonTrait;
 use Aaran\Auth\User\Models\User;
+use Aaran\Auth\User\Services\UserService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
@@ -20,9 +21,15 @@ class Index extends Component
     public $password = '';
     public $profile_photo_path = '';
     public $tenant_id = '';
-    public $role_id ='';
-
     public bool $active_id = true;
+
+
+    protected $service;
+    public function boot(UserService $service): void
+    {
+        $this->service = $service;
+    }
+
 
     #region[Validation]
     public function rules(): array
@@ -54,30 +61,30 @@ class Index extends Component
     {
         $this->validate();
 
-        if ($this->vid == "") {
-            User::create([
-                'name' => Str::ucfirst($this->name),
-                'email' => $this->email,
-                'password' => Hash::make($this->password),
-                'profile_photo_path' => $this->profile_photo_path,
-                'tenant_id' => $this->tenant_id,
-                'role_id' => $this->role_id,
-            ]);
-            $message = "Saved";
+//        if ($this->vid == "") {
+//            User::create([
+//                'name' => Str::ucfirst($this->name),
+//                'email' => $this->email,
+//                'password' => Hash::make($this->password),
+//                'profile_photo_path' => $this->profile_photo_path,
+//                'tenant_id' => $this->tenant_id,
+//                'role_id' => $this->role_id,
+//            ]);
+//            $message = "Saved";
+//
+//        } else {
+//            $obj = User::find($this->vid);
+//            $obj->name = Str::ucfirst($this->name);
+//            $obj->email = $this->email;
+//            $obj->password = Hash::make($this->password);
+//            $obj->profile_photo_path = $this->profile_photo_path;
+//            $obj->tenant_id = $this->tenant_id;
+//            $obj->role_id = $this->role_id;
+//            $obj->save();
+//            $message = "Updated";
+//        }
 
-        } else {
-            $obj = User::find($this->vid);
-            $obj->name = Str::ucfirst($this->name);
-            $obj->email = $this->email;
-            $obj->password = Hash::make($this->password);
-            $obj->profile_photo_path = $this->profile_photo_path;
-            $obj->tenant_id = $this->tenant_id;
-            $obj->role_id = $this->role_id;
-            $obj->save();
-            $message = "Updated";
-        }
-
-        $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+//        $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
     }
     #endregion
 

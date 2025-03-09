@@ -3,7 +3,7 @@
 namespace Aaran\Core\Livewire\Role;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Auth\Models\Role;
+use Aaran\Auth\User\Models\Role;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;

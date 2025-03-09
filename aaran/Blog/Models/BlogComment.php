@@ -2,7 +2,7 @@
 
 namespace Aaran\Blog\Models;
 
-use Aaran\Auth\Models\User;
+use Aaran\Auth\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

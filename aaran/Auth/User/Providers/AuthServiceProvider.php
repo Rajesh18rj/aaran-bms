@@ -1,26 +1,21 @@
 <?php
 
-namespace Aaran\Core\Providers;
+namespace Aaran\Auth\User\Providers;
 
+use Aaran\Auth\User\Providers\AuthRouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Aaran\Core\Livewire\Role;
-
-use Aaran\Core\Livewire\Tenant;
 use Aaran\Core\Livewire\Users;
-use Aaran\Core\Livewire\Versions;
-use Aaran\Core\Livewire\DefaultCompany;
 
-
-
-class CoreServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
     protected string $moduleName = 'Core';
     protected string $moduleNameLower = 'core';
 
     public function register(): void
     {
-        $this->app->register(CoreRouteServiceProvider::class);
+        $this->app->register(AuthRouteServiceProvider::class);
         $this->loadConfigs();
         $this->loadViews();
     }
@@ -30,21 +25,13 @@ class CoreServiceProvider extends ServiceProvider
         $this->loadMigrations();
 
         Livewire::component('role::index', \Aaran\Auth\User\Livewire\Role\Index::class);
-        // Register
-        Livewire::component('tenant::index', Tenant\Index::class);
         Livewire::component('users::index', \Aaran\Auth\User\Livewire\Users\Index::class);
-        Livewire::component('versions::index', Versions\Index::class);
-        Livewire::component('DefaultCompany::Index', DefaultCompany\Index::class);
-
-        Livewire::component('DefaultCompany::SwitchDefaultCompany', DefaultCompany\SwitchDefaultCompany::class);
-        Livewire::component('DefaultCompany::SwitchAcYear', DefaultCompany\SwitchAcyear::class);
-
 
     }
 
     protected function loadConfigs(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/core.php', $this->moduleNameLower);
+        $this->mergeConfigFrom(__DIR__ . '/../config/auth.php', $this->moduleNameLower);
     }
 
     protected function loadViews(): void

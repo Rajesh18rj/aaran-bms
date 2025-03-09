@@ -3,7 +3,7 @@
 namespace Aaran;
 
 use Aaran\Assets\Providers\AssetsServiceProvider;
-use Aaran\Auth\Providers\AuthServiceProvider;
+use Aaran\Auth\User\Providers\AuthServiceProvider;
 use Aaran\Blog\Providers\BlogServiceProvider;
 use Aaran\Books\Providers\BooksServiceProvider;
 use Aaran\Common\Providers\CommonServiceProvider;

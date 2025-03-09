@@ -1,9 +1,11 @@
 <?php
 
-namespace Aaran\Core\Models;
+namespace Aaran\Auth\User\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Aaran\Auth\Models\Tenant;
 use Aaran\Auth\User\Database\Factories\UserFactory;
+use Aaran\Auth\User\Models\Role;
 use Aaran\Core\Scopes\TenantScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
