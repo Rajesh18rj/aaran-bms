@@ -17,3 +17,84 @@
 - 2025_01_02_000004_create_role_user_table
 - 2025_01_02_000005_create_permission_role_table
 - 2025_01_02_000006_create_personal_access_tokens_table
+
+# books
+- 2025_01_02_000021_create_account_heads_table
+- 2025_01_02_000022_create_ledger_groups_table
+- 2025_01_02_000023_create_ledgers_table
+
+
+# Common
+
+- 2025_01_02_000101_create_cities_table
+- 2025_01_02_000102_create_states_table
+- 2025_01_02_000103_create_pincodes_table
+- 2025_01_02_000104_create_countries_table
+- 2025_01_02_000105_create_hsncodes_table
+- 2025_01_02_000106_create_units_table
+- 2025_01_02_000107_create_categories_table
+- 2025_01_02_000108_create_colours_table
+- 2025_01_02_000109_create_sizes_table
+- 2025_01_02_000110_create_departments_table
+- 2025_01_02_000111_create_transports_table
+- 2025_01_02_000112_create_bank_table
+- 2025_01_02_000113_create_receipttypes_table
+- 2025_01_02_000114_create_despatches_table
+- 2025_01_02_000115_create_gst_percents_table
+- 2025_01_02_000116_create_contact_types_table
+- 2025_01_02_000117_create_payment_modes_table
+- 2025_01_02_000118_create_transaction_types_table
+- 2025_01_02_000119_create_account_types_table
+
+# master
+- 2025_01_02_000200_create_companies_table
+- 2025_01_02_000201_create_company_details_table
+- 2025_01_02_000202_create_contacts_table
+- 2025_01_02_000202_create_contacts_details_table
+- 2025_01_02_000203_create_products_table
+- 2025_01_02_000204_create_orders_table
+- 2025_01_02_000205_create_styles_table
+
+# Entries
+- 2025_01_02_000301_create_sales_table
+- 2025_01_02_000302_create_saleitems_table
+- 2025_01_02_000303_create_purchases_table
+- 2025_01_02_000304_create_purchaseitems_table
+- 2025_01_02_000307_create_credit_notes_table
+- 2025_01_02_000308_create_credit_noteitems_table
+- 2025_01_02_000309_create_debit_notes_table
+- 2025_01_02_000310_create_debit_noteitems_table
+- 2025_01_02_000311_create_export_sales_table
+- 2025_01_02_000312_create_export_sale_items_table
+- 2025_01_02_000313_create_export_sale_contacts_table
+- 2025_01_02_000314_create_packing_lists_table
+
+# Transaction
+- 2025_01_02_000400_create_account_books_table
+- 2025_01_02_000401_create_transactions_table
+- 2025_01_02_000402_add_vch_to_transactions_table
+- 2025_01_02_000404_create_bank_books_table
+- 2025_01_02_000406_create_cash_books_table
+
+# MasterGST
+- 2025_01_02_000501_create_master_gst_tokens_table
+- 2025_01_02_000502_create_master_gst_irns_table
+- 2025_01_02_000503_create_master_gst_eways_table
+- 2025_01_02_000504_create_eway_bills_table
+
+
+# Web
+- 2025_01_02_000602_create_contact_messages_table
+
+# Blog
+- 2025_01_06_000601_create_blog_categories_table
+- 2025_01_06_000602_create_blog_tags_table
+- 2025_01_06_000603_create_blog_posts_table
+- 2025_01_06_000604_create_blog_comments_table
+- 2025_01_06_000605_create_blog_likes_table
+
+
+
+
+
+
