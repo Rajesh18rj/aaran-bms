@@ -19,7 +19,7 @@ class UserService
         return $this->userRepository->getAll();
     }
 
-    public function getUserById($id)
+    public function getById($id)
     {
         return $this->userRepository->findById($id);
     }

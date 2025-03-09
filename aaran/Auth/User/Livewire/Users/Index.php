@@ -25,6 +25,7 @@ class Index extends Component
 
 
     protected $service;
+
     public function boot(UserService $service): void
     {
         $this->service = $service;
@@ -61,84 +62,60 @@ class Index extends Component
     {
         $this->validate();
 
-//        if ($this->vid == "") {
-//            User::create([
-//                'name' => Str::ucfirst($this->name),
-//                'email' => $this->email,
-//                'password' => Hash::make($this->password),
-//                'profile_photo_path' => $this->profile_photo_path,
-//                'tenant_id' => $this->tenant_id,
-//                'role_id' => $this->role_id,
-//            ]);
-//            $message = "Saved";
-//
-//        } else {
-//            $obj = User::find($this->vid);
-//            $obj->name = Str::ucfirst($this->name);
-//            $obj->email = $this->email;
-//            $obj->password = Hash::make($this->password);
-//            $obj->profile_photo_path = $this->profile_photo_path;
-//            $obj->tenant_id = $this->tenant_id;
-//            $obj->role_id = $this->role_id;
-//            $obj->save();
-//            $message = "Updated";
-//        }
+        $this->service->save([
+            'name' => Str::ucfirst($this->name),
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
+            'profile_photo_path' => $this->profile_photo_path,
+            'tenant_id' => $this->tenant_id,
+            'active_id' => $this->active_id,
+        ]);
+
+        $this->resetForm();
 
 //        $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
     }
+
+    public function edit($id): void
+    {
+        $obj = $this->service->getById($id)->where('id', $id)->first();
+        $this->vid = $id;
+        $this->name = $obj->name;
+        $this->email = $obj->email;
+        $this->password = $obj->password;
+        $this->profile_photo_path = $obj->profile_photo_path;
+        $this->tenant_id = $obj->tenant_id;
+        $this->active_id = $obj->active_id;
+    }
+
+    public function getUpdate(): void
+    {
+       $this->validate();
+
+        $this->service->update($this->vid, [
+            'name' => Str::ucfirst($this->name),
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
+            'profile_photo_path' => $this->profile_photo_path,
+            'tenant_id' => $this->tenant_id,
+            'active_id' => $this->active_id,
+        ]);
+
+        $this->resetForm();
+    }
+
+    public function getDelete($id): void
+    {
+        $this->service->getById($id)->where('id', $id)->delete();
+    }
+
     #endregion
 
-    #region[Clear Fields]
-    public function clearFields(): void
-    {
-        $this->vid = '';
-        $this->name = '';
-        $this->email = '';
-        $this->password = '';
-        $this->profile_photo_path = '';
-        $this->tenant_id = '';
-        $this->role_id ='';
-        $this->searches = '';
-    }
-    #endregion[Clear Fields]
+    #region[reset]
 
-    #region[getObj]
-    public function getObj($id): void
+    private function resetForm()
     {
-        if ($id) {
-            $obj = User::find($id);
-            $this->vid = $obj->id;
-            $this->name = $obj->name;
-            $this->email = $obj->email;
-            $this->password = $obj->password;
-            $this->profile_photo_path = $obj->profile_photo_path;
-            $this->tenant_id = $obj->tenant_id;
-            $this->role_id = $obj->role_id;
-        }
-    }
-    #endregion
-
-    #region[getList]
-    public function getList()
-    {
-        return User::search($this->searches)
-//            ->where('active_id', '=', $this->activeRecord)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-            ->paginate($this->perPage);
-    }
-    #endregion
-
-    #region[delete]
-    public function deleteFunction($id): void
-    {
-        if ($id) {
-            $obj = User::find($id);
-            if ($obj) {
-                $obj->delete();
-                $message = "Deleted Successfully";
-                $this->dispatch('notify', ...['type' => 'success', 'content' => $message]);
-            }
-        }
+        $this->reset(['name', 'email', 'password', 'profile_photo_path', 'tenant_id', 'role_id']);
     }
     #endregion
 
@@ -146,8 +123,9 @@ class Index extends Component
     public function render()
     {
         return view('core::Users.index')->with([
-            'list' => $this->getList()
+            'list' => $this->service->getList(),
         ]);
     }
     #endregion
+
 }

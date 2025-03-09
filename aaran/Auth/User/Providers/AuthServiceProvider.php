@@ -2,11 +2,8 @@
 
 namespace Aaran\Auth\User\Providers;
 
-use Aaran\Auth\User\Providers\AuthRouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use Aaran\Core\Livewire\Role;
-use Aaran\Core\Livewire\Users;
 
 class AuthServiceProvider extends ServiceProvider
 {

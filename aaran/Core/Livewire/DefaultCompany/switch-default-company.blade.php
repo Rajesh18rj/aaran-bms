@@ -11,7 +11,8 @@
             class=" flex flex-row justify-between px-6 pt-4 text-xl font-semibold text-blue-600/100 dark:text-blue-500/100 ">
             <div class="text-xl">Choose&nbsp;Company</div>
             <div>
-                <livewire:DefaultCompany::SwitchAcyear/>
+                <livewire:DefaultCompany::SwitchAcYear/>
+
             </div>
         </div>
 

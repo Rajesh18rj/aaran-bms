@@ -5,7 +5,7 @@ namespace Aaran\Auth\User\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
-use Aaran\Auth\User\Http\Middleware\EnsureUserHasPermission;
+use Aaran\Auth\User\Http\Middleware\EnsurePermission;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -34,7 +34,7 @@ class UserServiceProvider extends ServiceProvider
             __DIR__.'/Config/user.php' => config_path('user.php'),
         ], 'user-config');
 
-        app('router')->aliasMiddleware('user.permission', EnsureUserHasPermission::class);
+        app('router')->aliasMiddleware('user.permission', EnsurePermission::class);
     }
 
     protected function callSeeders()
