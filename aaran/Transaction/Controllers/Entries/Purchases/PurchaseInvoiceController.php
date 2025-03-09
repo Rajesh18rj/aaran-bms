@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Entries\Purchases;
+namespace Aaran\Transaction\Controllers\Entries\Purchases;
 
+use Aaran\Assets\Helper\ConvertTo;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\ContactDetail;
-use App\Helper\ConvertTo;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;

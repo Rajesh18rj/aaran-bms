@@ -277,8 +277,8 @@ $CGSTTotal = 0;
             <?php
             $invoiceTotal += $row->grand_total;
             $taxableValueTotal += $row->total_taxable;
-            $gstTotal+=$row->sales_type==='1'?$row->total_gst:0;
-            $CGSTTotal+=($row->sales_type!=='1'?$row->total_gst:0);
+            $gstTotal += $row->sales_type === '1' ? $row->total_gst : 0;
+            $CGSTTotal += ($row->sales_type !== '1' ? $row->total_gst : 0);
             ?>
         <tr class="text-sm center v-align-c border-b">
             <td height="26px" class="center border-r">{{$index+1}}</td>
@@ -288,11 +288,11 @@ $CGSTTotal = 0;
             <td class="center border-r">{{ date('d-m-Y', strtotime( $row->invoice_date))}}</td>
             <td class="right border-r">{{$row->grand_total}}</td>
             <td class="right border-r">{{$row->total_taxable}}</td>
-            <td class="right border-r">{{$row->sales_type=='1'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
+            <td class="right border-r">{{$row->sales_type=='1'?\Aaran\Transaction\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
             <td class="right border-r">{{$row->sales_type=='1'?$row->total_gst/2:0}}</td>
-            <td class="right border-r">{{$row->sales_type=='1'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
+            <td class="right border-r">{{$row->sales_type=='1'?\Aaran\Transaction\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
             <td class="right border-r">{{$row->sales_type=='1'?$row->total_gst/2:0}}</td>
-            <td class="right border-r">{{$row->sales_type!='1'?\App\Http\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
+            <td class="right border-r">{{$row->sales_type!='1'?\Aaran\Transaction\Controllers\Report\Sales\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
             <td class="right border-r">{{$row->sales_type!='1'?$row->total_gst:0}}</td>
         </tr>
     @endforeach

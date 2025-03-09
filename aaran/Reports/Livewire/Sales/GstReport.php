@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Livewire\Reports\Sales;
+namespace Aaran\Reports\Livewire\Sales;
 
+use Aaran\Assets\Trait\CommonTraitNew;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
-use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 

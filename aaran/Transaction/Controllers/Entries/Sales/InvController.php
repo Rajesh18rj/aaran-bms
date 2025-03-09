@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Entries\Sales;
+namespace Aaran\Transaction\Controllers\Entries\Sales;
 
+use Aaran\Assets\Helper\ConvertTo;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\ContactDetail;
 use Aaran\MasterGst\Models\MasterGstEway;
 use Aaran\MasterGst\Models\MasterGstIrn;
-use App\Helper\ConvertTo;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Spatie\LaravelPdf\Facades\Pdf;
-use function Spatie\LaravelPdf\Support\pdf;
 
 class InvController extends Controller
 {

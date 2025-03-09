@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Report\Purchase;
+namespace Aaran\Transaction\Controllers\Report\Purchase;
 
 use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Purchase;
@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use function Spatie\LaravelPdf\Support\pdf;
 
 class MonthlyReportController extends Controller
 {

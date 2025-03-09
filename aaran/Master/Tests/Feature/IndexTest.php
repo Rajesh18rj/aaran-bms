@@ -1,6 +1,6 @@
 <?php
 
-use Aaran\Auth\Models\DefaultCompany;
+use Aaran\Core\Models\DefaultCompany;
 use Aaran\Auth\User\Models\User;
 use Aaran\Master\Livewire\Company\Index;
 use Aaran\Master\Models\Company;

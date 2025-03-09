@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Livewire\Reports\Statement;
+namespace Aaran\Reports\Livewire\Statement;
 
+use Aaran\Assets\Trait\CommonTraitNew;
 use Aaran\Master\Models\Contact;
-use App\Livewire\Trait\CommonTraitNew;
 use Livewire\Component;
 
 class Receivable extends Component

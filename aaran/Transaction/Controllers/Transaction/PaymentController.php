@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Transaction;
+namespace Aaran\Transaction\Controllers\Transaction;
 
-use Aaran\Common\Models\Common;
 use Aaran\Master\Models\Company;
 use Aaran\Transaction\Models\Transaction;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
-use function Spatie\LaravelPdf\Support\pdf;
 
 class PaymentController extends Controller
 {

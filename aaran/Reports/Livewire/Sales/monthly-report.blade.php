@@ -58,11 +58,11 @@
                                     </x-table.cell-text>
                                     <x-table.cell-text>
                                         <button wire:click="monthlyReport({{$index+1}})"
-                                                @click="setTimeout(()=>open = 2,1500)">{{\App\Livewire\Reports\Sales\MonthlyReport::monthlySales($index+1)}}</button>
+                                                @click="setTimeout(()=>open = 2,1500)">{{\Aaran\Reports\Livewire\Sales\MonthlyReport::monthlySales($index+1)}}</button>
                                     </x-table.cell-text>
                                 </x-table.row>
                                     <?php
-                                    $totalSales += \App\Livewire\Reports\Sales\MonthlyReport::monthlySales($index + 1);
+                                    $totalSales += \Aaran\Reports\Livewire\Sales\MonthlyReport::monthlySales($index + 1);
                                     ?>
                             @endforeach
                             <x-table.row>
@@ -138,38 +138,38 @@
                                 {{--                                {{dd($row['sale']['sales_type'])}}--}}
                                 <x-table.row>
                                     <x-table.cell-text><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$index+1}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$index+1}}</a>
                                     </x-table.cell-text>
 
                                     <x-table.cell-text left><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['contact_gstin']}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['contact_gstin']}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text left><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['contact_name']}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['contact_name']}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['invoice_no']}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['invoice_no']}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{ date('d-m-Y', strtotime( $row['sale']['invoice_date']))}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{ date('d-m-Y', strtotime( $row['sale']['invoice_date']))}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text right><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['grand_total']}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['grand_total']}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text right><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['total_taxable']}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['total_taxable']}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text left><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['percent']:0}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['percent']:0}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text right><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text left><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['percent']:0}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['percent']:0}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text right><a
-                                            href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</a>
+                                                href="{{ route('sales.upsert',[$row['sale']['id']]) }}"> {{$row['sale']['sales_type']=='1'?$row['sale']['total_gst']/2:0}}</a>
                                     </x-table.cell-text>
                                     <x-table.cell-text>
                                         <a href="{{ route('sales.upsert',[$row['sale']['id']]) }}">{{$row['sale']['sales_type']!='1'?$row['percent']:0}}</a>

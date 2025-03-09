@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Entries\ExportSales;
+namespace Aaran\Transaction\Controllers\Entries\ExportSales;
 
+use Aaran\Assets\Helper\ConvertTo;
 use Aaran\Entries\Models\ExportSale;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\ContactDetail;
-use App\Helper\ConvertTo;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;

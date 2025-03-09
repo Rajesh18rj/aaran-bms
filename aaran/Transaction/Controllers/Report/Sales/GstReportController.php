@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Report\Sales;
+namespace Aaran\Transaction\Controllers\Report\Sales;
 
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
@@ -8,7 +8,6 @@ use Aaran\Master\Models\Company;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
-use function Spatie\LaravelPdf\Support\pdf;
 
 class GstReportController extends Controller
 {

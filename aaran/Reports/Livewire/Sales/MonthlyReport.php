@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Livewire\Reports\Sales;
+namespace Aaran\Reports\Livewire\Sales;
 
-use Aaran\Common\Models\Common;
+use Aaran\Assets\Trait\CommonTraitNew;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Contact;
-use Aaran\Master\Models\Product;
-use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -72,11 +70,11 @@ class MonthlyReport extends Component
                 ->select('products.hsncode_id', 'products.gstpercent_id')
                 ->where('id', $item->product_id)
                 ->first();
-            if ($product) {
-                $data[] = $salesType == '1'
-                    ? 'HSN Code - '.Common::name($product->hsncode_id).' - '.(Common::name($product->gstpercent_id) / 2).'%'
-                    : 'HSN Code - '.Common::name($product->hsncode_id).' - '.Common::name($product->gstpercent_id).'%';
-            }
+//            if ($product) {
+//                $data[] = $salesType == '1'
+//                    ? 'HSN Code - '.Common::name($product->hsncode_id).' - '.(Common::name($product->gstpercent_id) / 2).'%'
+//                    : 'HSN Code - '.Common::name($product->hsncode_id).' - '.Common::name($product->gstpercent_id).'%';
+//            }
         }
         return implode(', ', $data);
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\Reports\Statement;
+namespace Aaran\Reports\Livewire\Statement;
 
+use Aaran\Assets\Trait\CommonTraitNew;
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Contact;
 use Aaran\Transaction\Models\Transaction;
-use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +14,7 @@ use Livewire\Component;
 
 class PayablesReport extends Component
 {
-    use CommonTraitNew;
+    use CommonTraitNew ;
     #region[properties]
     public Collection $contacts;
     public $partyName;

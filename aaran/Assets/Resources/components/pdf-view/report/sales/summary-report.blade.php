@@ -262,14 +262,14 @@ $totalSales = 0;
     @foreach(\App\Helper\Months::months() as $index=>$row)
         <tr class="text-sm center v-align-c border-b ">
             <td height="26px" class="center border-r ">{{$row}}</td>
-            <td class="right border-r px-2">{{\App\Http\Controllers\Report\Sales\SummaryController::monthlySales($index+1,$year)}}</td>
+            <td class="right border-r px-2">{{\Aaran\Transaction\Controllers\Report\Sales\SummaryController::monthlySales($index+1,$year)}}</td>
         </tr>
             <?php
-            $totalSales += \App\Http\Controllers\Report\Sales\SummaryController::monthlySales($index + 1, $year)
+            $totalSales += \Aaran\Transaction\Controllers\Report\Sales\SummaryController::monthlySales($index + 1, $year)
             ?>
     @endforeach
     <tr class="text-sm center v-align-c font-bold">
-        <td height="26px" class="center border-r " >TOTAL</td>
+        <td height="26px" class="center border-r ">TOTAL</td>
         <td class="right px-2 border-r ">{{number_format($totalSales,2,'.','')}}</td>
     </tr>
 </table>

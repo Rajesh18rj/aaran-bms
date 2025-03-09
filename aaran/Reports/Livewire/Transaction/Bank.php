@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Livewire\Reports\Transaction;
+namespace Aaran\Reports\Livewire\Transaction;
 
-use Aaran\Common\Models\Common;
+use Aaran\Assets\Trait\CommonTraitNew;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
 use Aaran\Transaction\Models\AccountBook;
 use Aaran\Transaction\Models\Transaction;
-use App\Livewire\Trait\CommonTraitNew;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -66,11 +65,11 @@ class Bank extends Component
         $this->accountId = $this->transaction->id;
         $this->transId = $this->transaction->trans_type_id;
         if ($this->transId == 108) {
-            $this->transName = Common::find(108)->vname;
+//            $this->transName = Common::find(108)->vname;
         } elseif ($this->transId == 109) {
-            $this->transName = Common::find(109)->vname;
+//            $this->transName = Common::find(109)->vname;
         } else {
-            $this->transName = Common::find(136)->vname;
+//            $this->transName = Common::find(136)->vname;
         }
     }
 

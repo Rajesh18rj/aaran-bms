@@ -228,88 +228,88 @@
     </style>
 </head>
 <body>
-    <!------Top Company Area------------------------------------------------------------------------------------------>
-    <table class="border w-full">
-        <tr>
-            <td width="35%" class="right">
-                @if($cmp->get('logo')!='no_image')
-                    <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
-                @else
-                    <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" width="130px">
-                @endif
-            </td>
-            <td width="65%" class="lh-0 left">
-                <div class=" lh-1 font-bold times text-4xl">{{$cmp->get('company_name')}}</div>
-                <div class="lh-2 text-md v-align-b">
-                    <div class="times">{{$cmp->get('address_1')}}</div>
-                    <div class="times">{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</div>
-                    <div class="times">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</div>
-                    <div class="times">{{$cmp->get('gstin')}}</div>
-                </div>
-            </td>
-        </tr>
-    </table>
+<!------Top Company Area------------------------------------------------------------------------------------------>
+<table class="border w-full">
+    <tr>
+        <td width="35%" class="right">
+            @if($cmp->get('logo')!='no_image')
+                <img src="{{ public_path('/storage/images/'.$cmp->get('logo'))}}" alt="company logo" width="130px"/>
+            @else
+                <img src="{{ public_path('images/sk-logo.jpeg') }}" alt="" width="130px">
+            @endif
+        </td>
+        <td width="65%" class="lh-0 left">
+            <div class=" lh-1 font-bold times text-4xl">{{$cmp->get('company_name')}}</div>
+            <div class="lh-2 text-md v-align-b">
+                <div class="times">{{$cmp->get('address_1')}}</div>
+                <div class="times">{{$cmp->get('address_2')}}, {{$cmp->get('city')}}</div>
+                <div class="times">{{$cmp->get('contact')}} - {{$cmp->get('email')}}</div>
+                <div class="times">{{$cmp->get('gstin')}}</div>
+            </div>
+        </td>
+    </tr>
+</table>
 
-    <?php
-    $invoiceTotal = 0;
-    $taxableValueTotal = 0;
-    $gstTotal = 0;
-    $CGSTTotal = 0;
-    ?>
-    <table class="border border-t-none">
-        <tr class="bg-gray text-sm lh-2 border-b">
-            <th width="3%" class="border-r py-5">S.No</th>
-            <th width="10%" class="border-r">GSTIN NO</th>
-            <th width="auto" class="border-r">Party Name</th>
-            <th width="5%" class="border-r">Bill No</th>
-            <th width="7%" class="border-r">Date</th>
-            <th width="7%" class="border-r">Invoice Amount</th>
-            <th width="7%" class="border-r">Taxable Amount</th>
-            <th width="5%" class="border-r">CGST %</th>
-            <th width="6%" class="border-r">CGST TAX</th>
-            <th width="5%" class="border-r">SGST %</th>
-            <th width="6%" class="border-r">SGST TAX</th>
-            <th width="5%" class="border-r">IGST %</th>
-            <th width="6%" class="border-r">IGST TAX</th>
-        </tr>
-        <!-- Table Body ------------------------------------------------------------------------------------------->
-        @foreach($list as $index=>$row)
-                <?php
-                $invoiceTotal += $row->grand_total;
-                $taxableValueTotal += $row->total_taxable;
-                $gstTotal += $row->sales_type == '1' ? $row->total_gst : 0;
-                $CGSTTotal += $row->sales_type != '1' ? $row->total_gst : 0;
-                ?>
+<?php
+$invoiceTotal = 0;
+$taxableValueTotal = 0;
+$gstTotal = 0;
+$CGSTTotal = 0;
+?>
+<table class="border border-t-none">
+    <tr class="bg-gray text-sm lh-2 border-b">
+        <th width="3%" class="border-r py-5">S.No</th>
+        <th width="10%" class="border-r">GSTIN NO</th>
+        <th width="auto" class="border-r">Party Name</th>
+        <th width="5%" class="border-r">Bill No</th>
+        <th width="7%" class="border-r">Date</th>
+        <th width="7%" class="border-r">Invoice Amount</th>
+        <th width="7%" class="border-r">Taxable Amount</th>
+        <th width="5%" class="border-r">CGST %</th>
+        <th width="6%" class="border-r">CGST TAX</th>
+        <th width="5%" class="border-r">SGST %</th>
+        <th width="6%" class="border-r">SGST TAX</th>
+        <th width="5%" class="border-r">IGST %</th>
+        <th width="6%" class="border-r">IGST TAX</th>
+    </tr>
+    <!-- Table Body ------------------------------------------------------------------------------------------->
+    @foreach($list as $index=>$row)
+            <?php
+            $invoiceTotal += $row->grand_total;
+            $taxableValueTotal += $row->total_taxable;
+            $gstTotal += $row->sales_type == '1' ? $row->total_gst : 0;
+            $CGSTTotal += $row->sales_type != '1' ? $row->total_gst : 0;
+            ?>
 
-            <tr class="text-sm center v-align-c border-b">
-                <td height="26px" class="center border-r">{{$index+1}}</td>
-                <td class="center border-r">{{$row->contact->gstin}}</td>
-                <td class="center border-r">{{$row->contact->vname}}</td>
-                <td class="center border-r">{{$row->Entry_no}}</td>
-                <td class="center border-r"> {{ date('d-m-Y', strtotime( $row->purchase_date))}}</td>
-                <td class="right border-r">{{$row->grand_total}}</td>
-                <td class="right border-r">{{$row->total_taxable}}</td>
-                <td class="right border-r">{{$row->sales_type=='1'?\App\Http\Controllers\Report\Purchase\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
-                <td class="right border-r">{{$row->sales_type=='1'?$row->total_gst/2:0}}</td>
-                <td class="right border-r">{{$row->sales_type=='1'?\App\Http\Controllers\Report\Purchase\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
-                <td class="right border-r">{{$row->sales_type=='1'?$row->total_gst/2:0}}</td>
-                <td class="right border-r">{{$row->sales_type!='1'?\App\Http\Controllers\Report\Purchase\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
-                <td class="right border-r">{{$row->sales_type!='1'?$row->total_gst:0}}</td>
-            </tr>
-        @endforeach
-        <tr class="text-sm border-t right v-align-c">
-            <td height="26px" class="center border-r" colspan="3">Total</td>
-            <td class="right border-r "></td>
-            <td class="right border-r "></td>
-            <td class="right border-r ">{{number_format($invoiceTotal,2,'.','')}}</td>
-            <td class="right border-r ">{{number_format($taxableValueTotal,2,'.','')}}</td>
-            <td class="right border-r "></td>
-            <td class="right border-r ">{{number_format($gstTotal/2,2,'.','')}}</td>
-            <td class="right border-r "></td>
-            <td class="right border-r">{{number_format($gstTotal/2,2,'.','')}}</td>
-            <td class="right border-r"></td>
-            <td class="right border-r">{{number_format($CGSTTotal,2,'.','')}}</td>
+        <tr class="text-sm center v-align-c border-b">
+            <td height="26px" class="center border-r">{{$index+1}}</td>
+            <td class="center border-r">{{$row->contact->gstin}}</td>
+            <td class="center border-r">{{$row->contact->vname}}</td>
+            <td class="center border-r">{{$row->Entry_no}}</td>
+            <td class="center border-r"> {{ date('d-m-Y', strtotime( $row->purchase_date))}}</td>
+            <td class="right border-r">{{$row->grand_total}}</td>
+            <td class="right border-r">{{$row->total_taxable}}</td>
+            <td class="right border-r">{{$row->sales_type=='1'?\Aaran\Transaction\Controllers\Report\Purchase\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
+            <td class="right border-r">{{$row->sales_type=='1'?$row->total_gst/2:0}}</td>
+            <td class="right border-r">{{$row->sales_type=='1'?\Aaran\Transaction\Controllers\Report\Purchase\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
+            <td class="right border-r">{{$row->sales_type=='1'?$row->total_gst/2:0}}</td>
+            <td class="right border-r">{{$row->sales_type!='1'?\Aaran\Transaction\Controllers\Report\Purchase\MonthlyReportController::getPercent($row->id,$row->sales_type):0}}</td>
+            <td class="right border-r">{{$row->sales_type!='1'?$row->total_gst:0}}</td>
         </tr>
-    </table>
+    @endforeach
+    <tr class="text-sm border-t right v-align-c">
+        <td height="26px" class="center border-r" colspan="3">Total</td>
+        <td class="right border-r "></td>
+        <td class="right border-r "></td>
+        <td class="right border-r ">{{number_format($invoiceTotal,2,'.','')}}</td>
+        <td class="right border-r ">{{number_format($taxableValueTotal,2,'.','')}}</td>
+        <td class="right border-r "></td>
+        <td class="right border-r ">{{number_format($gstTotal/2,2,'.','')}}</td>
+        <td class="right border-r "></td>
+        <td class="right border-r">{{number_format($gstTotal/2,2,'.','')}}</td>
+        <td class="right border-r"></td>
+        <td class="right border-r">{{number_format($CGSTTotal,2,'.','')}}</td>
+    </tr>
+</table>
 </body>
 </html>

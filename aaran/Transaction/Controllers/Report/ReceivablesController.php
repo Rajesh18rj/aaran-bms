@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Report;
+namespace Aaran\Transaction\Controllers\Report;
 
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
@@ -10,7 +10,6 @@ use Aaran\Transaction\Models\Transaction;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
-use function Spatie\LaravelPdf\Support\pdf;
 
 class ReceivablesController extends Controller
 {

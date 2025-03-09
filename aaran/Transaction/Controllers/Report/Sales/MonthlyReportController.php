@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Report\Sales;
+namespace Aaran\Transaction\Controllers\Report\Sales;
 
-use Aaran\Common\Models\Common;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\Product;

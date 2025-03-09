@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Report\Contact;
+namespace Aaran\Transaction\Controllers\Report\Contact;
 
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
