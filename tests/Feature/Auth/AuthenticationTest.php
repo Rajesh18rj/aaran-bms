@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use Aaran\Auth\Identity\Models\User;
 use Livewire\Volt\Volt as LivewireVolt;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use Aaran\Auth\Identity\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;

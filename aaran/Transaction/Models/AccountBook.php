@@ -2,10 +2,10 @@
 
 namespace Aaran\Transaction\Models;
 
+use Aaran\Auth\Identity\Models\User;
 use Aaran\Common\Models\AccountType;
 use Aaran\Common\Models\Bank;
 use Aaran\Common\Models\TransactionType;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

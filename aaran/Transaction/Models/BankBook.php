@@ -4,7 +4,7 @@ namespace Aaran\Transaction\Models;
 
 use Aaran\Common\Models\AccountType;
 use Aaran\Common\Models\Bank;
-use App\Models\User;
+use Aaran\Auth\Identity\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use Aaran\Auth\Identity\Models\User;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 

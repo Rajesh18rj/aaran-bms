@@ -11,7 +11,7 @@ The **User Module** in Aaran-BMS provides a robust **Role-Based Access Control (
 ```
 Aaran/ 🚀
 │── Auth/ 🔐
-│   ├── User/ 👤
+│   ├── Identity/ 👤
 │   │   ├── Config/ ⚙️
 │   │   │   ├── user.php 🛠️
 │   │   ├── Database/ 🗄️

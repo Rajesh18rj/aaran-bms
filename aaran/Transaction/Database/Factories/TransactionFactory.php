@@ -9,7 +9,7 @@ use Aaran\Common\Models\TransactionType;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
 use Aaran\Transaction\Models\Transaction;
-use App\Models\User;
+use Aaran\Auth\Identity\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TransactionFactory extends Factory

@@ -3,7 +3,7 @@
 namespace Aaran;
 
 use Aaran\Assets\Providers\AssetsServiceProvider;
-use Aaran\Auth\User\Providers\AuthServiceProvider;
+use Aaran\Auth\AuthServiceProvider;
 use Aaran\Blog\Providers\BlogServiceProvider;
 use Aaran\Books\Providers\BooksServiceProvider;
 use Aaran\Common\Providers\CommonServiceProvider;
@@ -17,9 +17,19 @@ use Aaran\Reports\Providers\ReportsServiceProvider;
 use Aaran\Transaction\Providers\TransactionServiceProvider;
 use Aaran\Web\Providers\WebServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class AaranServiceProviders extends ServiceProvider
 {
+
+    public function boot()
+    {
+        // Auto-register Livewire components in Aaran modules
+        Livewire::component('user-table', Auth\Identity\Livewire\Class\UserTable::class);
+        Livewire::component('user-form', Auth\Identity\Livewire\Class\UserForm::class);
+        Livewire::component('user-profile', Auth\Identity\Livewire\Class\UserProfile::class);
+    }
+
     public function register(): void
     {
 

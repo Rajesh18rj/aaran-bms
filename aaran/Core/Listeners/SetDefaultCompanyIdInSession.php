@@ -2,7 +2,8 @@
 
 namespace Aaran\Core\Listeners;
 
-use Aaran\Auth\Models\DefaultCompany;
+
+use Aaran\Core\Models\DefaultCompany;
 
 class SetDefaultCompanyIdInSession
 {

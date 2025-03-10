@@ -7,7 +7,7 @@ use Aaran\Common\Models\GstPercent;
 use Aaran\Common\Models\Hsncode;
 use Aaran\Common\Models\Unit;
 use Aaran\Master\Models\Product;
-use App\Models\User;
+use Aaran\Auth\Identity\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 

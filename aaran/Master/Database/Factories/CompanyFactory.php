@@ -7,7 +7,7 @@ use Aaran\Common\Models\City;
 use Aaran\Common\Models\Pincode;
 use Aaran\Common\Models\State;
 use Aaran\Master\Models\Company;
-use App\Models\User;
+use Aaran\Auth\Identity\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CompanyFactory extends Factory

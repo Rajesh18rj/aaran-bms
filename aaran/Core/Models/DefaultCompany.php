@@ -2,6 +2,7 @@
 
 namespace Aaran\Core\Models;
 
+use Aaran\Auth\Identity\Models\User;
 use Aaran\Master\Models\Company;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
