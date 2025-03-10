@@ -43,21 +43,21 @@
                 @foreach($list as $index=>$row)
                         <x-aaran-ui::table.row>
                             <x-aaran-ui::table.cell-text>
-{{--                                <a href="{{route('payables-report',[$row->id])}}"> {{$index+1}}</a>--}} {{--Todo--}}
+                                <a href="{{route('payables-report',[$row->id])}}"> {{$index+1}}</a>
                             </x-aaran-ui::table.cell-text>
 
                             <x-aaran-ui::table.cell-text left>
-{{--                                <a href="{{route('payables-report',[$row->id])}}"> {{$row->vname}}</a>--}} {{--Todo--}}
+                                <a href="{{route('payables-report',[$row->id])}}"> {{$row->vname}}</a>
                             </x-aaran-ui::table.cell-text>
                             <x-aaran-ui::table.cell-text>
-{{--                                <a href="{{route('payables-report',[$row->id])}}"--}}
-{{--                                   class="text-orange-600">--}}
-{{--                                    {{$row->contact_type->vname}}--}}
-{{--                                </a>--}}    {{--Todo--}}
+                                <a href="{{route('payables-report',[$row->id])}}"
+                                   class="text-orange-600">
+                                    {{$row->contact_type->vname}}
+                                </a>
                             </x-aaran-ui::table.cell-text>
                             <x-aaran-ui::table.cell-text>
-{{--                                <a--}}
-{{--                                        href="{{route('payables-report',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>--}} {{--Todo--}}
+                                <a
+                                        href="{{route('payables-report',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>
                             </x-aaran-ui::table.cell-text>
                         </x-aaran-ui::table.row>
                 @endforeach

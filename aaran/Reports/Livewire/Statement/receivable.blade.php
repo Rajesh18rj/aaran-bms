@@ -41,22 +41,23 @@
                 @foreach($list as $index=>$row)
                         <x-aaran-ui::table.row>
                             <x-aaran-ui::table.cell-text>
-{{--<a href="{{route('receivables-report',[$row->id])}}"> {{$index+1}}</a>--}}{{-- --}}{{--Todo--}}
+                                <a href="{{route('receivables-report',[$row->id])}}"> {{$index+1}}</a>
                             </x-aaran-ui::table.cell-text>
 
                             <x-aaran-ui::table.cell-text left>
-{{--                                <a href="{{route('receivables-report',[$row->id])}}"> {{$row->vname}}</a>--}} {{--Todo--}}
+                                <a href="{{route('receivables-report',[$row->id])}}"> {{$row->vname}}</a>
                             </x-aaran-ui::table.cell-text>
                             <x-aaran-ui::table.cell-text>
-{{--                                <a--}}
-{{--                                    href="{{route('receivables-report',[$row->id])}}"--}}
-{{--                                   class="text-blue-600">--}}
-{{--                                    {{$row->contact_type->vname}}--}}
-{{--                                </a>          Todo--}}
+                                <a
+                                    href="{{route('receivables-report',[$row->id])}}"
+                                   class="text-blue-600">
+                                    {{$row->contact_type->vname}}
+                                </a>
                             </x-aaran-ui::table.cell-text>
                             <x-aaran-ui::table.cell-text>
-{{--                                <a--}}
-{{--                                    href="{{route('receivables-report',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}</a>--}} {{--todo--}}
+                                <a
+                                    href="{{route('receivables-report',[$row->id])}}"> {{$row->opening_balance+$row->outstanding}}
+                                </a>
                             </x-aaran-ui::table.cell-text>
                         </x-aaran-ui::table.row>
                 @endforeach
