@@ -56,5 +56,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->permissions()->where('name', $permission)->exists();
     }
-
 }
