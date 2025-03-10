@@ -17,7 +17,7 @@ class GstReportController extends Controller
 //        return pdf('pdf-view.report.sales.gst-report', [
         Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
 
-        $pdf = PDF::loadView('pdf-view.report.sales.gst-report'
+        $pdf = PDF::loadView('aaran-ui::components.pdf-view.report.sales.gst-report'
             , [
             'sales'=>$this->getSales($month,$year),
             'purchase'=>$this->getPurchase($month,$year),
