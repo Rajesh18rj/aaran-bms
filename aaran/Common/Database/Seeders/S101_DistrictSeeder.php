@@ -2,7 +2,6 @@
 
 namespace Aaran\Common\Database\Seeders;
 
-use Aaran\Common\Models\City;
 use Aaran\Common\Models\District;
 use Illuminate\Database\Seeder;
 
