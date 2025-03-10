@@ -3,6 +3,7 @@
 namespace Aaran\Common\Database\Seeders;
 
 use Aaran\Common\Models\City;
+use Aaran\Common\Models\District;
 use Illuminate\Database\Seeder;
 
 class S101_DistrictSeeder extends Seeder
