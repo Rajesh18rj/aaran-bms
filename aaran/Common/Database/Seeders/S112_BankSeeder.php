@@ -9,59 +9,61 @@ class S112_BankSeeder extends Seeder
 {
     public static function run(): void
     {
-        Bank::create([
-            'vname' => 'State Bank Of India',
-            'active_id' => '1'
-        ]);
+        $banks = [
+            // Public Sector Banks (PSBs)
+            'State Bank of India',
+            'Punjab National Bank',
+            'Bank of Baroda',
+            'Canara Bank',
+            'Union Bank of India',
+            'Bank of India',
+            'Indian Bank',
+            'Central Bank of India',
+            'Indian Overseas Bank',
+            'UCO Bank',
+            'Bank of Maharashtra',
+            'Punjab & Sind Bank',
 
-        Bank::create([
-            'vname' => 'Indian Overseas Bank',
-            'active_id' => '1'
-        ]);
+            // Private Sector Banks
+            'HDFC Bank',
+            'ICICI Bank',
+            'Axis Bank',
+            'Kotak Mahindra Bank',
+            'IndusInd Bank',
+            'Yes Bank',
+            'IDFC First Bank',
+            'Federal Bank',
+            'South Indian Bank',
+            'RBL Bank',
+            'Bandhan Bank',
+            'City Union Bank',
+            'Karur Vysya Bank',
+            'Tamilnad Mercantile Bank',
+            'DCB Bank',
+            'IDBI Bank',
+            'Jammu & Kashmir Bank',
+            'Karnataka Bank',
+            'Lakshmi Vilas Bank',
+            'Nainital Bank',
 
-        Bank::create([
-            'vname' => 'IDFC',
-            'active_id' => '1'
-        ]);
+            // Small Finance Banks
+            'AU Small Finance Bank',
+            'Equitas Small Finance Bank',
+            'Ujjivan Small Finance Bank',
+            'Jana Small Finance Bank',
 
-        Bank::create([
-            'vname' => 'HDFC Bank',
-            'active_id' => '1'
-        ]);
+            // Foreign Banks
+            'Citibank',
+            'Standard Chartered Bank',
+            'HSBC Bank',
+            'DBS Bank',
+        ];
 
-        Bank::create([
-            'vname' => 'Karur Vysya Bank',
-            'active_id' => '1'
-        ]);
-
-        Bank::create([
-            'vname' => 'AXIS Bank',
-            'active_id' => '1'
-        ]);
-
-        Bank::create([
-            'vname' => 'ICICI Bank',
-            'active_id' => '1'
-        ]);
-
-        Bank::create([
-            'vname' => 'IDBI Bank',
-            'active_id' => '1'
-        ]);
-
-        Bank::create([
-            'vname' => 'Kotak Bank',
-            'active_id' => '1'
-        ]);
-
-        Bank::create([
-            'vname' => 'Canara Bank',
-            'active_id' => '1'
-        ]);
-
-        Bank::create([
-            'vname' => 'TMB',
-            'active_id' => '1'
-        ]);
+        foreach ($banks as $bank) {
+            Bank::create([
+                'vname' => $bank,
+                'active_id' => '1'
+            ]);
+        }
     }
 }

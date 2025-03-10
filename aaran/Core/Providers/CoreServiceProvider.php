@@ -29,10 +29,7 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->loadMigrations();
 
-        Livewire::component('role::index', \Aaran\Auth\User\Livewire\Role\Index::class);
-        // Register
         Livewire::component('tenant::index', Tenant\Index::class);
-        Livewire::component('users::index', \Aaran\Auth\User\Livewire\Users\Index::class);
         Livewire::component('versions::index', Versions\Index::class);
         Livewire::component('DefaultCompany::Index', DefaultCompany\Index::class);
 

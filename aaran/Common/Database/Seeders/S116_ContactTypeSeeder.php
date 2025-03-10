@@ -9,23 +9,20 @@ class S116_ContactTypeSeeder extends Seeder
 {
     public static function run(): void
     {
-        ContactType::create([
-            'id' => 1,
-            'vname' => '-',
-            'active_id' => '1'
-        ]);
+        $contactTypes = [
+            1 => '-',
+            2 => 'Creditors',
+            3 => 'Debtors'
+        ];
 
-        ContactType::create([
-            'id' => 2,
-            'vname' => 'Creditors',
-            'active_id' => '1'
-        ]);
-
-        ContactType::create([
-            'id' => 3,
-            'vname' => 'Debtors',
-            'active_id' => '1'
-        ]);
+        foreach ($contactTypes as $id => $vname) {
+            ContactType::create([
+                'id' => $id,
+                'vname' => $vname,
+                'active_id' => '1'
+            ]);
+        }
     }
+
 }
 

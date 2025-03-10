@@ -13,6 +13,8 @@ return new class extends Migration {
             Schema::create('countries', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname')->unique();
+                $table->string('country_code')->nullable();
+                $table->string('currency_symbol')->nullable();
                 $table->tinyInteger('active_id')->nullable();
             });
         }

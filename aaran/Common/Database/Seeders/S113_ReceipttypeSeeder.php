@@ -9,40 +9,30 @@ class S113_ReceipttypeSeeder extends Seeder
 {
     public static function run(): void
     {
-        ReceiptType::create([
-            'vname' => '-',
-            'active_id' => '1'
-        ]);
+        $receiptTypes = [
+            '-',
+            'Cash',
+            'Cheque',
+            'Demand Draft',
+            'PhonePe',
+            'GPay',
+            'Paytm',
+            'UPI',
+            'RTGS',
+            'NEFT',
+            'IMPS',
+            'Bank Transfer',
+            'Credit Card',
+            'Debit Card',
+            'Net Banking',
+            'Wallet Payment'
+        ];
 
-
-        ReceiptType::create([
-            'vname' => 'Cash',
-            'active_id' => '1'
-        ]);
-
-        ReceiptType::create([
-            'vname' => 'Cheque',
-            'active_id' => '1'
-        ]);
-
-        ReceiptType::create([
-            'vname' => 'PhonePe',
-            'active_id' => '1'
-        ]);
-
-        ReceiptType::create([
-            'vname' => 'GPay',
-            'active_id' => '1'
-        ]);
-
-        ReceiptType::create([
-            'vname' => 'RTGS',
-            'active_id' => '1'
-        ]);
-
-        ReceiptType::create([
-            'vname' => 'NEFT',
-            'active_id' => '1'
-        ]);
+        foreach ($receiptTypes as $type) {
+            ReceiptType::create([
+                'vname' => $type,
+                'active_id' => '1'
+            ]);
+        }
     }
 }

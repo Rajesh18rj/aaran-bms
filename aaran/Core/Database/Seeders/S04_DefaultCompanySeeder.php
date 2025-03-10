@@ -2,7 +2,7 @@
 
 namespace Aaran\Core\Database\Seeders;
 
-use Aaran\Auth\Models\DefaultCompany;
+use Aaran\Core\Models\DefaultCompany;
 use Illuminate\Database\Seeder;
 
 class S04_DefaultCompanySeeder extends Seeder
@@ -11,7 +11,7 @@ class S04_DefaultCompanySeeder extends Seeder
     {
         DefaultCompany::create([
             'company_id' => '1',
-            'acyear' => '116',
+            'acyear' => config('core.current_acyear'),
         ]);
     }
 }

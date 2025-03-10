@@ -9,59 +9,20 @@ class S101_CitySeeder extends Seeder
 {
     public static function run(): void
     {
-        City::create([
-            'vname' => '-',
-            'active_id' => '1'
-        ]);
+        $cities = [
+            '-', 'Chennai', 'Coimbatore', 'Madurai', 'Tiruchirappalli', 'Salem', 'Tirunelveli', 'Tiruppur',
+            'Erode', 'Vellore', 'Thoothukudi', 'Dindigul', 'Thanjavur', 'Ranipet', 'Sivakasi', 'Karur',
+            'Udhagamandalam', 'Hosur', 'Nagercoil', 'Kancheepuram', 'Kumbakonam', 'Rajapalayam',
+            'Pudukkottai', 'Ariyalur', 'Nagapattinam', 'Perambalur', 'Tiruvarur', 'Karaikudi',
+            'Ambur', 'Tenkasi', 'Kallakurichi', 'Namakkal', 'Tiruvannamalai', 'Krishnagiri',
+            'Thiruvallur', 'Cuddalore', 'Pollachi', 'Avadi', 'Ambattur', 'Pallavaram', 'Tambaram'
+        ];
 
-        City::create([
-            'vname' => 'Tiruppur',
-            'active_id' => '1'
-        ]);
-
-        City::create([
-            'vname' => 'Coimbatore',
-            'active_id' => '1'
-        ]);
-
-        City::create([
-            'vname' => 'Erode',
-            'active_id' => '1'
-        ]);
-
-        City::create([
-            'vname' => 'Chennai',
-            'active_id' => '1'
-        ]);
-
-        City::create([
-            'vname' => 'Madurai',
-            'active_id' => '1'
-        ]);
-
-        City::create([
-            'vname' => 'Salem',
-            'active_id' => '1'
-        ]);
-
-        City::create([
-            'vname' => 'Tiruchirappalli',
-            'active_id' => '1'
-        ]);
-
-        City::create([
-            'vname' => 'Ambattur',
-            'active_id' => '1'
-        ]);
-
-        City::create([
-            'vname' => 'Tirunelveli',
-            'active_id' => '1'
-        ]);
-
-        City::create([
-            'vname' => 'Avadi',
-            'active_id' => '1'
-        ]);
+        foreach ($cities as $city) {
+            City::create([
+                'vname' => $city,
+                'active_id' => '1'
+            ]);
+        }
     }
 }

@@ -13,6 +13,7 @@ return new class extends Migration {
             Schema::create('sizes', function (Blueprint $table) {
                 $table->id();
                 $table->string('vname')->unique();
+                $table->string('description')->nullable();
                 $table->tinyInteger('active_id')->nullable();
             });
         }

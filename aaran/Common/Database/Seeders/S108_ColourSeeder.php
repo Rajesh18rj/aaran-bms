@@ -9,45 +9,18 @@ class S108_ColourSeeder extends Seeder
 {
     public static function run(): void
     {
-        Colour::create([
-            'vname' => '-',
-            'active_id' => '1'
-        ]);
+        $colors = [
+            'Black', 'White', 'Red', 'Blue', 'Green', 'Yellow', 'Pink', 'Purple', 'Orange', 'Brown', 'Grey',
+            'Maroon', 'Navy Blue', 'Sky Blue', 'Dark Green', 'Olive Green', 'Lime Green', 'Beige', 'Cream', 'Lavender',
+            'Magenta', 'Turquoise', 'Teal', 'Burgundy', 'Mustard', 'Peach', 'Coral', 'Silver', 'Gold', 'Khaki',
+            'Ivory', 'Charcoal', 'Aqua', 'Mint Green', 'Cyan', 'Neon Green', 'Neon Pink', 'Neon Yellow'
+        ];
 
-        Colour::create([
-            'vname' => 'Blue',
-            'active_id' => '1'
-        ]);
-
-        Colour::create([
-            'vname' => 'Pink',
-            'active_id' => '1'
-        ]);
-
-        Colour::create([
-            'vname' => 'Red',
-            'active_id' => '1'
-        ]);
-
-        Colour::create([
-            'vname' => 'Purple',
-            'active_id' => '1'
-        ]);
-
-        Colour::create([
-            'vname' => 'Yellow',
-            'active_id' => '1'
-        ]);
-
-        Colour::create([
-            'vname' => 'Beige',
-            'active_id' => '1'
-        ]);
-
-        Colour::create([
-            'vname' => 'Orange',
-            'active_id' => '1'
-        ]);
-
+        foreach ($colors as $color) {
+            Colour::create([
+                'vname' => $color,
+                'active_id' => '1'
+            ]);
+        }
     }
 }

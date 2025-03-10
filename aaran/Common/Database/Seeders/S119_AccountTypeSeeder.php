@@ -9,15 +9,25 @@ class S119_AccountTypeSeeder extends Seeder
 {
     public static function run(): void
     {
-        AccountType::create([
-            'vname' => 'Savings',
-            'active_id' => '1'
-        ]);
+        $accountTypes = [
+            'Savings',
+            'Current',
+            'Fixed Deposit',
+            'Recurring Deposit',
+            'NRI Account',
+            'Salary Account',
+            'Demat Account',
+            'Loan Account',
+            'Overdraft Account',
+            'Cash Credit Account'
+        ];
 
-        AccountType::create([
-            'vname' => 'Current',
-            'active_id' => '1'
-        ]);
-
+        foreach ($accountTypes as $vname) {
+            AccountType::create([
+                'vname' => $vname,
+                'active_id' => '1'
+            ]);
+        }
     }
+
 }

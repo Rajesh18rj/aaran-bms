@@ -4,44 +4,45 @@ namespace Aaran\Common\Database\Seeders;
 
 use Aaran\Common\Models\Size;
 use Illuminate\Database\Seeder;
+
 class S109_SizeSeeder extends Seeder
 {
     public static function run(): void
     {
+        $sizes = [
+            ['XS', 'Extra Small'],
+            ['S', 'Small'],
+            ['M', 'Medium'],
+            ['L', 'Large'],
+            ['XL', 'Extra Large'],
+            ['XXL', 'Double Extra Large'],
+            ['XXXL', 'Triple Extra Large'],
+            ['4XL', 'Four Extra Large'],
+            ['5XL', 'Five Extra Large'],
 
-        Size::create([
-            'vname' => '-',
-            'active_id' => '1'
-        ]);
+            // Kids' Sizes
+            ['0-3M', '0-3 Months'],
+            ['3-6M', '3-6 Months'],
+            ['6-12M', '6-12 Months'],
+            ['1Y', '1 Year'],
+            ['2Y', '2 Years'],
+            ['3Y', '3 Years'],
+            ['4Y', '4 Years'],
+            ['5Y', '5 Years'],
+            ['6Y', '6 Years'],
+            ['7Y', '7 Years'],
+            ['8Y', '8 Years'],
+            ['9Y', '9 Years'],
+            ['10Y', '10 Years'],
+        ];
 
-        Size::create([
-            'vname' => 's',
-            'active_id' => '1'
-        ]);
-
-        Size::create([
-            'vname' => 'm',
-            'active_id' => '1'
-        ]);
-
-        Size::create([
-            'vname' => 'l',
-            'active_id' => '1'
-        ]);
-
-        Size::create([
-            'vname' => 'xl',
-            'active_id' => '1'
-        ]);
-
-        Size::create([
-            'vname' => 'All size',
-            'active_id' => '1'
-        ]);
-
-        Size::create([
-            'vname' => 'Mixed size',
-            'active_id' => '1'
-        ]);
+        foreach ($sizes as [$vname, $description]) {
+            Size::create([
+                'vname' => $vname,
+                'description' => $description,
+                'active_id' => '1'
+            ]);
+        }
     }
+
 }

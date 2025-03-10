@@ -9,6 +9,7 @@ class S000_CommonSeeder extends Seeder
     public static function run(): void
     {
        S101_CitySeeder::run();
+       S101_DistrictSeeder::run();
        S102_StateSeeder::run();
        S103_CountrySeeder::run();
        S104_PincodeSeeder::run();
