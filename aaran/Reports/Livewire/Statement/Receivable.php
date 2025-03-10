@@ -18,7 +18,7 @@ class Receivable extends Component
 
     public function render()
     {
-        return view('livewire.reports.statement.receivable')->with([
+        return view('reports::Statement.receivable')->with([
             'list' => $this->getList(),
         ]);
     }

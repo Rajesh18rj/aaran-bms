@@ -17,7 +17,7 @@ class Payable extends Component
 
     public function render()
     {
-        return view('livewire.reports.statement.payable')->with([
+        return view('reports::Statement.payable')->with([
             'list' => $this->getList(),
         ]);
     }

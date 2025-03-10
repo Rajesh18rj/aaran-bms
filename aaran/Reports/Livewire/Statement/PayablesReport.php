@@ -115,7 +115,7 @@ class PayablesReport extends Component
     public function render()
     {
 //        $this->getContact();
-        return view('livewire.reports.statement.payables-report')->with([
+        return view('reports::Statement.payables-report')->with([
             'list' => $this->getList()
         ]);
     }
