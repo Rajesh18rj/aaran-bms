@@ -69,7 +69,9 @@
                 <x-aaran-ui::menu.app.sub.blog/>
             @endif
 
-
+            @if(\Aaran\Assets\Features\Customise::hasReport())
+                <x-aaran-ui::menu.app.sub.reports/>
+            @endif
 
             {{--            @if(Aaran\Aadmin\Src\Customise::hasReport())--}}
             {{--                <x-menu.sub.reports/>--}}

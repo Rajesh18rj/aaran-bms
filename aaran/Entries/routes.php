@@ -31,6 +31,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     //Reports
     Route::get('/contactReport/{id}/{month?}/{year?}', Aaran\Reports\Livewire\Contact\PartyReport::class)->name('contactReport');
     Route::get('/invReport/{id}/{month?}/{year?}', Aaran\Reports\Livewire\Contact\ContactReport::class)->name('invReport');
+    Route::get('/receivables', Aaran\Reports\Livewire\Statement\Receivable::class)->name('receivables');
+    Route::get('/payables', Aaran\Reports\Livewire\Statement\Payable::class)->name('payables');
+    Route::get('/payables-report/{id}', Aaran\Reports\Livewire\Statement\PayablesReport::class)->name('payables-report');
+    Route::get('/receivables-report/{id}', Aaran\Reports\Livewire\Statement\ReceivablesReport::class)->name('receivables-report');
 
 
 

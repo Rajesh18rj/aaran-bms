@@ -7,7 +7,7 @@
                                 text-gray-500 hover:text-gray-200 border-l-4 border-transparent hover:border-blue-500 px-4 group">
 
                         <span class="inline-flex justify-center items-center space-x-3">
-                            <x-icons.icon-fill iconfill="dashboard"  class="w-4 h-auto block fill-gray-500 group-hover:fill-blue-500"/>
+                            <x-aaran-ui::icons.icon-fill iconfill="dashboard"  class="w-4 h-auto block fill-gray-500 group-hover:fill-blue-500"/>
 
                             <span
                                 class=" flex font-semibold text-sm tracking-wide truncate my-4 font-sans uppercase">
@@ -32,7 +32,7 @@
 
         <ul class="grid-cols-1 grid bg-gray-800">
 
-            @include('components.menu.items.report-menu')
+            @include('aaran-ui::components.menu.app.items.report-menu')
             <li class="bg-gray-1000 mt-0.5"></li>
         </ul>
     </div>
