@@ -7,12 +7,6 @@
         <div class=" bg-[#F8F8FF] gap-10 flex sm:flex-row flex-col tracking-wider rounded-lg">
 
             <x-aaran-ui::web.dashboard.greetings/>
-
-            @livewire('user-table')
-            @livewire('user-form')
-            @livewire('user-profile')
-
-
         </div>
 
         <!-- row 2 ---------------------------------------------------------------------------------------------------->

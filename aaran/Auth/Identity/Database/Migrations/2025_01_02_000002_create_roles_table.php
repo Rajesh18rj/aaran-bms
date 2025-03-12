@@ -16,7 +16,7 @@ return new class extends Migration {
                 $table->string('slug')->unique()->nullable(); // Unique role identifier
                 $table->text('description')->nullable(); // Optional description
                 $table->smallInteger('active_id')->nullable();
-
+                $table->timestamps();
                 // Indexing for better performance
                 $table->index(['slug']);
             });

@@ -2,6 +2,7 @@
 
 namespace Aaran\Auth\Identity\Models;
 
+use Aaran\Auth\Identity\Database\Factories\UserFactory;
 use Aaran\Core\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -55,5 +56,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasPermission($permission)
     {
         return $this->permissions()->where('name', $permission)->exists();
+    }
+
+    protected static function newFactory(): UserFactory
+    {
+        return new UserFactory();
     }
 }

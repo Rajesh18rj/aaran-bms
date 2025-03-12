@@ -16,3 +16,39 @@ test('authenticated users can visit the dashboard', function () {
     $response = $this->get('/dashboard');
     $response->assertStatus(200);
 });
+
+
+beforeEach(function () {
+    $this->user = User::factory()->create();
+});
+
+
+// Model Tests
+it('has correct attributes', function () {
+    expect($this->user)->toHaveKeys(['name', 'email', 'password', 'tenant_id']);
+});
+
+
+
+beforeEach(function () {
+    $this->user = User::factory()->create();
+});
+
+
+// Model Tests
+it('has correct attributes', function () {
+    expect($this->user)->toHaveKeys(['name', 'email', 'password', 'tenant_id']);
+});
+
+
+
+beforeEach(function () {
+    $this->user = User::factory()->create();
+});
+
+
+// Model Tests
+it('has correct attributes', function () {
+    expect($this->user)->toHaveKeys(['name', 'email', 'password', 'tenant_id']);
+});
+
