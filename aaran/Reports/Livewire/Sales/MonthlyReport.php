@@ -110,6 +110,7 @@ class MonthlyReport extends Component
 
     public function printMonthly()
     {
+        // to-do
         return $this->redirect(route('monthlySalesReport.print',
             [
                 'month' => $this->month ?: Carbon::now()->format('m'),
@@ -119,13 +120,14 @@ class MonthlyReport extends Component
 
     public function printSummary()
     {
+        // to-do
         return $this->redirect(route('summary.print', ['year' => $this->year ?: Carbon::now()->format('Y')]));
     }
 
     public function render()
     {
         $this->getContects();
-        return view('livewire.reports.sales.monthly-report')->with([
+        return view('reports::Sales.monthly-report')->with([
             'list' => $this->getList(), 'salesAll' => $this->getSales(),
         ]);
     }
