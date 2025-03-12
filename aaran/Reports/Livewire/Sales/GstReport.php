@@ -33,21 +33,18 @@ class GstReport extends Component
 
     public function salesReport()
     {
-        // to-do
         return $this->redirect(route('monthlySalesReport.print',
             ['month' => $this->month ?: Carbon::now()->format('m'), 'year' => $this->year ?: Carbon::now()->format('Y')]));
     }
 
     public function purchaseReport()
     {
-        // to-do
         return $this->redirect(route('monthlyPurchaseReport.print', ['month' => $this->month ?: Carbon::now()->format('m'), 'year' => $this->year ?: Carbon::now()->format('Y')]));
 
     }
 
     public function GstPrint()
     {
-        // to-do
         return $this->redirect(route('gstReport.print', ['month' => $this->month ?: Carbon::now()->format('m'), 'year' => $this->year ?: Carbon::now()->format('Y')], '_blank'));
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Report\Sales;
+namespace Aaran\Reports\Controllers\Sales;
 
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
@@ -8,7 +8,6 @@ use Aaran\Master\Models\Company;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
-use function Spatie\LaravelPdf\Support\pdf;
 
 class GstReportController extends Controller
 {
@@ -18,7 +17,7 @@ class GstReportController extends Controller
 //        return pdf('pdf-view.report.sales.gst-report', [
         Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
 
-        $pdf = PDF::loadView('pdf-view.report.sales.gst-report'
+        $pdf = PDF::loadView('aaran-ui::components.pdf-view.report.sales.gst-report'
             , [
             'sales'=>$this->getSales($month,$year),
             'purchase'=>$this->getPurchase($month,$year),
