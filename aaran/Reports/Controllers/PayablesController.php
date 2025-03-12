@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Report;
+namespace Aaran\Reports\Controllers;
 
 use Aaran\Entries\Models\Purchase;
 use Aaran\Master\Models\Company;
@@ -10,7 +10,6 @@ use Aaran\Transaction\Models\Transaction;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
-use function Spatie\LaravelPdf\Support\pdf;
 
 class PayablesController extends Controller
 {
@@ -21,7 +20,7 @@ class PayablesController extends Controller
 //        return pdf('pdf-view.report.payables', [
         Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
 
-        $pdf = PDF::loadView('pdf-view.report.payables'
+        $pdf = PDF::loadView('aaran-ui::components.pdf-view.report.payables'
             , [
             'list' => $purchase,
             'cmp' => Company::printDetails(session()->get('company_id')),

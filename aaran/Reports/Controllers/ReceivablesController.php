@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Report;
+namespace Aaran\Reports\Controllers;
 
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
@@ -10,7 +10,6 @@ use Aaran\Transaction\Models\Transaction;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
-use function Spatie\LaravelPdf\Support\pdf;
 
 class ReceivablesController extends Controller
 {
@@ -19,7 +18,7 @@ class ReceivablesController extends Controller
         $sale = $this->getList($party, $start_date, $end_date);
         $this->getBalance($party, $start_date, $end_date);
         Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
-        $pdf = PDF::loadView('pdf-view.report.receivables'
+        $pdf = PDF::loadView('aaran-ui::components.pdf-view.report.receivables'
             , [
             'list' => $sale,
             'cmp' => Company::printDetails(session()->get('company_id')),

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Report\Contact;
+namespace Aaran\Reports\Controllers\Contact;
 
 use Aaran\Entries\Models\Purchase;
 use Aaran\Entries\Models\Sale;
@@ -10,8 +10,6 @@ use Aaran\Master\Models\ContactDetail;
 use Aaran\Transaction\Models\Transaction;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class PartyReportController extends Controller
@@ -23,7 +21,7 @@ class PartyReportController extends Controller
 
         Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
 
-        $pdf = PDF::loadView('pdf-view.report.Contact.party_report'
+        $pdf = PDF::loadView('aaran-ui::pdf-view.report.Contact.party_report'
             , [
                 'list' => $contact,
                 'cmp' => Company::printDetails(session()->get('company_id')),
