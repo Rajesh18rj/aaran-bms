@@ -110,7 +110,6 @@ class MonthlyReport extends Component
 
     public function printMonthly()
     {
-        // to-do
         return $this->redirect(route('monthlySalesReport.print',
             [
                 'month' => $this->month ?: Carbon::now()->format('m'),
@@ -120,7 +119,6 @@ class MonthlyReport extends Component
 
     public function printSummary()
     {
-        // to-do
         return $this->redirect(route('summary.print', ['year' => $this->year ?: Carbon::now()->format('Y')]));
     }
 

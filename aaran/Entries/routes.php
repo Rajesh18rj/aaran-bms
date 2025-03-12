@@ -37,6 +37,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/receivables-report/{id}', Aaran\Reports\Livewire\Statement\ReceivablesReport::class)->name('receivables-report');
     Route::get('/gstReport', Aaran\Reports\Livewire\Sales\GstReport::class)->name('gstReport');
     Route::get('/salesMonthly', Aaran\Reports\Livewire\Sales\MonthlyReport::class)->name('salesMonthly');
+    Route::get('/monthlySalesReport/print/{month?}/{year?}', Aaran\Reports\Controllers\Sales\MonthlyReportController::class)->name('monthlySalesReport.print');
+    Route::get('/summary/print/{year?}', Aaran\Reports\Controllers\Sales\SummaryController::class)->name('summary.print');
 
 //
 
