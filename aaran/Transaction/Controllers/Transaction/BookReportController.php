@@ -27,44 +27,52 @@ class BookReportController extends Controller
     public $contact_detail_id;
     public $invoiceDate_first;
 
-    public function __invoke($id,$start_date, $end_date)
+    public function __invoke($id, $start_date, $end_date)
     {
         $this->byParty = $id;
-//        $this->contact_detail_id=ContactDetail::where('contact_id', '=', $this->byParty)->first()->id;
+
         $this->transaction = AccountBook::find($id);
-        $this->opening_balance = AccountBook::find($id)->opening_balance;
-        $this->accountId = $this->transaction->id;
-        $this->transId = $this->transaction->trans_type_id;
-        if ($this->transId == 108) {
-            $this->transName = TransactionType::find(108)->vname;
-        } elseif ($this->transId == 109) {
-            $this->transName = TransactionType::find(109)->vname;
+
+        if ($this->transaction) {
+            $this->opening_balance = $this->transaction->opening_balance;
+            $this->accountId = $this->transaction->id;
+            $this->transId = $this->transaction->trans_type_id;
         } else {
-            $this->transName = TransactionType::find(136)->vname;
+            $this->opening_balance = 0;
+            $this->accountId = null;
+            $this->transId = null;
+        }
+
+        if ($this->transId == 108) {
+            $this->transName = TransactionType::find(108)?->vname ?? 'Unknown Transaction';
+        } elseif ($this->transId == 109) {
+            $this->transName = TransactionType::find(109)?->vname ?? 'Unknown Transaction';
+        } else {
+            $this->transName = TransactionType::find(136)?->vname ?? 'Unknown Transaction';
         }
 
         Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif', 'fontDir']);
 
         $this->invoiceDate_first = Carbon::now()->subYear()->format('Y-m-d');
 
-        $pdf = PDF::loadView('aaran-ui::components.pdf-view.Transaction.bookReport'
-            , [
-                'transaction' => Transaction::where('trans_type_id', $this->transId)
-                    ->where('account_book_id', $this->accountId)
-                    ->whereDate('vdate', '>=', $start_date ?: $this->invoiceDate_first)
-                    ->whereDate('vdate', '<=', $end_date ?: $this->invoiceDate_first)
-                    ->get(),
-                'cmp' => Company::printDetails(session()->get('company_id')),
-                'start_date' => date('d-m-Y', strtotime($start_date)),
-                'contact' => Contact::find($id),
-                'end_date' => date('d-m-Y', strtotime($end_date)),
-                'opening_balance' => $this->opening_balance,
-                'party' => $this->byParty,
-                'trans_name' => $this->transName,
-//                'billing_address' => ContactDetail::printDetails($this->contact_detail_id),
-            ]);
+        $pdf = PDF::loadView('aaran-ui::components.pdf-view.Transaction.bookReport', [
+            'transaction' => Transaction::where('trans_type_id', $this->transId)
+                ->where('account_book_id', $this->accountId)
+                ->whereDate('vdate', '>=', $start_date ?: $this->invoiceDate_first)
+                ->whereDate('vdate', '<=', $end_date ?: $this->invoiceDate_first)
+                ->get(),
+            'cmp' => Company::printDetails(session()->get('company_id')),
+            'start_date' => date('d-m-Y', strtotime($start_date)),
+            'contact' => Contact::find($id),
+            'end_date' => date('d-m-Y', strtotime($end_date)),
+            'opening_balance' => $this->opening_balance,
+            'party' => $this->byParty,
+            'trans_name' => $this->transName,
+        ]);
+
         $pdf->render();
         return $pdf->stream();
     }
+
 
 }

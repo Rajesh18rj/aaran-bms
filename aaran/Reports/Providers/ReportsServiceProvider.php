@@ -10,6 +10,7 @@ use Aaran\Reports\Livewire\Statement\Payable;
 use Aaran\Reports\Livewire\Statement\PayablesReport;
 use Aaran\Reports\Livewire\Statement\Receivable;
 use Aaran\Reports\Livewire\Statement\ReceivablesReport;
+use Aaran\Reports\Livewire\Transaction\Bank;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -40,7 +41,7 @@ class ReportsServiceProvider extends ServiceProvider
         Livewire::component('reports::gst-report', GstReport::class);
         Livewire::component('reports::monthly-report', MonthlyReport::class);
 
-
+        Livewire::component('reports::bank', Bank::class);
     }
 
     protected function loadConfigs(): void

@@ -3,6 +3,8 @@
 namespace Aaran\Reports\Livewire\Transaction;
 
 use Aaran\Assets\Trait\CommonTraitNew;
+use Aaran\Common\Models\PaymentMode;
+use Aaran\Common\Models\ReceiptType;
 use Aaran\Master\Models\Contact;
 use Aaran\Master\Models\Order;
 use Aaran\Transaction\Models\AccountBook;
@@ -14,6 +16,7 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Aaran\Common\Models\Bank as BankModel;
 
 class Bank extends Component
 {
@@ -61,18 +64,25 @@ class Bank extends Component
     {
         $this->byParty = $id;
         $this->transaction = AccountBook::find($id);
-        $this->opening_bal = AccountBook::find($id)->opening_balance;
-        $this->accountId = $this->transaction->id;
-        $this->transId = $this->transaction->trans_type_id;
-        if ($this->transId == 108) {
-//            $this->transName = Common::find(108)->vname;
-        } elseif ($this->transId == 109) {
-//            $this->transName = Common::find(109)->vname;
+
+        if ($this->transaction) {
+            $this->opening_bal = $this->transaction->opening_balance ?: 0;
+            $this->accountId = $this->transaction->id;
+            $this->transId = $this->transaction->trans_type_id;
+
+            if ($this->transId == 108) {
+                // $this->transName = Common::find(108)->vname;
+            } elseif ($this->transId == 109) {
+                // $this->transName = Common::find(109)->vname;
+            } else {
+                // $this->transName = Common::find(136)->vname;
+            }
         } else {
-//            $this->transName = Common::find(136)->vname;
+            $this->opening_bal = 0;
+            $this->accountId = null;
+            $this->transId = null;
         }
     }
-
     #endregion
 
     public function updatedAccountBookId($value)
@@ -88,22 +98,118 @@ class Bank extends Component
     }
 
     #region[Get-Save]
+//    public function getSave(): void
+//    {
+//        if ($this->common->vname != '') {
+//            if ($this->common->vid == '') {
+//                $Transaction = new Transaction();
+//                $extraFields = [
+//                    'acyear' => session()->get('acyear'),
+//                    'company_id' => session()->get('company_id'),
+//                    'account_book_id' => $this->account_book_id ?: $this->accountId,
+//                    'contact_id' => $this->contact_id ?: '1',
+//                    'vch_no' => $this->vch_no,
+//                    'paid_to' => $this->paid_to,
+//                    'purpose' => $this->purpose,
+//                    'order_id' => $this->order_id ?: '1',
+//                    'trans_type_id' => $this->trans_type_id ?: $this->transId,
+//                    'opening_bal' => $this->opening_bal,
+//                    'mode_id' => $this->mode_id ?: '111',
+//                    'vdate' => $this->vdate,
+//                    'receipttype_id' => $this->receipt_type_id ?: '1',
+//                    'remarks' => $this->remarks,
+//                    'chq_no' => $this->chq_no,
+//                    'chq_date' => $this->chq_date,
+//                    'instrument_bank_id' => $this->instrument_bank_id ?: '1',
+//                    'deposit_on' => $this->deposit_on,
+//                    'realised_on' => $this->realised_on,
+//                    'ref_no' => $this->ref_no,
+//                    'ref_amount' => $this->ref_amount,
+//                    'verified_by' => $this->verified_by,
+//                    'verified_on' => $this->verified_on,
+//                    'against_id' => $this->against_id ?: '0',
+//                    'user_id' => auth()->id(),
+//                ];
+//                $this->common->save($Transaction, $extraFields);
+//
+////                $this->common->logEntry($this->vch_no, $this->mode_name, 'create', $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been created.');
+//
+////                $this->contactUpdate();
+//                $message = "Saved";
+//            } else {
+//                $Transaction = Transaction::find($this->common->vid);
+//                $extraFields = [
+//                    'acyear' => session()->get('acyear'),
+//                    'company_id' => session()->get('company_id'),
+//                    'account_book_id' => $this->account_book_id ?: $this->accountId,
+//                    'contact_id' => $this->contact_id,
+//                    'vch_no' => $this->vch_no,
+//                    'paid_to' => $this->paid_to,
+//                    'purpose' => $this->purpose,
+//                    'order_id' => $this->order_id,
+//                    'trans_type_id' => $this->trans_type_id ?: $this->transId,
+//                    'mode_id' => $this->mode_id,
+//                    'vdate' => $this->vdate,
+//                    'receipttype_id' => $this->receipt_type_id,
+//                    'opening_bal' => $this->opening_bal,
+//                    'remarks' => $this->remarks,
+//                    'chq_no' => $this->chq_no,
+//                    'chq_date' => $this->chq_date,
+//                    'instrument_bank_id' => $this->instrument_bank_id,
+//                    'deposit_on' => $this->deposit_on,
+//                    'realised_on' => $this->realised_on,
+//                    'ref_no' => $this->ref_no,
+//                    'ref_amount' => $this->ref_amount,
+//                    'verified_by' => $this->verified_by,
+//                    'verified_on' => $this->verified_on,
+//                    'against_id' => $this->against_id,
+////                    'account_id' => $this->account_id,
+//                    'user_id' => auth()->id(),
+//                ];
+//                $this->common->edit($Transaction, $extraFields);
+//
+////                $this->common->logEntry($this->vch_no, $this->mode_name, 'update', $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been updated and the amount is ' . $this->common->vname . ' by ' . $this->trans_type_name);
+//
+////                $this->contactUpdate();
+//                $message = "Updated";
+//            }
+//            $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
+//        }
+//    }
     public function getSave(): void
     {
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
                 $Transaction = new Transaction();
+
+                // ✅ Ensure account_book_id is set before saving
+                $this->account_book_id = $this->account_book_id ?: $this->accountId;
+
+                if (!$this->account_book_id) {
+                    $this->dispatch('notify', ...['type' => 'error', 'content' => 'Error: Account Book ID is required!']);
+                    return;
+                }
+
+                // ✅ Log values for debugging
+                \Log::info('Saving Transaction', [
+                    'account_book_id' => $this->account_book_id,
+                    'order_id' => $this->order_id,
+                    'contact_id' => $this->contact_id,
+                    'trans_type_id' => $this->trans_type_id,
+                    'mode_id' => $this->mode_id,
+                ]);
+
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
-                    'account_book_id' => $this->account_book_id ?: $this->accountId,
+                    'account_book_id' => $this->account_book_id, // ✅ Always set
                     'contact_id' => $this->contact_id ?: '1',
                     'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
-                    'order_id' => $this->order_id ?: '1',
+                    'order_id' => $this->order_id ?: '1', // ✅ Ensure order_id is set
                     'trans_type_id' => $this->trans_type_id ?: $this->transId,
-                    'opening_bal' => $this->opening_bal,
+                    'opening_bal' => $this->opening_bal ?: 0, // ✅ Prevent null errors
                     'mode_id' => $this->mode_id ?: '111',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '1',
@@ -122,26 +228,31 @@ class Bank extends Component
                 ];
                 $this->common->save($Transaction, $extraFields);
 
-                $this->common->logEntry($this->vch_no, $this->mode_name, 'create', $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been created.');
-
-//                $this->contactUpdate();
                 $message = "Saved";
             } else {
                 $Transaction = Transaction::find($this->common->vid);
+
+                // ✅ Ensure account_book_id is set before updating
+                $this->account_book_id = $this->account_book_id ?: $this->accountId;
+                if (!$this->account_book_id) {
+                    $this->dispatch('notify', ...['type' => 'error', 'content' => 'Error: Account Book ID is required for update!']);
+                    return;
+                }
+
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
-                    'account_book_id' => $this->account_book_id ?: $this->accountId,
+                    'account_book_id' => $this->account_book_id, // ✅ Always set
                     'contact_id' => $this->contact_id,
                     'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
-                    'order_id' => $this->order_id,
+                    'order_id' => $this->order_id ?: '1', // ✅ Ensure order_id is set
                     'trans_type_id' => $this->trans_type_id ?: $this->transId,
                     'mode_id' => $this->mode_id,
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id,
-                    'opening_bal' => $this->opening_bal,
+                    'opening_bal' => $this->opening_bal ?: 0, // ✅ Prevent null errors
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
@@ -153,19 +264,16 @@ class Bank extends Component
                     'verified_by' => $this->verified_by,
                     'verified_on' => $this->verified_on,
                     'against_id' => $this->against_id,
-//                    'account_id' => $this->account_id,
                     'user_id' => auth()->id(),
                 ];
                 $this->common->edit($Transaction, $extraFields);
 
-                $this->common->logEntry($this->vch_no, $this->mode_name, 'update', $this->mode_name . ' for ' . $this->contact_name . ' - ' . $this->mode_name . ' has been updated and the amount is ' . $this->common->vname . ' by ' . $this->trans_type_name);
-
-//                $this->contactUpdate();
                 $message = "Updated";
             }
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
+
 
     public function contactUpdate()
     {
@@ -296,8 +404,7 @@ class Bank extends Component
 
     public function bankSave($name)
     {
-        $obj = Common::create([
-            'label_id' => 9,
+        $obj = BankModel::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -308,10 +415,8 @@ class Bank extends Component
     public function getBankList(): void
     {
         $this->bankCollection = $this->bank_name ?
-            Common::search(trim($this->bank_name))->where('label_id', '=', '9')->get() :
-            Common::where('label_id', '=', '9')
-                ->Orwhere('id', '=', '1')
-                ->get();
+            BankModel::search(trim($this->bank_name))->get() :
+            BankModel::all();
 
     }
 #endregion
@@ -369,8 +474,7 @@ class Bank extends Component
 
     public function receiptTypeSave($name)
     {
-        $obj = Common::create([
-            'label_id' => 14,
+        $obj = ReceiptType::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -381,8 +485,8 @@ class Bank extends Component
     public function getReceiptTypeList(): void
     {
         $this->receipt_typeCollection = $this->receipt_type_name ?
-            Common::search(trim($this->receipt_type_name))->where('label_id', '=', '14')->get() :
-            Common::where('label_id', '=', '14')->Orwhere('id', '=', '1')->get();
+            ReceiptType::search(trim($this->receipt_type_name))->get() :
+            ReceiptType::all();
     }
 #endregion
 
@@ -503,8 +607,7 @@ class Bank extends Component
 
     public function instrumentBankSave($name)
     {
-        $obj = Common::create([
-            'label_id' => 25,
+        $obj = BankModel::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -516,10 +619,8 @@ class Bank extends Component
     public function getInstrumentBankList(): void
     {
         $this->instrumentBankCollection = $this->instrument_bank_name ?
-            Common::search(trim($this->instrument_bank_name))->where('label_id', '=', '25')->get() :
-            Common::where('label_id', '=', '25')
-                ->Orwhere('id', '=', '1')
-                ->get();
+            BankModel::search(trim($this->bank_name))->get() :
+            BankModel::all();
     }
 #endregion
 
@@ -576,8 +677,7 @@ class Bank extends Component
 
     public function modeSave($name)
     {
-        $obj = Common::create([
-            'label_id' => 20,
+        $obj = PaymentMode::create([
             'vname' => $name,
             'active_id' => '1'
         ]);
@@ -588,8 +688,8 @@ class Bank extends Component
     public function getModeList(): void
     {
         $this->modeCollection = $this->mode_name ?
-            Common::search(trim($this->mode_name))->where('label_id', '=', '20')->get() :
-            Common::where('label_id', '=', '20')->get();
+            PaymentMode::search(trim($this->mode_name))->get() :
+            PaymentMode::all();
     }
 
 #endregion
@@ -641,24 +741,27 @@ class Bank extends Component
     {
         if ($this->byParty) {
             $obj = AccountBook::find($this->byParty);
-            $this->opening_balance = $obj->opening_balance;
+
+            if ($obj) {
+                $this->opening_balance = $obj->opening_balance;
+            } else {
+                $this->opening_balance = 0;  // Default value to prevent errors
+            }
 
             $this->invoiceDate_first = Carbon::now()->subYear()->format('Y-m-d');
 
-            $this->payment_total = Transaction::whereDate('vdate', '<', $this->startDate?:$this->invoiceDate_first)
-                ->where('contact_id','=',$this->byParty)
-                ->where('mode_id','=',110)
+            $this->payment_total = Transaction::whereDate('vdate', '<', $this->startDate ?: $this->invoiceDate_first)
+                ->where('contact_id', '=', $this->byParty)
+                ->where('mode_id', '=', 110)
                 ->sum('vname');
 
-            $this->receipt_total = Transaction::whereDate('vdate', '<', $this->startDate?:$this->invoiceDate_first)
-                ->where('contact_id','=',$this->byParty)
-                ->where('mode_id','=',111)
+            $this->receipt_total = Transaction::whereDate('vdate', '<', $this->startDate ?: $this->invoiceDate_first)
+                ->where('contact_id', '=', $this->byParty)
+                ->where('mode_id', '=', 111)
                 ->sum('vname');
-
-            $this->opening_balance = $this->opening_balance + $this->payment_total - $this->receipt_total;
         }
-        return $this->opening_balance;
     }
+
     #endregion
 
     #region[List]
@@ -728,7 +831,7 @@ class Bank extends Component
                 return $query->whereDate('vdate', '<=', $this->endDate);
             })
             ->get();
-        return view('livewire.reports.transaction.bank')->with([
+        return view('reports::Transaction.bank')->with([
             'list' => $list,
         ]);
     }
