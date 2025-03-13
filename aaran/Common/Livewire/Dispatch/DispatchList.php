@@ -1,26 +1,27 @@
 <?php
 
-namespace Aaran\Common\Livewire\colour;
+namespace Aaran\Common\Livewire\Dispatch;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Common\Models\Colour;
+use Aaran\Common\Models\Despatch;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class ColourList extends Component
+class DispatchList extends Component
 {
     use CommonTrait;
 
     #[Validate]
     public string $vname = '';
+    public string $vdate = '';
     public bool $active_id = true;
 
     #region[Validation]
     public function rules(): array
     {
         return [
-            'vname' => 'required' . ($this->vid ? '' : '|unique:colours,vname'),
+            'vname' => 'required' . ($this->vid ? '' : '|unique:despatches,vname'),
         ];
     }
 
@@ -47,15 +48,17 @@ class ColourList extends Component
         $this->validate();
 
         if ($this->vid == "") {
-            Colour::create([
+            Despatch::create([
                 'vname' => Str::ucfirst($this->vname),
+                'vdate' => $this->vdate,
                 'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = Colour::find($this->vid);
+            $obj = Despatch::find($this->vid);
             $obj->vname = Str::ucfirst($this->vname);
+            $obj->vdate = $this->vdate;
             $obj->active_id = $this->active_id;
             $obj->save();
             $message = "Updated";
@@ -70,6 +73,7 @@ class ColourList extends Component
     {
         $this->vid = '';
         $this->vname = '';
+        $this->vdate = '';
         $this->active_id = '1';
         $this->searches = '';
     }
@@ -79,9 +83,10 @@ class ColourList extends Component
     public function getObj($id): void
     {
         if ($id) {
-            $obj = Colour::find($id);
+            $obj = Despatch::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->vdate = $obj->vdate;
             $this->active_id = $obj->active_id;
         }
     }
@@ -90,7 +95,7 @@ class ColourList extends Component
     #region[list]
     public function getList()
     {
-        return Colour::search($this->searches)
+        return Despatch::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -101,7 +106,7 @@ class ColourList extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = Colour::find($id);
+            $obj = Despatch::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -114,7 +119,7 @@ class ColourList extends Component
     #region[render]
     public function render()
     {
-        return view('common::colour.colour-list')->with([
+        return view('common::dispatch.dispatch-list')->with([
             'list' => $this->getList()
         ]);
     }

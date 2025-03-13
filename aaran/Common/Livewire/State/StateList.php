@@ -1,41 +1,42 @@
 <?php
 
-namespace Aaran\Common\Livewire\hsncode;
+namespace Aaran\Common\Livewire\State;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Common\Models\Hsncode;
+use Aaran\Common\Models\State;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class HsncodeList extends Component
+class StateList extends Component
 {
     use CommonTrait;
 
     #[Validate]
     public string $vname = '';
     public bool $active_id = true;
+    public $state_code;
 
     #region[Validation]
     public function rules(): array
     {
         return [
-            'vname' => 'required' . ($this->vid ? '' : '|unique:hsncodes,vname'),
+            'vname' => 'required' . ($this->vid ? '' : '|unique:states,vname'),
         ];
     }
 
     public function messages(): array
     {
         return [
-            'vname.required' => 'The :attribute are missing.',
-            'vname.unique' => 'The :attribute is already created.',
+            'vname.required' => ':attribute is missing.',
+            'vname.unique' => 'This :attribute is already created.',
         ];
     }
 
     public function validationAttributes(): array
     {
         return [
-            'vname' => 'name',
+            'vname' => 'state name',
         ];
     }
 
@@ -47,15 +48,17 @@ class HsncodeList extends Component
         $this->validate();
 
         if ($this->vid == "") {
-            Hsncode::create([
+            State::create([
                 'vname' => Str::ucfirst($this->vname),
+                'state_code' => $this->state_code,
                 'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = Hsncode::find($this->vid);
+            $obj = State::find($this->vid);
             $obj->vname = Str::ucfirst($this->vname);
+            $obj->state_code = $this->state_code;
             $obj->active_id = $this->active_id;
             $obj->save();
             $message = "Updated";
@@ -70,6 +73,7 @@ class HsncodeList extends Component
     {
         $this->vid = '';
         $this->vname = '';
+        $this->state_code = '';
         $this->active_id = '1';
         $this->searches = '';
     }
@@ -79,9 +83,10 @@ class HsncodeList extends Component
     public function getObj($id): void
     {
         if ($id) {
-            $obj = Hsncode::find($id);
+            $obj = State::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->state_code = $obj->state_code;
             $this->active_id = $obj->active_id;
         }
     }
@@ -90,7 +95,7 @@ class HsncodeList extends Component
     #region[list]
     public function getList()
     {
-        return Hsncode::search($this->searches)
+        return State::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -101,7 +106,7 @@ class HsncodeList extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = Hsncode::find($id);
+            $obj = State::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -114,7 +119,7 @@ class HsncodeList extends Component
     #region[render]
     public function render()
     {
-        return view('common::hsncode.hsncode-list')->with([
+        return view('common::state.state-list')->with([
             'list' => $this->getList()
         ]);
     }

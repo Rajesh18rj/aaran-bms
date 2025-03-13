@@ -1,14 +1,14 @@
 <?php
 
-namespace Aaran\Common\Livewire\bank;
+namespace Aaran\Common\Livewire\Category;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Common\Models\Bank;
+use Aaran\Common\Models\Category;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class BankList extends Component
+class CategoryList extends Component
 {
     use CommonTrait;
 
@@ -20,7 +20,7 @@ class BankList extends Component
     public function rules(): array
     {
         return [
-            'vname' => 'required' . ($this->vid ? '' : '|unique:banks,vname'),
+            'vname' => 'required' . ($this->vid ? '' : '|unique:categories,vname'),
         ];
     }
 
@@ -47,14 +47,14 @@ class BankList extends Component
         $this->validate();
 
         if ($this->vid == "") {
-            Bank::create([
+            Category::create([
                 'vname' => Str::ucfirst($this->vname),
                 'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = Bank::find($this->vid);
+            $obj = Category::find($this->vid);
             $obj->vname = Str::ucfirst($this->vname);
             $obj->active_id = $this->active_id;
             $obj->save();
@@ -79,7 +79,7 @@ class BankList extends Component
     public function getObj($id): void
     {
         if ($id) {
-            $obj = Bank::find($id);
+            $obj = Category::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->active_id = $obj->active_id;
@@ -90,7 +90,7 @@ class BankList extends Component
     #region[list]
     public function getList()
     {
-        return Bank::search($this->searches)
+        return Category::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -101,7 +101,7 @@ class BankList extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = Bank::find($id);
+            $obj = Category::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -114,7 +114,7 @@ class BankList extends Component
     #region[render]
     public function render()
     {
-        return view('common::bank.bank-list')->with([
+        return view('common::category.category-list')->with([
             'list' => $this->getList()
         ]);
     }

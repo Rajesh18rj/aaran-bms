@@ -1,14 +1,15 @@
 <?php
 
-namespace Aaran\Common\Livewire\size;
+namespace Aaran\Common\Livewire\ReceiptType;
+
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Common\Models\Size;
+use Aaran\Common\Models\ReceiptType;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class SizeList extends Component
+class ReceiptTypeList extends Component
 {
     use CommonTrait;
 
@@ -20,7 +21,7 @@ class SizeList extends Component
     public function rules(): array
     {
         return [
-            'vname' => 'required' . ($this->vid ? '' : '|unique:sizes,vname'),
+            'vname' => 'required' . ($this->vid ? '' : '|unique:receipttypes,vname'),
         ];
     }
 
@@ -47,14 +48,14 @@ class SizeList extends Component
         $this->validate();
 
         if ($this->vid == "") {
-            Size::create([
+            ReceiptType::create([
                 'vname' => Str::ucfirst($this->vname),
                 'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = Size::find($this->vid);
+            $obj = ReceiptType::find($this->vid);
             $obj->vname = Str::ucfirst($this->vname);
             $obj->active_id = $this->active_id;
             $obj->save();
@@ -79,7 +80,7 @@ class SizeList extends Component
     public function getObj($id): void
     {
         if ($id) {
-            $obj = Size::find($id);
+            $obj = ReceiptType::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->active_id = $obj->active_id;
@@ -90,7 +91,7 @@ class SizeList extends Component
     #region[list]
     public function getList()
     {
-        return Size::search($this->searches)
+        return ReceiptType::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -101,7 +102,7 @@ class SizeList extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = Size::find($id);
+            $obj = ReceiptType::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -114,7 +115,7 @@ class SizeList extends Component
     #region[render]
     public function render()
     {
-        return view('common::size.size-list')->with([
+        return view('common::receipttype.receipt-type-list')->with([
             'list' => $this->getList()
         ]);
     }

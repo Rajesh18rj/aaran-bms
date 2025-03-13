@@ -1,15 +1,15 @@
 <?php
 
-namespace Aaran\Common\Livewire\pincode;
+namespace Aaran\Common\Livewire\Country;
 
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Common\Models\Pincode;
+use Aaran\Common\Models\Country;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class PincodeList extends Component
+class CountryList extends Component
 {
     use CommonTrait;
 
@@ -21,7 +21,7 @@ class PincodeList extends Component
     public function rules(): array
     {
         return [
-            'vname' => 'required' . ($this->vid ? '' : '|unique:pincodes,vname'),
+            'vname' => 'required' . ($this->vid ? '' : '|unique:countries,vname'),
         ];
     }
 
@@ -48,14 +48,14 @@ class PincodeList extends Component
         $this->validate();
 
         if ($this->vid == "") {
-            Pincode::create([
+            Country::create([
                 'vname' => Str::ucfirst($this->vname),
                 'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = Pincode::find($this->vid);
+            $obj = Country::find($this->vid);
             $obj->vname = Str::ucfirst($this->vname);
             $obj->active_id = $this->active_id;
             $obj->save();
@@ -80,7 +80,7 @@ class PincodeList extends Component
     public function getObj($id): void
     {
         if ($id) {
-            $obj = Pincode::find($id);
+            $obj = Country::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->active_id = $obj->active_id;
@@ -91,7 +91,7 @@ class PincodeList extends Component
     #region[list]
     public function getList()
     {
-        return Pincode::search($this->searches)
+        return Country::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -102,7 +102,7 @@ class PincodeList extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = Pincode::find($id);
+            $obj = Country::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -115,7 +115,7 @@ class PincodeList extends Component
     #region[render]
     public function render()
     {
-        return view('common::pincode.pincode-list')->with([
+        return view('common::country.country-list')->with([
             'list' => $this->getList()
         ]);
     }

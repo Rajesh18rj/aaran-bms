@@ -1,42 +1,41 @@
 <?php
 
-namespace Aaran\Common\Livewire\gst;
+namespace Aaran\Common\Livewire\Bank;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Common\Models\GstPercent;
+use Aaran\Common\Models\Bank;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class GstList extends Component
+class BankList extends Component
 {
     use CommonTrait;
 
     #[Validate]
     public string $vname = '';
     public bool $active_id = true;
-    public $desc;
 
     #region[Validation]
     public function rules(): array
     {
         return [
-            'vname' => 'required' . ($this->vid ? '' : '|unique:gst_percents,vname'),
+            'vname' => 'required' . ($this->vid ? '' : '|unique:banks,vname'),
         ];
     }
 
     public function messages(): array
     {
         return [
-            'vname.required' => ':attribute is missing.',
-            'vname.unique' => 'This :attribute is already created.',
+            'vname.required' => 'The :attribute are missing.',
+            'vname.unique' => 'The :attribute is already created.',
         ];
     }
 
     public function validationAttributes(): array
     {
         return [
-            'vname' => 'gst percent',
+            'vname' => 'name',
         ];
     }
 
@@ -48,17 +47,15 @@ class GstList extends Component
         $this->validate();
 
         if ($this->vid == "") {
-            GstPercent::create([
+            Bank::create([
                 'vname' => Str::ucfirst($this->vname),
-                'desc' => $this->desc,
                 'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = GstPercent::find($this->vid);
+            $obj = Bank::find($this->vid);
             $obj->vname = Str::ucfirst($this->vname);
-            $obj->desc = $this->desc;
             $obj->active_id = $this->active_id;
             $obj->save();
             $message = "Updated";
@@ -73,7 +70,6 @@ class GstList extends Component
     {
         $this->vid = '';
         $this->vname = '';
-        $this->desc = '';
         $this->active_id = '1';
         $this->searches = '';
     }
@@ -83,10 +79,9 @@ class GstList extends Component
     public function getObj($id): void
     {
         if ($id) {
-            $obj = GstPercent::find($id);
+            $obj = Bank::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
-            $this->desc = $obj->desc;
             $this->active_id = $obj->active_id;
         }
     }
@@ -95,7 +90,7 @@ class GstList extends Component
     #region[list]
     public function getList()
     {
-        return GstPercent::search($this->searches)
+        return Bank::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -106,7 +101,7 @@ class GstList extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = GstPercent::find($id);
+            $obj = Bank::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -119,7 +114,7 @@ class GstList extends Component
     #region[render]
     public function render()
     {
-        return view('common::gst.gst-list')->with([
+        return view('common::bank.bank-list')->with([
             'list' => $this->getList()
         ]);
     }

@@ -1,15 +1,14 @@
 <?php
 
-namespace Aaran\Common\Livewire\receipttype;
-
+namespace Aaran\Common\Livewire\Department;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Common\Models\ReceiptType;
+use Aaran\Common\Models\Department;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class ReceiptTypeList extends Component
+class DepartmentList extends Component
 {
     use CommonTrait;
 
@@ -21,7 +20,7 @@ class ReceiptTypeList extends Component
     public function rules(): array
     {
         return [
-            'vname' => 'required' . ($this->vid ? '' : '|unique:receipttypes,vname'),
+            'vname' => 'required' . ($this->vid ? '' : '|unique:departments,vname'),
         ];
     }
 
@@ -48,14 +47,14 @@ class ReceiptTypeList extends Component
         $this->validate();
 
         if ($this->vid == "") {
-            ReceiptType::create([
+            Department::create([
                 'vname' => Str::ucfirst($this->vname),
                 'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = ReceiptType::find($this->vid);
+            $obj = Department::find($this->vid);
             $obj->vname = Str::ucfirst($this->vname);
             $obj->active_id = $this->active_id;
             $obj->save();
@@ -80,7 +79,7 @@ class ReceiptTypeList extends Component
     public function getObj($id): void
     {
         if ($id) {
-            $obj = ReceiptType::find($id);
+            $obj = Department::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
             $this->active_id = $obj->active_id;
@@ -91,7 +90,7 @@ class ReceiptTypeList extends Component
     #region[list]
     public function getList()
     {
-        return ReceiptType::search($this->searches)
+        return Department::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -102,7 +101,7 @@ class ReceiptTypeList extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = ReceiptType::find($id);
+            $obj = Department::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -115,7 +114,7 @@ class ReceiptTypeList extends Component
     #region[render]
     public function render()
     {
-        return view('common::receipttype.receipt-type-list')->with([
+        return view('common::department.department-list')->with([
             'list' => $this->getList()
         ]);
     }

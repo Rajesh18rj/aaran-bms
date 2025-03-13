@@ -1,41 +1,42 @@
 <?php
 
-namespace Aaran\Common\Livewire\department;
+namespace Aaran\Common\Livewire\Gst;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Common\Models\Department;
+use Aaran\Common\Models\GstPercent;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class DepartmentList extends Component
+class GstList extends Component
 {
     use CommonTrait;
 
     #[Validate]
     public string $vname = '';
     public bool $active_id = true;
+    public $desc;
 
     #region[Validation]
     public function rules(): array
     {
         return [
-            'vname' => 'required' . ($this->vid ? '' : '|unique:departments,vname'),
+            'vname' => 'required' . ($this->vid ? '' : '|unique:gst_percents,vname'),
         ];
     }
 
     public function messages(): array
     {
         return [
-            'vname.required' => 'The :attribute are missing.',
-            'vname.unique' => 'The :attribute is already created.',
+            'vname.required' => ':attribute is missing.',
+            'vname.unique' => 'This :attribute is already created.',
         ];
     }
 
     public function validationAttributes(): array
     {
         return [
-            'vname' => 'name',
+            'vname' => 'gst percent',
         ];
     }
 
@@ -47,15 +48,17 @@ class DepartmentList extends Component
         $this->validate();
 
         if ($this->vid == "") {
-            Department::create([
+            GstPercent::create([
                 'vname' => Str::ucfirst($this->vname),
+                'desc' => $this->desc,
                 'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = Department::find($this->vid);
+            $obj = GstPercent::find($this->vid);
             $obj->vname = Str::ucfirst($this->vname);
+            $obj->desc = $this->desc;
             $obj->active_id = $this->active_id;
             $obj->save();
             $message = "Updated";
@@ -70,6 +73,7 @@ class DepartmentList extends Component
     {
         $this->vid = '';
         $this->vname = '';
+        $this->desc = '';
         $this->active_id = '1';
         $this->searches = '';
     }
@@ -79,9 +83,10 @@ class DepartmentList extends Component
     public function getObj($id): void
     {
         if ($id) {
-            $obj = Department::find($id);
+            $obj = GstPercent::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
+            $this->desc = $obj->desc;
             $this->active_id = $obj->active_id;
         }
     }
@@ -90,7 +95,7 @@ class DepartmentList extends Component
     #region[list]
     public function getList()
     {
-        return Department::search($this->searches)
+        return GstPercent::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -101,7 +106,7 @@ class DepartmentList extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = Department::find($id);
+            $obj = GstPercent::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -114,7 +119,7 @@ class DepartmentList extends Component
     #region[render]
     public function render()
     {
-        return view('common::department.department-list')->with([
+        return view('common::gst.gst-list')->with([
             'list' => $this->getList()
         ]);
     }

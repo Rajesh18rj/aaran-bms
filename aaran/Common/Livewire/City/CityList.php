@@ -1,64 +1,61 @@
 <?php
 
-namespace Aaran\Common\Livewire\transport;
+namespace Aaran\Common\Livewire\City;
 
 use Aaran\Assets\Trait\CommonTrait;
-use Aaran\Common\Models\Transport;
+use Aaran\Common\Models\City;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class TransportList extends Component
+class CityList extends Component
 {
     use CommonTrait;
 
     #[Validate]
     public string $vname = '';
     public bool $active_id = true;
-    public $vehicle_no;
 
     #region[Validation]
     public function rules(): array
     {
         return [
-            'vname' => 'required' . ($this->vid ? '' : '|unique:transports,vname'),
+            'vname' => 'required' . ($this->vid ? '' : '|unique:cities,vname'),
         ];
     }
 
     public function messages(): array
     {
         return [
-            'vname.required' => 'The :attribute are missing.',
-            'vname.unique' => 'The :attribute is already created.',
+            'vname.required' => ':attribute is missing.',
+            'vname.unique' => 'This :attribute is already created.',
         ];
     }
 
     public function validationAttributes(): array
     {
         return [
-            'vname' => 'name',
+            'vname' => 'city name',
         ];
     }
 
     #endregion[Validation]
 
-    #region[save]
+    #region[getSave]
     public function getSave(): void
     {
         $this->validate();
 
         if ($this->vid == "") {
-            Transport::create([
+            City::create([
                 'vname' => Str::ucfirst($this->vname),
-                'vehicle_no' => $this->vehicle_no,
                 'active_id' => $this->active_id,
             ]);
             $message = "Saved";
 
         } else {
-            $obj = Transport::find($this->vid);
+            $obj = City::find($this->vid);
             $obj->vname = Str::ucfirst($this->vname);
-            $obj->vehicle_no = $this->vehicle_no;
             $obj->active_id = $this->active_id;
             $obj->save();
             $message = "Updated";
@@ -73,29 +70,27 @@ class TransportList extends Component
     {
         $this->vid = '';
         $this->vname = '';
-        $this->vehicle_no = '';
         $this->active_id = '1';
         $this->searches = '';
     }
     #endregion[Clear Fields]
 
-    #region[obj]
+    #region[getObj]
     public function getObj($id): void
     {
         if ($id) {
-            $obj = Transport::find($id);
+            $obj = City::find($id);
             $this->vid = $obj->id;
             $this->vname = $obj->vname;
-            $this->vehicle_no = $obj->vehicle_no;
             $this->active_id = $obj->active_id;
         }
     }
     #endregion
 
-    #region[list]
+    #region[getList]
     public function getList()
     {
-        return Transport::search($this->searches)
+        return City::search($this->searches)
             ->where('active_id', '=', $this->activeRecord)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -106,7 +101,7 @@ class TransportList extends Component
     public function deleteFunction($id): void
     {
         if ($id) {
-            $obj = Transport::find($id);
+            $obj = City::find($id);
             if ($obj) {
                 $obj->delete();
                 $message = "Deleted Successfully";
@@ -119,7 +114,7 @@ class TransportList extends Component
     #region[render]
     public function render()
     {
-        return view('common::transport.transport-list')->with([
+        return view('common::city.city-list')->with([
             'list' => $this->getList()
         ]);
     }
