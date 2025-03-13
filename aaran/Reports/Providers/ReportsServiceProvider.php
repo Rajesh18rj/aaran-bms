@@ -4,6 +4,8 @@ namespace Aaran\Reports\Providers;
 
 use Aaran\Reports\Livewire\Contact\ContactReport;
 use Aaran\Reports\Livewire\Contact\PartyReport;
+use Aaran\Reports\Livewire\Sales\GstReport;
+use Aaran\Reports\Livewire\Sales\MonthlyReport;
 use Aaran\Reports\Livewire\Statement\Payable;
 use Aaran\Reports\Livewire\Statement\PayablesReport;
 use Aaran\Reports\Livewire\Statement\Receivable;
@@ -34,6 +36,11 @@ class ReportsServiceProvider extends ServiceProvider
         Livewire::component('reports::payable', Payable::class);
         Livewire::component('reports::payables-report', PayablesReport::class);
         Livewire::component('reports::receivables-report', ReceivablesReport::class);
+
+        Livewire::component('reports::gst-report', GstReport::class);
+        Livewire::component('reports::monthly-report', MonthlyReport::class);
+
+
     }
 
     protected function loadConfigs(): void

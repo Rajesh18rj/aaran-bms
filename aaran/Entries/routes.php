@@ -35,6 +35,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/payables', Aaran\Reports\Livewire\Statement\Payable::class)->name('payables');
     Route::get('/payables-report/{id}', Aaran\Reports\Livewire\Statement\PayablesReport::class)->name('payables-report');
     Route::get('/receivables-report/{id}', Aaran\Reports\Livewire\Statement\ReceivablesReport::class)->name('receivables-report');
+    Route::get('/gstReport', Aaran\Reports\Livewire\Sales\GstReport::class)->name('gstReport');
+    Route::get('/salesMonthly', Aaran\Reports\Livewire\Sales\MonthlyReport::class)->name('salesMonthly');
+    Route::get('/payables/print/{party}/{start_date?}/{end_date?}', Aaran\Reports\Controllers\PayablesController::class)->name('payables.print');
+    Route::get('/receivables/print/{party}/{start_date?}/{end_date?}', Aaran\Reports\Controllers\ReceivablesController::class)->name('receivables.print');
+    Route::get('/monthlySalesReport/print/{month?}/{year?}', Aaran\Reports\Controllers\Sales\MonthlyReportController::class)->name('monthlySalesReport.print');
+    Route::get('/summary/print/{year?}', Aaran\Reports\Controllers\Sales\SummaryController::class)->name('summary.print');
+    Route::get('/monthlyPurchaseReport/print/{month?}/{year?}', Aaran\Reports\Controllers\Purchase\MonthlyReportController::class)->name('monthlyPurchaseReport.print');
+    Route::get('/gstReport/print/{month?}/{year?}', Aaran\Reports\Controllers\Sales\GstReportController::class)->name('gstReport.print');
+
+
+//
 
 
 

@@ -125,7 +125,7 @@ class MonthlyReport extends Component
     public function render()
     {
         $this->getContects();
-        return view('livewire.reports.sales.monthly-report')->with([
+        return view('reports::Sales.monthly-report')->with([
             'list' => $this->getList(), 'salesAll' => $this->getSales(),
         ]);
     }

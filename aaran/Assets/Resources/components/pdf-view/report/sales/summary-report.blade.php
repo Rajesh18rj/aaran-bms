@@ -259,7 +259,7 @@ $totalSales = 0;
         <th class="border-r py-5">Month</th>
         <th width="15%" class="border-r py-5">Total sales</th>
     </tr>
-    @foreach(\App\Helper\Months::months() as $index=>$row)
+    @foreach(\Aaran\Assets\Helper\Months::months() as $index=>$row)
         <tr class="text-sm center v-align-c border-b ">
             <td height="26px" class="center border-r ">{{$row}}</td>
             <td class="right border-r px-2">{{\Aaran\Transaction\Controllers\Report\Sales\SummaryController::monthlySales($index+1,$year)}}</td>

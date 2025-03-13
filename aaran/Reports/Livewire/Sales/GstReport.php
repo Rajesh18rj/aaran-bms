@@ -50,7 +50,7 @@ class GstReport extends Component
 
     public function render()
     {
-        return view('livewire.reports.sales.gst-report')->with([
+        return view('reports::Sales.gst-report')->with([
             'sales' => $this->getSales(), 'purchase' => $this->getPurchase()
         ]);
     }
