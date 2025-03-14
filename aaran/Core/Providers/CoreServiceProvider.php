@@ -4,10 +4,10 @@ namespace Aaran\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use Aaran\Core\Livewire\Role;
+//use Aaran\Core\Livewire\Role;
 
 use Aaran\Core\Livewire\Tenant;
-use Aaran\Core\Livewire\Users;
+//use Aaran\Core\Livewire\Users;
 use Aaran\Core\Livewire\Versions;
 use Aaran\Core\Livewire\DefaultCompany;
 
@@ -41,7 +41,8 @@ class CoreServiceProvider extends ServiceProvider
 
     protected function loadConfigs(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/core.php', $this->moduleNameLower);
+        $this->mergeConfigFrom(__DIR__ . '/../Config/core.php', $this->moduleNameLower);
+        $this->mergeConfigFrom(__DIR__ . '/../Config/aaran.php', 'aaran');
     }
 
     protected function loadViews(): void
