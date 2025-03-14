@@ -47,7 +47,8 @@
                                                 </div>
                                             </x-aaran-ui::dropdown.wrapper>
                                             @error('contact_name')
-                                            <span class="text-red-400">{{$message}}</span>@enderror
+                                            <span class="text-red-400">{{$message}}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="h-16 ">
@@ -90,6 +91,10 @@
                                                                           wire:keydown.arrow-up="decrementStyle"
                                                                           wire:keydown.arrow-down="incrementStyle"
                                                                           wire:keydown.enter="enterStyle"/>
+
+                                                        @error('style_id')
+                                                        <span class="text-red-500">{{'The Style is Required.'}}</span>
+                                                        @enderror
                                                         <x-aaran-ui::dropdown.select>
 
                                                             @if($styleCollection)
@@ -113,9 +118,15 @@
                                     <div class="w-full space-y-3 ">
                                         <div class="h-16 ">
                                             <x-aaran-ui::input.floating wire:model="invoice_no" label="Invoice No"/>
+                                            @error('invoice_no')
+                                                <span class="text-red-500">{{'Invoice No is Required.'}}</span>
+                                            @enderror
                                         </div>
                                         <div class="h-16 ">
                                             <x-aaran-ui::input.model-date wire:model="invoice_date" label="Invoice Date"/>
+                                            @error('invoice_date')
+                                            <span class="text-red-500">{{'Invoice Date is Required.'}}</span>
+                                            @enderror
                                         </div>
                                         <div class=" ">
                                             @if(\Aaran\Assets\Features\SaleEntry::hasJob_no())
@@ -133,6 +144,10 @@
                                                             wire:keydown.arrow-up="decrementDespatch"
                                                             wire:keydown.arrow-down="incrementDespatch"
                                                             wire:keydown.enter="enterDespatch"/>
+
+                                                        @error('despatch_id')
+                                                        <span class="text-red-500">{{'Despatch No is Required.'}}</span>
+                                                        @enderror
 
                                                         <x-aaran-ui::dropdown.select>
                                                             @if($despatchCollection)
@@ -200,8 +215,10 @@
                                                                 highlight="{{$highlightProduct === $i  }}"
                                                                 wire:click.prevent="setProduct('{{$product->vname}}','{{$product->id}}','{{$product->gstpercent_id}}')">
                                                                 {{ $product->vname }} &nbsp;-&nbsp; GST&nbsp;:
-{{--                                                                &nbsp;{{\Aaran\Entries\Models\Sale::commons($product->gstpercent_id)}}--}}
-                                                                %
+                                                                &nbsp;
+{{--                                                                {{\Aaran\Entries\Models\Sale::commons($product->gstpercent_id)}}%--}}
+                                                                {{ \Aaran\Entries\Models\Sale::find($product->gstpercent_id)->vname ?? 'N/A' }} %
+
                                                             </x-aaran-ui::dropdown.option>
 
                                                         @empty
@@ -462,6 +479,9 @@
                                                         @endforelse
                                                     @endif
                                                 </x-aaran-ui::dropdown.select>
+                                                @error('billing_id')
+                                                    <span class="text-red-500">{{'Billing Address is Required.'}}</span>
+                                                @enderror
                                             </div>
                                         </x-aaran-ui::dropdown.wrapper>
                                     @endif
@@ -493,6 +513,9 @@
                                                         @endforelse
                                                     @endif
                                                 </x-aaran-ui::dropdown.select>
+                                                @error('shipping_id')
+                                                    <span class="text-red-500">{{'Shipping Address is Required.'}}</span>
+                                                @enderror
                                             </div>
                                         </x-aaran-ui::dropdown.wrapper>
                                     @endif
@@ -501,20 +524,21 @@
 
                             </div>
                         </x-aaran-ui::tabs.content>
+
                         <x-aaran-ui::tabs.content>
                             <div class="flex justify-between gap-5 h-56 pt-3">
                                 <div class="w-full space-y-8 ">
+
                                     @if(\Aaran\Assets\Features\SaleEntry::hasTransport())
                                         <x-aaran-ui::dropdown.wrapper label="Transport" type="transportTyped">
                                             <div class="relative ">
                                                 <x-aaran-ui::dropdown.input label="Transport" id="transport_name"
+                                                                  wire:model="transport_id"
                                                                   wire:model.live="transport_name"
                                                                   wire:keydown.arrow-up="decrementTransport"
                                                                   wire:keydown.arrow-down="incrementTransport"
                                                                   wire:keydown.enter="enterTransport"/>
-                                                @error('transport_id')
-                                                <span class="text-red-500">{{'The Transport is Required.'}}</span>
-                                                @enderror
+
                                                 <x-aaran-ui::dropdown.select>
                                                     @if($transportCollection)
                                                         @forelse ($transportCollection as $i => $transport)
@@ -530,19 +554,25 @@
                                                         @endforelse
                                                     @endif
                                                 </x-aaran-ui::dropdown.select>
+                                                @error('transport_id')
+                                                    <span class="text-red-400">Transport is Required</span>
+                                                @enderror
                                                 @error('transport_name')
-                                                <span class="text-red-400">{{$message}}</span>@enderror
+                                                    <span class="text-red-400">Transport Name is Required</span>
+                                                @enderror
                                             </div>
                                         </x-aaran-ui::dropdown.wrapper>
                                     @endif
-                                    <x-aaran-ui::input.model-date wire:model="TransdocDt" label="Transport Date"/>
-                                    <x-aaran-ui::input.model-select wire:model="TransMode" label="Transport Mode">
-                                        <option value="">Choose..</option>
-                                        <option value="1">Road</option>
-                                        <option value="2">Rail</option>
-                                        <option value="3">Air</option>
-                                        <option value="4">ship</option>
-                                    </x-aaran-ui::input.model-select>
+
+                                        <x-aaran-ui::input.model-date wire:model="TransdocDt" label="Transport Date"/>
+                                        <x-aaran-ui::input.model-select wire:model="TransMode" label="Transport Mode">
+                                            <option value="">Choose..</option>
+                                            <option value="1">Road</option>
+                                            <option value="2">Rail</option>
+                                            <option value="3">Air</option>
+                                            <option value="4">ship</option>
+                                        </x-aaran-ui::input.model-select>
+
                                 </div>
                                 <div class="w-full space-y-8">
                                     <div>
@@ -551,7 +581,7 @@
                                         <span class="text-red-400">{{$message}}</span>@enderror
                                     </div>
                                     <div>
-                                        <x-aaran-ui::input.floating wire:model.live="Vehno" label="Vechile No"/>
+                                        <x-aaran-ui::input.floating wire:model.live="Vehno" label="Vehicle No"/>
                                         @error('Vehno')
                                         <span class="text-red-400">{{$message}}</span>@enderror
                                     </div>
@@ -564,9 +594,9 @@
                                 </div>
                             </div>
                         </x-aaran-ui::tabs.content>
+
                         <x-aaran-ui::tabs.content>
                             <div class="w-1/2 space-y-8 gap-5 h-52 pt-3">
-
 
                                 @if(\Aaran\Assets\Features\SaleEntry::hasDestination())
                                     <x-aaran-ui::input.floating wire:model="destination" label="Destination"/>
