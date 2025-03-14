@@ -3,11 +3,10 @@
 namespace Aaran\Auth\Identity\Models;
 
 use Aaran\Auth\Identity\Database\Factories\UserFactory;
-use Aaran\Core\Models\Tenant;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -34,7 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
     // Define relationship with Tenant (if needed in the future)
     public function tenant()
     {
-        return $this->belongsTo(Tenant::class);
+        return $this->belongsTo(\Aaran\Tenant\Models\Tenant::class);
     }
 
     // Get full profile photo URL

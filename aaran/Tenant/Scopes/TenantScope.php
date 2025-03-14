@@ -1,6 +1,6 @@
 <?php
 
-namespace Aaran\Core\Scopes;
+namespace Aaran\Tenant\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
