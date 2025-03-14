@@ -3,9 +3,9 @@
 namespace Aaran\Core\Providers;
 
 use Aaran\Core\Listeners\SetDefaultCompanyIdInSession;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Aaran\Tenant\Listeners\SetTenantIdInSession;
 use Illuminate\Auth\Events\Login;
-use Aaran\Core\Listeners\SetTenantIdInSession;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

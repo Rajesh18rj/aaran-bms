@@ -1,6 +1,6 @@
 <?php
 
-namespace Aaran\Core\Models;
+namespace Aaran\Tenant\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

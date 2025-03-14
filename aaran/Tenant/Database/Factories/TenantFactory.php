@@ -1,8 +1,8 @@
 <?php
 
-namespace Aaran\Core\Database\Factories;
+namespace Aaran\Tenant\Database\Factories;
 
-use Aaran\Auth\Models\Tenant;
+use Aaran\Tenant\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TenantFactory extends Factory

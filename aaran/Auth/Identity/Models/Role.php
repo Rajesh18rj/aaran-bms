@@ -2,11 +2,11 @@
 
 namespace Aaran\Auth\Identity\Models;
 
-use Aaran\Core\Models\Tenant;
+use Aaran\Tenant\Models\Tenant;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Storage;
 
 class Role extends Authenticatable implements MustVerifyEmail
