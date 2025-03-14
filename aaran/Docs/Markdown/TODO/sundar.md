@@ -13,7 +13,7 @@
 - contact save method saving secondary address twice
 - check all active btn are on when new button click
 - jet-stream package issue to clean
-- while button hover hand symbol to show
+- while button hover hand symbol to show ✅ fixed by - Rajesh 14-03-2025
 - blog page to correct
 - software permission is to be planned with database version
 - Export sales to check

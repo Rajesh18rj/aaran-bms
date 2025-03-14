@@ -182,7 +182,6 @@ class Bank extends Component
             if ($this->common->vid == '') {
                 $Transaction = new Transaction();
 
-                // ✅ Ensure account_book_id is set before saving
                 $this->account_book_id = $this->account_book_id ?: $this->accountId;
 
                 if (!$this->account_book_id) {
@@ -190,7 +189,6 @@ class Bank extends Component
                     return;
                 }
 
-                // ✅ Log values for debugging
                 \Log::info('Saving Transaction', [
                     'account_book_id' => $this->account_book_id,
                     'order_id' => $this->order_id,
@@ -202,14 +200,14 @@ class Bank extends Component
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
                     'company_id' => session()->get('company_id'),
-                    'account_book_id' => $this->account_book_id, // ✅ Always set
+                    'account_book_id' => $this->account_book_id,
                     'contact_id' => $this->contact_id ?: '1',
                     'vch_no' => $this->vch_no,
                     'paid_to' => $this->paid_to,
                     'purpose' => $this->purpose,
-                    'order_id' => $this->order_id ?: '1', // ✅ Ensure order_id is set
+                    'order_id' => $this->order_id ?: 1,
                     'trans_type_id' => $this->trans_type_id ?: $this->transId,
-                    'opening_bal' => $this->opening_bal ?: 0, // ✅ Prevent null errors
+                    'opening_bal' => $this->opening_bal ?: 0,
                     'mode_id' => $this->mode_id ?: '111',
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '1',
