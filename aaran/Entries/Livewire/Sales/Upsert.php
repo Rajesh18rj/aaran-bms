@@ -109,6 +109,7 @@ class Upsert extends Component
             'style_id' => 'required',
             'despatch_id' => 'required',
             'transport_id' => 'required',
+            'transport_name' => 'required|string'
         ];
     }
 

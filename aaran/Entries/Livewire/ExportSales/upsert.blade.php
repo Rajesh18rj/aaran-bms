@@ -26,7 +26,7 @@
                                                                       wire:keydown.arrow-down="incrementContact"
                                                                       wire:keydown.enter="enterContact"/>
                                                     @error('contact_id')
-                                                    <span class="text-red-500">{{'The Party Name is Required.'}}</span>
+                                                        <span class="text-red-500">{{'The Party Name is Required.'}}</span>
                                                     @enderror
                                                     <x-aaran-ui::dropdown.select>
                                                         @if($contactCollection)
@@ -96,9 +96,15 @@
                                     <div class="w-full space-y-3">
                                         <div class="h-16">
                                             <x-aaran-ui::input.floating wire:model="invoice_no" label="Invoice No"/>
+                                            @error('invoice_no')
+                                            <span class="text-red-500">{{'Invoice No is Required.'}}</span>
+                                            @enderror
                                         </div>
                                         <div class="h-16">
                                             <x-aaran-ui::input.model-date wire:model="invoice_date" label="Invoice Date"/>
+                                            @error('invoice_date')
+                                            <span class="text-red-500">{{'Invoice Date is Required.'}}</span>
+                                            @enderror
                                         </div>
                                         <div class="h-16">
                                             <x-aaran-ui::input.floating wire:model.live="sales_type" :label="'Sales Type'"/>
@@ -127,7 +133,9 @@
                                                                 @endforelse
                                                             @endif
                                                         </x-aaran-ui::dropdown.select>
-
+                                                        @error('style_id')
+                                                        <span class="text-red-500">{{'Style is Required.'}}</span>
+                                                        @enderror
                                                     </div>
                                                 </x-aaran-ui::dropdown.wrapper>
                                             @endif

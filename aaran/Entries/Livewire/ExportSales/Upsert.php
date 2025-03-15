@@ -59,6 +59,27 @@ class Upsert extends Component
     public $currency_type='';
     #endregion
 
+    public function rules(): array
+    {
+        return [
+            'uniqueno' => 'required|string|max:255|unique:export_sales,uniqueno',
+//            'company_id' => 'required|exists:companies,id',
+            'contact_id' => 'required|integer|exists:contacts,id',
+            'invoice_no' => 'required|integer|unique:export_sales,invoice_no',
+            'invoice_date' => 'required|date',
+            'order_id' => 'required|exists:orders,id',
+            'style_id' => 'required|exists:styles,id',
+        ];
+    }
+    public function messages() {
+        return [
+            'contact_id.required' => 'The contact field is required.',
+            'contact_id.integer' => 'The contact ID must be a valid number.',
+            'contact_id.exists' => 'The selected contact does not exist in the database.',
+            ];
+    }
+
+
     #region[Contact]
     #[validate]
     public $contact_name = '';
@@ -530,7 +551,7 @@ class Upsert extends Component
     {
         if ($this->uniqueno != '') {
             if ($this->common->vid == "") {
-//                $this->validate($this->rules());
+                $this->validate($this->rules());
                 $obj = ExportSale::create([
                     'uniqueno' => session()->get('company_id').'~'.session()->get('acyear').'~'.ExportSale::nextNo(),
                     'acyear' => session()->get('acyear'),
