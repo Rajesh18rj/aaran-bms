@@ -46,7 +46,8 @@
                                                 </div>
                                             </x-aaran-ui::dropdown.wrapper>
                                             @error('contact_name')
-                                            <span class="text-red-400">{{$message}}</span>@enderror
+                                                <span class="text-red-400">{{$message}}</span>
+                                            @enderror
                                         </div>
                                         <div class="h-16 ">
                                             @if(\Aaran\Assets\Features\SaleEntry::hasOrder())
@@ -120,6 +121,9 @@
                                         </div>
                                         <div class="h-16 ">
                                             <x-aaran-ui::input.model-date wire:model="purchase_date" label="Purchase Date"/>
+                                            @error('purchase_date')
+                                            <span class="text-red-400">{{'Purchase Date is Required'}}</span>
+                                            @enderror
                                         </div>
                                         <div class="h-16 ">
                                             <x-aaran-ui::input.model-select wire:model="sales_type" :label="'Sales Type'">

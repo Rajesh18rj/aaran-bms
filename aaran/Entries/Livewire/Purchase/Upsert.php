@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Upsert extends Component
@@ -60,10 +61,23 @@ class Upsert extends Component
     public $grandtotalBeforeRound;
     #endregion
 
+    public function rules(): array
+    {
+        return [
+            'uniqueno' => 'required|string|max:255|unique:purchases,uniqueno',
+//            'company_id' => 'required|exists:companies,id',
+            'contact_id' => 'required|integer|exists:contacts,id',
+            'order_id' => 'required',
+            'purchase_date' => 'required|date',
+            'transport_id' => 'required',
+        ];
+    }
+
     #region[Contact]
 
-    public $contact_id = '';
+    #[validate]
     public $contact_name = '';
+    public $contact_id = '';
     public Collection $contactCollection;
     public $highlightContact = 0;
     public $contactTyped = false;
@@ -127,7 +141,8 @@ class Upsert extends Component
 
     #region[Order]
 
-    #[Rule('required')]
+//    #[Rule('required')]
+    #[validate]
     public $order_id = '';
     public $order_name = '';
     public Collection $orderCollection;
@@ -553,9 +568,10 @@ class Upsert extends Component
     #region[Save]
     public function save(): void
     {
-        try {
+//        try {
             if ($this->uniqueno != '') {
                 if ($this->common->vid == "") {
+                    $this->validate($this->rules());
                     $obj = Purchase::create([
                         'uniqueno' => session()->get('company_id') . '~' . session()->get('acyear') . '~' . $this->entry_no,
                         'acyear' => session()->get('acyear'),
@@ -645,10 +661,11 @@ class Upsert extends Component
                 }
                 $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
                 $this->getRoute();
-            }
-        } catch (\Exception $exception) {
-            echo($exception->getMessage());
+//            }
         }
+//            catch (\Exception $exception) {
+//            echo($exception->getMessage());
+//        }
     }
 
     public function saveItem($id): void
