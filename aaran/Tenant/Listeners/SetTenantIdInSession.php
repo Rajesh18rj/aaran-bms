@@ -1,9 +1,6 @@
 <?php
 
-namespace Aaran\Core\Listeners;
-
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+namespace Aaran\Tenant\Listeners;
 
 class SetTenantIdInSession
 {
