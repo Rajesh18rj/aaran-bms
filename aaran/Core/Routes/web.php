@@ -8,4 +8,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/versions', Aaran\Core\Livewire\Versions\Index::class)->name('versions');
     Route::get('/defaults', Aaran\Core\Livewire\DefaultCompany\Index::class)->name('defaults');
 
+    Route::get('/tenants', Aaran\Core\Livewire\Tenant\Index::class)->name('tenants');
 });
