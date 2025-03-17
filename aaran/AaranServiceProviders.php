@@ -10,7 +10,7 @@ use Aaran\Common\Providers\CommonServiceProvider;
 use Aaran\Core\Providers\CoreServiceProvider;
 use Aaran\Core\Providers\EventServiceProvider;
 use Aaran\Tenant\Providers\TenantServiceProvider;
-use Aaran\Tenant\Services\StartupService;
+use Aaran\Core\Services\StartupService;
 use Aaran\Docs\Providers\DocsServiceProvider;
 use Aaran\Entries\Providers\EntriesServiceProvider;
 use Aaran\Master\Providers\MasterServiceProvider;
