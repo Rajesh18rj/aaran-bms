@@ -14,8 +14,13 @@ class TenantServiceProvider extends ServiceProvider
         });
     }
 
+    protected function loadMigrations(): void
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+    }
+
     public function boot()
     {
-        //
+        $this->loadMigrations();
     }
 }
