@@ -150,6 +150,9 @@
                                               wire:keydown.arrow-up="decrementContact"
                                               wire:keydown.arrow-down="incrementContact"
                                               wire:keydown.enter="enterContact"/>
+                            @error('contact_id')
+                            <span class="text-red-500">{{'The Party Name is Required.'}}</span>
+                            @enderror
                             <x-aaran-ui::dropdown.select>
 
                                 @if($contactCollection)
@@ -286,11 +289,14 @@
 
                                         <div class="relative">
                                             <x-aaran-ui::dropdown.input label="Order NO" id="order_name"
-                                                              wire:model.live="order_name"
-                                                              wire:keydown.arrow-up="decrementOrder"
-                                                              wire:keydown.arrow-down="incrementOrder"
-                                                              wire:keydown.enter="enterOrder"/>
+                                                                        wire:model.live="order_name"
+                                                                        wire:keydown.arrow-up="decrementOrder"
+                                                                        wire:keydown.arrow-down="incrementOrder"
+                                                                        wire:keydown.enter="enterOrder"/>
 
+                                            @error('order_id')
+                                            <span class="text-red-500">{{'The Order is Required.'}}</span>
+                                            @enderror
                                             <x-aaran-ui::dropdown.select>
                                                 @if($orderCollection)
 

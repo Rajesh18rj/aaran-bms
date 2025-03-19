@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Index extends Component
@@ -46,6 +47,13 @@ class Index extends Component
     public $opening_bal;
     #endregion
 
+    public function rules(): array
+    {
+        return[
+            'contact_id' => $this->contact_id,
+        ];
+    }
+
     #region[Mount]
     public function mount($id)
     {
@@ -68,7 +76,6 @@ class Index extends Component
     #endregion
 
 
-
     public function updatedAccountBookId($value)
     {
         $selectedAccountBook = AccountBook::find($value);
@@ -85,8 +92,13 @@ class Index extends Component
     #region[Get-Save]
     public function getSave(): void
     {
+        if (!isset($this->order_id)) {
+            return;
+        }
+
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
+                $this->validate($this->rules());
                 $Transaction = new Transaction();
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
@@ -179,8 +191,9 @@ class Index extends Component
 
     #region[Contact]
 
-    public $contact_id = '';
+    #[validate]
     public $contact_name = '';
+    public $contact_id = '';
     public Collection $contactCollection;
     public $highlightContact = 0;
     public $contactTyped = false;
@@ -383,7 +396,7 @@ class Index extends Component
 
     #region[Order]
 
-    #[Rule('required')]
+//    #[Rule('required')]
     public $order_id = '';
     public $order_name = '';
     public Collection $orderCollection;
