@@ -10,12 +10,14 @@ class S117_PaymentModeSeeder extends Seeder
     public static function run(): void
     {
         PaymentMode::create([
-            'vname' => 'Payment',
+            'id' => 110,
+            'vname' => 'Receipt',
             'active_id' => '1'
         ]);
 
         PaymentMode::create([
-            'vname' => 'Receipt',
+            'id' => 111,
+            'vname' => 'Payment',
             'active_id' => '1'
         ]);
 

@@ -2,6 +2,7 @@
     <x-slot name="header">{{$mode_name}}</x-slot>
 
     <x-aaran-ui::forms.m-panel>
+        <x-aaran-ui::alerts.notification />
 
         <!-- Top Controls  -------------------------------------------------------------------------------------------->
 
@@ -12,8 +13,7 @@
                 {{$list->count()}}
             </x-aaran-ui::table.caption>
             <div class="flex justify-end w-full">
-                {{--Todo--}}
-{{--                <x-aaran-ui::button.print-x href="{{ route('transactions.print',[$mode_id == 111 ? 1 : 2 ]) }}"/>--}}
+                <x-aaran-ui::button.print-x href="{{ route('transactions.print',[$mode_id == 111 ? 1 : 2 ]) }}"/>
             </div>
         </div>
 

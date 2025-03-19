@@ -40,7 +40,7 @@ class Index extends Component
     public $vch_no;
 
     public $log;
-//    public $trans_type_id;
+
     public $account_book_id;
     public $account_books = [];
     public $opening_bal;
@@ -51,18 +51,23 @@ class Index extends Component
     {
         if ($id == 1) {
             $this->mode_id = 111;
-            $this->mode_name = PaymentMode::find($id)->vname;
-            $this->vch_no = Transaction::nextNo($this->mode_id);
         } elseif ($id == 2) {
             $this->mode_id = 110;
-            $this->mode_name = PaymentMode::find($id)->vname;
-            $this->vch_no = Transaction::nextNo($this->mode_id);
         }
+
+        // Fetch the payment mode safely
+        $paymentMode = PaymentMode::find($this->mode_id);
+
+        $this->mode_name = $paymentMode->vname;
+        $this->vch_no = Transaction::nextNo($this->mode_id);
+
         $this->trans_type_id = 108;
         $this->account_books = AccountBook::with('transType')->get();
         $this->opening_bal = AccountBook::find($id)->opening_balance ?? 0;
     }
     #endregion
+
+
 
     public function updatedAccountBookId($value)
     {
@@ -94,7 +99,9 @@ class Index extends Component
                     'order_id' => $this->order_id ?: '1',
                     'trans_type_id' => $this->trans_type_id ?: '108',
                     'opening_bal' => $this->opening_bal ?: 0,
-                    'mode_id' => $this->mode_id ?: '111',
+                    'mode_id' => $this->mode_id
+//                        ?: '111'
+                    ,
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '85',
                     'remarks' => $this->remarks,
@@ -157,6 +164,7 @@ class Index extends Component
             $this->dispatch('notify', ...['type' => 'success', 'content' => $message . ' Successfully']);
         }
     }
+
 
     public function contactUpdate()
     {
