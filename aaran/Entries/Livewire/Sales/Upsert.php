@@ -98,10 +98,18 @@ class Upsert extends Component
     public function rules(): array
     {
         return [
-            'contact_name' => 'required',
-            'transport_name' => 'required',
-            'distance' => 'required',
-            'Vehno' => 'required',
+            'uniqueno' => 'required|string|max:255|unique:sales,uniqueno',
+//            'company_id' => 'required|exists:companies,id',
+            'contact_id' => 'required',
+            'invoice_no' => 'required|integer|unique:sales,invoice_no',
+            'invoice_date' => 'required|date',
+            'order_id' => 'required',
+            'billing_id' => 'required',
+            'shipping_id' => 'required',
+            'style_id' => 'required',
+            'despatch_id' => 'required',
+            'transport_id' => 'required',
+            'transport_name' => 'required|string'
         ];
     }
 
