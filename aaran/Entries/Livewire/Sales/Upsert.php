@@ -1216,7 +1216,9 @@ class Upsert extends Component
             $this->total_taxable = $obj->total_taxable;
             $this->total_gst = $obj->total_gst;
             $this->ledger_id = $obj->ledger_id;
-            $this->ledger_name = $obj->ledger_id ? Ledger::find($obj->ledger_id)->vname : '';
+//            $this->ledger_name = $obj->ledger_id ? Ledger::find($obj->ledger_id)->vname : '';
+            $this->ledger_name = $obj?->ledger_id ? Ledger::find($obj->ledger_id)?->vname : '';
+
             $this->additional = $obj->additional;
             $this->round_off = $obj->round_off;
             $this->grand_total = $obj->grand_total;

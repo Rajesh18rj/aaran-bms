@@ -6,6 +6,8 @@ use Aaran\Assets\Helper\ConvertTo;
 use Aaran\Entries\Models\Sale;
 use Aaran\Master\Models\Company;
 use Aaran\Master\Models\ContactDetail;
+use Aaran\MasterGst\Models\MasterGstEway;
+use Aaran\MasterGst\Models\MasterGstIrn;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;
@@ -18,6 +20,7 @@ class SalesInvoiceController extends Controller
         if ($vid != '') {
 
             $sale = $this->getSales($vid);
+//            dd($vid);
 
             if (!$sale) {
                 abort(404, "Sale not found");
@@ -33,8 +36,8 @@ class SalesInvoiceController extends Controller
                     'cmp' => Company::printDetails(session()->get('company_id')),
                     'billing_address' => ContactDetail::printDetails($sale->billing_id),
                     'shipping_address' => ContactDetail::printDetails($sale->shipping_id),
-//                    'irn'=>$this->getIrn($vid),
-//                    'eWay'=>$this->getEway($vid),
+                    'irn'=>$this->getIrn($vid),
+                    'eWay'=>$this->getEway($vid),
                 ]);
 
             $pdf->render();
@@ -47,7 +50,7 @@ class SalesInvoiceController extends Controller
 
     public function getSales($vid): ?Sale
     {
-        return Sale::select(
+        $sale = Sale::select(
             'sales.*',
             'contacts.vname as contact_name',
             'contacts.msme_no as msme_no',
@@ -57,22 +60,25 @@ class SalesInvoiceController extends Controller
             'styles.vname as style_name',
             'styles.desc as style_desc',
             'despatches.vname as despatch_name',
-//            'despatches.vdate as despatch_date',
             'transports.vname as transport_name',
-//            'transports.desc as transport_id',
-//            'transports.desc_1 as transport_no',
-            'ledgers.vname as ledger_name',
+            'ledgers.vname as ledger_name'
         )
-            ->join('contacts', 'contacts.id', '=', 'sales.contact_id')
-            ->join('orders', 'orders.id', '=', 'sales.order_id')
-            ->join('styles', 'styles.id', '=', 'sales.style_id')
-            ->join('despatches', 'despatches.id', '=', 'sales.despatch_id')
-            ->join('transports', 'transports.id', '=', 'sales.transport_id')
-            ->join('ledgers', 'ledgers.id', '=', 'sales.ledger_id')
+            ->leftJoin('contacts', 'contacts.id', '=', 'sales.contact_id')
+            ->leftJoin('orders', 'orders.id', '=', 'sales.order_id')
+            ->leftJoin('styles', 'styles.id', '=', 'sales.style_id')
+            ->leftJoin('despatches', 'despatches.id', '=', 'sales.despatch_id')
+            ->leftJoin('transports', 'transports.id', '=', 'sales.transport_id')
+            ->leftJoin('ledgers', 'ledgers.id', '=', 'sales.ledger_id')
             ->where('sales.id', '=', $vid)
             ->first();
-//            ->get()->firstOrFail();
+
+        if (!$sale) {
+            abort(404, "Sale not found");
+        }
+
+        return $sale;
     }
+
     public function getSaleItems($vid): Collection
     {
         return DB::table('saleitems')
@@ -115,14 +121,14 @@ class SalesInvoiceController extends Controller
                 ];
             });
     }
-//    public function getIrn($vid)
-//    {
-//        return MasterGstIrn::where('sales_id',$vid)->first();
-//    }
-//    public function getEway($vid)
-//    {
-//        return MasterGstEway::where('sales_id',$vid)->first();
-//    }
+    public function getIrn($vid)
+    {
+        return MasterGstIrn::where('sales_id',$vid)->first();
+    }
+    public function getEway($vid)
+    {
+        return MasterGstEway::where('sales_id',$vid)->first();
+    }
 
 
 
