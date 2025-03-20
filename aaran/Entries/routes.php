@@ -20,6 +20,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     //Payment
     Route::get('transactions/{id}', Aaran\Entries\Livewire\Payment\Index::class)->name('transactions');
+    Route::get('transactions/{id}/print',  Aaran\Transaction\Controllers\Transaction\PaymentController::class)->name('transactions.print');
+
 
     //Export Sales
     Route::get('/exportsales', Aaran\Entries\Livewire\ExportSales\Index::class)->name('exportsales');

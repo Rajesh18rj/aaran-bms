@@ -283,8 +283,8 @@
                 <tr class="text-md center v-align-c ">
                     <td height="26px" class="center border-r">{{$index+1}}</td>
                     <td class="left border-r px-5">{{$row->contact->vname}}</td>
-                    <td class="center border-r ">{{\Aaran\Transaction\Models\Transaction::common($row->receipttype_id)}}</td>
-                    <td class="center border-r ">{{Aaran\Common\Models\Common::find($row->trans_type_id)->vname}}</td>
+                    <td class="center border-r">{{ $row->receipttype_id }}</td>
+                    <td class="center border-r ">{{Aaran\Common\Models\TransactionType::find($row->trans_type_id)->vname}}</td>
                     <td class="right  px-2">
                         {{number_format($row->vname,2,'.','')}}</td>
                 </tr>

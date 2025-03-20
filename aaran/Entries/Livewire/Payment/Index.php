@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Index extends Component
@@ -40,29 +41,40 @@ class Index extends Component
     public $vch_no;
 
     public $log;
-//    public $trans_type_id;
+
     public $account_book_id;
     public $account_books = [];
     public $opening_bal;
     #endregion
+
+    public function rules(): array
+    {
+        return[
+            'contact_id' => $this->contact_id,
+        ];
+    }
 
     #region[Mount]
     public function mount($id)
     {
         if ($id == 1) {
             $this->mode_id = 111;
-            $this->mode_name = PaymentMode::find($id)->vname;
-            $this->vch_no = Transaction::nextNo($this->mode_id);
         } elseif ($id == 2) {
             $this->mode_id = 110;
-            $this->mode_name = PaymentMode::find($id)->vname;
-            $this->vch_no = Transaction::nextNo($this->mode_id);
         }
+
+        // Fetch the payment mode safely
+        $paymentMode = PaymentMode::find($this->mode_id);
+
+        $this->mode_name = $paymentMode->vname;
+        $this->vch_no = Transaction::nextNo($this->mode_id);
+
         $this->trans_type_id = 108;
         $this->account_books = AccountBook::with('transType')->get();
         $this->opening_bal = AccountBook::find($id)->opening_balance ?? 0;
     }
     #endregion
+
 
     public function updatedAccountBookId($value)
     {
@@ -80,8 +92,13 @@ class Index extends Component
     #region[Get-Save]
     public function getSave(): void
     {
+        if (!isset($this->order_id)) {
+            return;
+        }
+
         if ($this->common->vname != '') {
             if ($this->common->vid == '') {
+                $this->validate($this->rules());
                 $Transaction = new Transaction();
                 $extraFields = [
                     'acyear' => session()->get('acyear'),
@@ -94,7 +111,9 @@ class Index extends Component
                     'order_id' => $this->order_id ?: '1',
                     'trans_type_id' => $this->trans_type_id ?: '108',
                     'opening_bal' => $this->opening_bal ?: 0,
-                    'mode_id' => $this->mode_id ?: '111',
+                    'mode_id' => $this->mode_id
+//                        ?: '111'
+                    ,
                     'vdate' => $this->vdate,
                     'receipttype_id' => $this->receipt_type_id ?: '85',
                     'remarks' => $this->remarks,
@@ -158,6 +177,7 @@ class Index extends Component
         }
     }
 
+
     public function contactUpdate()
     {
         if ($this->contact_id) {
@@ -171,8 +191,9 @@ class Index extends Component
 
     #region[Contact]
 
-    public $contact_id = '';
+    #[validate]
     public $contact_name = '';
+    public $contact_id = '';
     public Collection $contactCollection;
     public $highlightContact = 0;
     public $contactTyped = false;
@@ -375,7 +396,7 @@ class Index extends Component
 
     #region[Order]
 
-    #[Rule('required')]
+//    #[Rule('required')]
     public $order_id = '';
     public $order_name = '';
     public Collection $orderCollection;
