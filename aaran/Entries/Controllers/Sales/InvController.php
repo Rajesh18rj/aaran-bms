@@ -18,7 +18,7 @@ class InvController extends Controller
     public function __invoke($vid)
     {
         $sale = $this->getSales($vid);
-        return Pdf::view('aaran-ui::components.pdf-view.sales.spatie.garment', [
+        return Pdf::loadView('aaran-ui::components.pdf-view.sales.spatie.garment', [
             'obj' => $sale,
             'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
             'list' => $this->getSaleItems($vid),
@@ -27,8 +27,9 @@ class InvController extends Controller
             'shipping_address' => ContactDetail::printDetails($sale->shipping_id),
             'irn'=>$this->getIrn($vid),
             'eWay'=>$this->getEway($vid),
-        ])->name('invoice.pdf');
+        ])->stream('invoice.pdf');
     }
+
     public function getSales($vid): ?Sale
     {
         return Sale::select(
@@ -43,19 +44,18 @@ class InvController extends Controller
             'despatches.vname as despatch_name',
             'despatches.vdate as despatch_date',
             'transports.vname as transport_name',
-//            'transports.desc as transport_id',
-//            'transports.desc_1 as transport_no',
-            'ledgers.vname as ledger_name',
+            'ledgers.vname as ledger_name'
         )
-            ->join('contacts', 'contacts.id', '=', 'sales.contact_id')
-            ->join('orders', 'orders.id', '=', 'sales.order_id')
-            ->join('styles', 'styles.id', '=', 'sales.style_id')
-            ->join('despatches', 'despatches.id', '=', 'sales.despatch_id')
-            ->join('transports', 'transports.id', '=', 'sales.transport_id')
-            ->join('ledgers', 'ledgers.id', '=', 'sales.ledger_id')
+            ->leftJoin('contacts', 'contacts.id', '=', 'sales.contact_id')
+            ->leftJoin('orders', 'orders.id', '=', 'sales.order_id')
+            ->leftJoin('styles', 'styles.id', '=', 'sales.style_id')
+            ->leftJoin('despatches', 'despatches.id', '=', 'sales.despatch_id')
+            ->leftJoin('transports', 'transports.id', '=', 'sales.transport_id')
+            ->leftJoin('ledgers', 'ledgers.id', '=', 'sales.ledger_id')
             ->where('sales.id', '=', $vid)
-            ->get()->firstOrFail();
+            ->firstOrFail();
     }
+
     public function getSaleItems($vid): Collection
     {
         return DB::table('saleitems')
