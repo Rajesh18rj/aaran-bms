@@ -9,6 +9,7 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
         "./Aaran/**/*.blade.php", // 👈 Ensure Aaran views are included
+        "./Aaran/Assets/Resources/components/pdf-view/**/*.blade.php",
         "./Aaran/**/*.js",
         "./Aaran/**/*.vue",
     ],

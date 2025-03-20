@@ -17,18 +17,36 @@ class InvController extends Controller
 {
     public function __invoke($vid)
     {
-        $sale = $this->getSales($vid);
-        return Pdf::loadView('aaran-ui::components.pdf-view.sales.spatie.garment', [
-            'obj' => $sale,
-            'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
-            'list' => $this->getSaleItems($vid),
-            'cmp' => Company::printDetails(session()->get('company_id')),
-            'billing_address' => ContactDetail::printDetails($sale->billing_id),
-            'shipping_address' => ContactDetail::printDetails($sale->shipping_id),
-            'irn'=>$this->getIrn($vid),
-            'eWay'=>$this->getEway($vid),
-        ])->stream('invoice.pdf');
+        if ($vid != '') {
+
+            $sale = $this->getSales($vid);
+
+            if (!$sale) {
+                abort(404, "Sale not found");
+            }
+
+            Pdf::setOption(['dpi' => 150, 'defaultPaperSize' => 'a4', 'defaultFont' => 'sans-serif','fontDir']);
+
+            $pdf = PDF::loadView('aaran-ui::components.pdf-view.sales.spatie.garment'
+                , [
+                    'obj' => $sale,
+                    'rupees' => ConvertTo::ruppesToWords($sale->grand_total),
+                    'list' => $this->getSaleItems($vid),
+                    'cmp' => Company::printDetails(session()->get('company_id')),
+                    'billing_address' => ContactDetail::printDetails($sale->billing_id),
+                    'shipping_address' => ContactDetail::printDetails($sale->shipping_id),
+                    'irn'=>$this->getIrn($vid),
+                    'eWay'=>$this->getEway($vid),
+                ]);
+
+            $pdf->render();
+
+            return $pdf->stream();
+
+        }
+        return null;
     }
+
 
     public function getSales($vid): ?Sale
     {
