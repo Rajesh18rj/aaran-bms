@@ -740,10 +740,16 @@ class Upsert extends Component
 
     public function getProductList(): void
     {
-        $this->productCollection = $this->product_name ? Product::search(trim($this->product_name))
-            ->where('company_id', '=', session()->get('company_id'))
-            ->get() : Product::all()->where('company_id', '=', session()->get('company_id'));
+        $this->productCollection = $this->product_name
+            ? Product::search(trim($this->product_name))
+                ->where('company_id', '=', session()->get('company_id'))
+                ->orderBy('created_at', 'desc')
+                ->get()
+            : Product::where('company_id', '=', session()->get('company_id'))
+                ->orderBy('created_at', 'desc')
+                ->get();
     }
+
 
     #endregion
 
