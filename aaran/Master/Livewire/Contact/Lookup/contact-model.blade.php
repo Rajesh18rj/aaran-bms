@@ -1,11 +1,11 @@
-<div>
+<div x-data @keydown.tab.stop>
     <x-aaran-ui::controls.lookup.model :show-model="$showModel" :height="'h-[40rem]'" :width="'w-3/5'" label="Contact">
 
             <x-aaran-ui::tabs.tab-panel>
 
-                <x-slot name="tabs">
-                    <x-aaran-ui::tabs.tab>Mandatory</x-aaran-ui::tabs.tab>
-                    <x-aaran-ui::tabs.tab>Detailing</x-aaran-ui::tabs.tab>
+                <x-slot name="tabs" >
+                    <x-aaran-ui::tabs.tab x-data @keydown.tab.stop >Mandatory</x-aaran-ui::tabs.tab>
+                    <x-aaran-ui::tabs.tab x-data @keydown.tab.stop >Detailing</x-aaran-ui::tabs.tab>
                 </x-slot>
 
                 <x-slot name="content">
@@ -81,12 +81,21 @@
                                                 @enderror
 
                                                 <x-aaran-ui::dropdown.wrapper label="City" type="cityTyped">
+
                                                     <div class="relative ">
-                                                        <x-aaran-ui::dropdown.input label="City" id="city_name" wire:model.live="itemList.{{0}}.city_name" wire:keydown.arrow-up="decrementCity" wire:keydown.arrow-down="incrementCity" wire:keydown.enter="enterCity({{0}})" />
-                                                        <x-aaran-ui::dropdown.select>
+                                                        <x-aaran-ui::dropdown.input
+                                                            label="City"
+                                                            id="city_name"
+                                                            wire:model.live="itemList.{{0}}.city_name"
+                                                            wire:keydown.arrow-up="decrementCity"
+                                                            wire:keydown.arrow-down="incrementCity"
+                                                            wire:keydown.enter="enterCity({{0}})"/>
+                                                        <x-aaran-ui::dropdown.select >
                                                             @if($cityCollection)
                                                                 @forelse ($cityCollection as $i => $city)
-                                                                    <x-aaran-ui::dropdown.option highlight="{{$highlightCity === $i  }}" wire:click.prevent="setCity('{{$city->vname}}','{{$city->id}}','{{0}}')">
+                                                                    <x-aaran-ui::dropdown.option
+                                                                        highlight="{{$highlightCity === $i  }}"
+                                                                        wire:click.prevent="setCity('{{$city->vname}}','{{$city->id}}','{{0}}')">
                                                                         {{ $city->vname }}
                                                                     </x-aaran-ui::dropdown.option>
                                                                 @empty
@@ -96,6 +105,7 @@
                                                         </x-aaran-ui::dropdown.select>
                                                     </div>
                                                 </x-aaran-ui::dropdown.wrapper>
+
                                                 @error('itemList.0.city_name')
                                                 <span class="text-red-400"> {{$message}}</span>
                                                 @enderror
@@ -116,6 +126,7 @@
                                                         </x-aaran-ui::dropdown.select>
                                                     </div>
                                                 </x-aaran-ui::dropdown.wrapper>
+
                                                 @error('itemList.0.state_name')
                                                 <span class="text-red-400"> {{$message}}</span>
                                                 @enderror
