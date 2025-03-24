@@ -49,10 +49,23 @@ class Index extends Component
 
     public function rules(): array
     {
-        return[
-            'contact_id' => $this->contact_id,
+        return [
+//            'company_id' => 'required',
+            'account_book_id' => 'required',
+            'opening_bal' => 'required',
+            'contact_id' => 'required',
+            'order_id' => 'required',
+            'trans_type_id' => 'required',
+            'mode_id' => 'required',
+            'vdate' => 'required|date',
+//            'vname' => 'required|numeric|min:0',
+            'receipt_type_id' => 'required',
+            'remarks' => 'required',
+            'instrument_bank_id' => 'required',
+//            'user_id' => 'required|exists:users,id',
         ];
     }
+
 
     #region[Mount]
     public function mount($id)
@@ -115,7 +128,7 @@ class Index extends Component
 //                        ?: '111'
                     ,
                     'vdate' => $this->vdate,
-                    'receipttype_id' => $this->receipt_type_id ?: '85',
+                    'receipt_type_id' => $this->receipt_type_id ?: '85',
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
@@ -151,7 +164,7 @@ class Index extends Component
                     'opening_bal' => $this->opening_bal,
                     'mode_id' => $this->mode_id,
                     'vdate' => $this->vdate,
-                    'receipttype_id' => $this->receipt_type_id,
+                    'receipt_type_id' => $this->receipt_type_id,
                     'remarks' => $this->remarks,
                     'chq_no' => $this->chq_no,
                     'chq_date' => $this->chq_date,
@@ -241,12 +254,10 @@ class Index extends Component
         $this->contact_id = $v['id'];
         $this->contact_name = $v['name'];
         $this->contactTyped = false;
-
     }
 
     public function getContactList(): void
     {
-
         $this->contactCollection = $this->contact_name ? Contact::search(trim($this->contact_name))
             ->where('company_id', '=', session()->get('company_id'))
             ->get() : Contact::where('company_id', '=', session()->get('company_id'))->get();
@@ -691,8 +702,8 @@ class Index extends Component
             $this->mode_name = $Transaction->mode_id ? PaymentMode::find($Transaction->mode_id)->vname : '';
             $this->vdate = $Transaction->vdate;
             $this->amount = $Transaction->amount;
-            $this->receipt_type_id = $Transaction->receipttype_id;
-            $this->receipt_type_name = $Transaction->receipttype_id ? ReceiptType::find($Transaction->receipttype_id)->vname : '';
+            $this->receipt_type_id = $Transaction->receipt_type_id;
+            $this->receipt_type_name = optional(ReceiptType::find($Transaction->receipt_type_id))->vname ?? '';
             $this->remarks = $Transaction->remarks;
             $this->chq_no = $Transaction->chq_no;
             $this->chq_date = $Transaction->chq_date;
