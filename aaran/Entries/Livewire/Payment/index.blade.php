@@ -172,8 +172,12 @@
 
                     <x-aaran-ui::input.floating wire:model="common.vname" :label="'Amount*'"/>
 
-                    <x-aaran-ui::input.model-date wire:model="vdate" :label="'Date'"/>
-
+                    <div>
+                        <x-aaran-ui::input.model-date wire:model="vdate" :label="'Date'"/>
+                        @error('vdate')
+                            <span class="text-sm text-red-500">{{'Date is required.'}}</span>
+                        @enderror
+                    </div>
                 </div>
 
                 <!-- Right Area  -------------------------------------------------------------------------------------->
@@ -226,7 +230,9 @@
                                                         @endforelse
                                                     @endif
                                                 </x-aaran-ui::dropdown.select>
-
+                                                @error('receipt_type_id')
+                                                <span class="text-red-500">{{'Type is Required.'}}</span>
+                                                @enderror
                                             </div>
 
                                         </x-aaran-ui::dropdown.wrapper>
@@ -263,6 +269,9 @@
                                                     @endif
                                                 </x-aaran-ui::dropdown.select>
                                             </div>
+                                            @error('instrument_bank_id')
+                                            <span class="text-red-500">{{'Bank is Required.'}}</span>
+                                            @enderror
                                         </x-aaran-ui::dropdown.wrapper>
 
                                         <x-aaran-ui::input.model-date :label="'Chq.Date'"/>

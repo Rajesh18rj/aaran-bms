@@ -407,7 +407,7 @@ class Index extends Component
 
     #region[Order]
 
-//    #[Rule('required')]
+    #[Rule('required')]
     public $order_id = '';
     public $order_name = '';
     public Collection $orderCollection;
@@ -467,7 +467,6 @@ class Index extends Component
             ->where('company_id', '=', session()->get('company_id'))
             ->get() : Order::where('company_id', '=', session()->get('company_id'))->get();;
     }
-
     #endregion
 
     #region[trans_type]
