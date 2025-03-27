@@ -124,9 +124,8 @@ class Index extends Component
                     'order_id' => $this->order_id ?: '1',
                     'trans_type_id' => $this->trans_type_id ?: '108',
                     'opening_bal' => $this->opening_bal ?: 0,
-                    'mode_id' => $this->mode_id
-//                        ?: '111'
-                    ,
+                    'mode_id' => $this->mode_id ?: '111',
+//                    'mode_id' => isset($this->mode_id) ? $this->mode_id : null,
                     'vdate' => $this->vdate,
                     'receipt_type_id' => $this->receipt_type_id ?: '85',
                     'remarks' => $this->remarks,
@@ -756,8 +755,20 @@ class Index extends Component
         $this->account_book_id = '';
         $this->vdate = Carbon::now()->format('Y-m-d');
     }
-
     #endregion
+
+    public function deleteFunction($id): void
+    {
+        if ($id) {
+            $obj = Transaction::find($id);
+            if ($obj) {
+                $obj->delete();
+                $message = "Deleted Successfully";
+                $this->dispatch('notify', ...['type' => 'success', 'content' => $message]);
+            }
+        }
+    }
+
 
     #region[render]
     public function render()
