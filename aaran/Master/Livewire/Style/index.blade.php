@@ -43,8 +43,12 @@
                         <x-aaran-ui::table.cell-text>{{$index+1}}</x-aaran-ui::table.cell-text>
 
                         <x-aaran-ui::table.cell-text>
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->image) }}" alt="image"
-                                 class="flex w-10 h-10"
+{{--                            <img src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->image) }}" alt="image"--}}
+{{--                            <img src="{{ asset('storage/images/'.$row->image) }}" alt="image"--}}
+                            <img src="{{ Storage::url('images/'.$row->image) }}" alt="image"
+
+
+                            class="flex w-10 h-10"
                             />
                         </x-aaran-ui::table.cell-text>
 

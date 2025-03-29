@@ -16,24 +16,9 @@ class ProductModel extends Component
 {
     public bool $showModel = false;
 
-    public $vname = "";
+    public $vname;
     public $quantity;
     public $price;
-
-//    public function mount($name): void
-//    {
-//        $this->vname = $name;
-//        $this->producttype_id = 92;
-//        $this->producttype_name = $this->producttype_id ? Common::find($this->producttype_id)->vname : '';
-//        $this->hsncode_id = 61;
-//        $this->hsncode_name = $this->hsncode_id ? Common::find($this->hsncode_id)->vname : '';
-//        $this->unit_id = 94;
-//        $this->unit_name = $this->unit_id ? Common::find($this->unit_id)->vname : '';
-//        $this->gstpercent_id = 100;
-//        $this->gstpercent_name = $this->gstpercent_id ? Common::find($this->gstpercent_id)->vname : '';
-//        $this->quantity = 0;
-//        $this->price = 0;
-//    }
 
     public function mount($name, $producttype_id = null, $hsncode_id = null, $unit_id = null, $gstpercent_id = null): void
     {

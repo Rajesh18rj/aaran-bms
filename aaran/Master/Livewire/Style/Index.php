@@ -55,26 +55,22 @@ class Index extends Component
     public function save_image()
     {
         if ($this->image) {
+            $filename = time().'_'.$this->image->getClientOriginalName();
 
-            $image = $this->image;
-            $filename = $this->image->getClientOriginalName();
-
-            if (Storage::disk('public')->exists(Storage::path('public/images/' . $this->old_image))) {
-                Storage::disk('public')->delete(Storage::path('public/images/' . $this->old_image));
+            // Delete old image if exists
+            if ($this->old_image && Storage::disk('public')->exists('images/' . $this->old_image)) {
+                Storage::disk('public')->delete('images/' . $this->old_image);
             }
 
-            $image->storeAs('public/images', $filename);
+            // Store the image in 'storage/app/public/images'
+            $this->image->storeAs('images', $filename, 'public');
 
             return $filename;
-
-        } else {
-            if ($this->old_image) {
-                return $this->old_image;
-            } else {
-                return 'no_image';
-            }
         }
+
+        return $this->old_image ?? 'no_image.png'; // Return old image or a default one
     }
+
     #endregion
 
     #region[getObj]

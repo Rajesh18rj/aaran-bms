@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->string('vdate');
             $table->decimal('vname', 15, 2);
 
-            $table->foreignId('receipttype_id')->references('id')->on('receipt_types');
+            $table->foreignId('receipt_type_id')->references('id')->on('receipt_types');
             $table->string('remarks');
             $table->string('chq_no')->nullable();
             $table->string('chq_date')->nullable();
@@ -42,7 +42,7 @@ return new class extends Migration {
             $table->string('verified_on')->nullable();
 
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('active_id', 10)->nullable();
+            $table->tinyInteger('active_id', )->nullable();
 
             $table->timestamps();
         });

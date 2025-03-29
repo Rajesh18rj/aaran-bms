@@ -45,7 +45,7 @@ class Transaction extends Model
 
     public function receiptType()
     {
-        return $this->belongsTo(ReceiptType::class, 'receipttype_id');
+        return $this->belongsTo(ReceiptType::class, 'receipt_type_id');
     }
 
     public function mode(): BelongsTo

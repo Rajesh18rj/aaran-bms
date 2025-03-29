@@ -321,12 +321,14 @@
                             class="font-semibold w-2/5">{{$obj->Vehtype}}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Generated Date</span><span
                             class="w-1/5">:</span>
-                        <span
-                            class="font-semibold w-2/5">{{ $eWay->ewbdt }}
-                        </span>
+{{--                        <span--}}
+{{--                            class="font-semibold w-2/5">{{ $eWay->ewbdt }}--}}
+{{--                        </span>--}}
+                        <span class="font-semibold w-2/5">{{ optional($eWay)->ewbdt ?? 'N/A' }}</span>
+
                     </div>
                     <div class="inline-flex "><span class="w-2/5"> Valid Upto</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{ $eWay->ewbvalidtill }}</span></div>
+                            class="font-semibold w-2/5">{{ optional($eWay)->ewbvalidtill }}</span></div>
                 </div>
             </div>
         </div>
@@ -503,7 +505,7 @@
                     class="w-2/5">{{$obj->transport_no}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5">{{ $eWay->ewbdt }}</span>
+                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5">{{ optional($eWay)->ewbdt }}</span>
             </div>
         </div>
     </div>
@@ -841,9 +843,9 @@
                             class="font-semibold w-2/5">{{$obj->Vehtype}}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Generated Date</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{ $eWay->ewbdt }}</span></div>
+                            class="font-semibold w-2/5">{{ optional($eWay)->ewbdt }}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Valid Upto</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{ $eWay->ewbvalidtill }}</span></div>
+                            class="font-semibold w-2/5">{{ optional($eWay)->ewbvalidtill }}</span></div>
                 </div>
             </div>
         </div>
@@ -1020,7 +1022,7 @@
                     class="w-2/5">{{$obj->transport_no}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5">{{ $eWay->ewbdt }}</span>
+                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5">{{ optional($eWay)->ewbdt }}</span>
 
             </div>
         </div>
@@ -1359,9 +1361,9 @@
                             class="font-semibold w-2/5">{{$obj->Vehtype}}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Generated Date</span><span
                             class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{ $eWay->ewbdt }}</span></div>
+                            class="font-semibold w-2/5">{{ optional($eWay)->ewbdt }}</span></div>
                     <div class="inline-flex "><span class="w-2/5"> Valid Upto</span><span class="w-1/5">:</span><span
-                            class="font-semibold w-2/5">{{ $eWay->ewbvalidtill }}</span></div>
+                            class="font-semibold w-2/5">{{ optional($eWay)->ewbvalidtill }}</span></div>
                 </div>
             </div>
         </div>
@@ -1538,7 +1540,7 @@
                     class="w-2/5">{{$obj->transport_no}}</span>
             </div>
             <div class="flex justify-between">
-                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5">{{ $eWay->ewbdt }}</span>
+                <span class="w-2/5">Date</span><span class="w-1/5">:</span><span class="w-2/5">{{ optional($eWay)->ewbdt }}</span>
 
             </div>
         </div>

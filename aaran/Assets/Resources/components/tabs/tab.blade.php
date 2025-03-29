@@ -1,5 +1,6 @@
 <li>
     <button
+        x-data @keydown.tab.stop
         :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
         @click="select($el.id)"
         @mousedown.prevent

@@ -170,12 +170,10 @@
                                             <x-aaran-ui::dropdown.select>
                                                 @if($productCollection)
                                                     @forelse ($productCollection as $i => $product)
-                                                        <x-aaran-ui::dropdown.option highlight="{{$highlightProduct === $i  }}"
-                                                                           wire:click.prevent="setProduct('{{$product->vname}}','{{$product->id}}','{{$product->gstpercent_id}}')">
-                                                            {{ $product->vname }} &nbsp;-&nbsp; GST&nbsp;:
-                                                            &nbsp;
-                                                            {{ \Aaran\Common\Models\GstPercent::find($product->gstpercent_id)?->vname ?? '' }}
-                                                            %
+                                                        <x-aaran-ui::dropdown.option
+                                                            highlight="{{ $highlightProduct === $i }}"
+                                                            wire:click.prevent="setProduct('{{ $product->vname }}', '{{ $product->id }}', '{{ $product->gstpercent_id }}')">
+                                                            {{ $product->vname }} &nbsp;-&nbsp; GST&nbsp;: {{ $product->gstpercent->vname ?? 'N/A' }} %
                                                         </x-aaran-ui::dropdown.option>
                                                     @empty
                                                         @livewire('aaran.master.product.lookup.product-model',[$product_name])

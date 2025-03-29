@@ -17,7 +17,7 @@
     @if($showModel)
         <div x-data x-init="$refs.vname.focus()">
 
-            <div wire:click="clearAll"
+        <div wire:click="clearAll"
                  class="fixed inset-0 bg-gray-900  bg-opacity-90 cursor-pointer"></div>
 
             <div
