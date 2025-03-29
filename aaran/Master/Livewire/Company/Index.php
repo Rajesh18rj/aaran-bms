@@ -662,7 +662,7 @@ class Index extends Component
 //        $this->log = Logbook::where('vname', 'Company')->take(5)->get();
         return view('master::Company.index')->with([
             'list' => $this->getListForm->getList(Company::class, function ($query) {
-                return $query ;
+                return $query;
 //                    ->where('tenant_id', session()->get('tenant_id'));
             }),
         ]);
