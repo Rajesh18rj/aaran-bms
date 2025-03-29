@@ -55,7 +55,7 @@
         </x-aaran-ui::table.form>
 
         <x-aaran-ui::modal.delete/>
-        <div class="">{{ $list->links() }}</div>
+{{--        <div class="">{{ $list->links() }}</div>--}}
 
 
 
