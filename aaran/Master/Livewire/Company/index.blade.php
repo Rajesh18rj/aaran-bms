@@ -82,7 +82,7 @@
                             <div class="flex flex-col gap-3" >
                                 <x-aaran-ui::input.floating wire:model.live="common.vname" label="Name"/>
                                 @error('common.vname')
-                                <span class="text-red-400">{{$message}}</span>
+                                <span class="text-red-400 text-xs">{{$message}}</span>
                                 @enderror
                                 <x-aaran-ui::input.floating wire:model="display_name" label="Display-name"/>
                                 <x-aaran-ui::input.floating wire:model="mobile" label="Mobile"/>
@@ -103,11 +103,11 @@
                             <div class="flex flex-col gap-3">
                                 <x-aaran-ui::input.floating wire:model.live="address_1" label="Address" />
                                 @error('address_1')
-                                <span class="text-red-400">{{$message}}</span>
+                                <span class="text-red-400 text-xs">{{$message}}</span>
                                 @enderror
                                 <x-aaran-ui::input.floating wire:model.live="address_2" label="Area-Road" />
                                 @error('address_2')
-                                <span class="text-red-400">{{$message}}</span>
+                                <span class="text-red-400 text-xs">{{$message}}</span>
                                 @enderror
 
                                 <!-- City ----------------------------------------------------------------------------->
@@ -134,7 +134,7 @@
                                     </div>
                                 </x-aaran-ui::dropdown.wrapper>
                                 @error('city_name')
-                                <span class="text-red-400">{{$message}}</span>
+                                <span class="text-red-400 text-xs">{{$message}}</span>
                                 @enderror
 
                                 <!-- State ---------------------------------------------------------------------------->
@@ -162,7 +162,7 @@
                                 </x-aaran-ui::dropdown.wrapper>
 
                                 @error('state_name')
-                                <span class="text-red-400">{{$message}}</span>
+                                <span class="text-red-400 text-xs">{{$message}}</span>
                                 @enderror
                                 <!-- Pin-code ------------------------------------------------------------------------->
 
@@ -188,7 +188,7 @@
                                     </div>
                                 </x-aaran-ui::dropdown.wrapper>
                                 @error('pincode_name')
-                                <span class="text-red-400">{{$message}}</span>
+                                <span class="text-red-400 text-xs">{{$message}}</span>
                                 @enderror
 
                                 <!-- country ------------------------------------------------------------------------->
@@ -214,7 +214,7 @@
                                     </div>
                                 </x-aaran-ui::dropdown.wrapper>
                                 @error('country_name')
-                                <span class="text-red-400">{{$message}}</span>
+                                <span class="text-red-400 text-xs">{{$message}}</span>
                                 @enderror
                             </div>
                         </x-aaran-ui::tabs.content>

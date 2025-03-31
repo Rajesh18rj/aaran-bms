@@ -58,7 +58,7 @@ class Index extends Component
     {
         return [
             'common.vname' => 'required|unique:companies,vname',
-            'gstin' => 'required|unique:companies,gstin',
+            'gstin' => 'unique:companies,gstin',
             'address_1' => 'required',
             'address_2' => 'required',
             'city_name' => 'required',
