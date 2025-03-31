@@ -71,7 +71,7 @@
 
                 <x-aaran-ui::input.floating wire:model.live="common.vname" label="Product Name"/>
                 @error('common.vname')
-                <span class="text-red-400">{{$message}}</span>
+                <span class="text-red-400 text-xs">{{$message}}</span>
                 @enderror
 
                 <x-aaran-ui::dropdown.wrapper label="Product Type" type="producttypeTyped">
@@ -134,7 +134,7 @@
                     </div>
                 </x-aaran-ui::dropdown.wrapper>
                 @error('hsncode_name')
-                <span class="text-red-400">{{$message}}</span>
+                <span class="text-red-400 text-xs">{{$message}}</span>
                 @enderror
 
                 <!-- Unit Type ---------------------------------------------------------------------------------------->
@@ -161,7 +161,7 @@
                     </div>
                 </x-aaran-ui::dropdown.wrapper>
                 @error('unit_name')
-                <span class="text-red-400">{{$message}}</span>
+                <span class="text-red-400 text-xs">{{$message}}</span>
                 @enderror
 
                 <!-- GST Percent -------------------------------------------------------------------------------------->
@@ -187,11 +187,12 @@
                             @endif
 
                         </x-aaran-ui::dropdown.select>
-                        @error('gstpercent_name')
-                        <span class="text-red-400">{{$message}}</span>
-                        @enderror
                     </div>
                 </x-aaran-ui::dropdown.wrapper>
+                @error('gstpercent_name')
+                <span class="text-red-400 text-xs">{{$message}}</span>
+                @enderror
+
                 <x-aaran-ui::input.floating wire:model="quantity" label="Opening Quantity"/>
                 <x-aaran-ui::input.floating wire:model="price" label="Opening Price"/>
             </div>
