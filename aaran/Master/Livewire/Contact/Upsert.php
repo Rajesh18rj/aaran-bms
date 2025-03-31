@@ -55,7 +55,8 @@ class Upsert extends Component
     {
         return [
             'vname' => 'required|unique:contacts,vname',
-            'gstin' => 'required|unique:contacts,gstin',
+            'mobile' => 'required',
+            'gstin' => 'unique:contacts,gstin',
             'itemList.0.address_1' => 'required',
             'itemList.0.address_2' => 'required',
             'itemList.0.city_name' => 'required',
@@ -628,13 +629,11 @@ class Upsert extends Component
     #region[Save]
     public function save(): void
     {
+        $this->validate($this->rules());
         $company_id = Company::value('id');
 
         if (!empty($this->vname)) {
             if (empty($this->vid)) {
-                // Validation
-                $this->validate($this->rules());
-
                 $contactTypeId = !empty($this->contact_type_id) ? $this->contact_type_id : ContactType::value('id') ?? 124;
 
                 // Creating new contact

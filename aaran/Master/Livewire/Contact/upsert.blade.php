@@ -26,9 +26,12 @@
 
                             <x-aaran-ui::input.floating wire:model.live="vname" label="Contact Name"/>
                             @error('vname')
-                            <span class="text-red-400">{{$message}}</span>
+                            <span class="text-red-400">{{'Contact Name is Required'}}</span>
                             @enderror
                             <x-aaran-ui::input.floating wire:model="mobile" label="Mobile"/>
+                            @error('mobile')
+                            <span class="text-red-400">{{'Mobile Number is Required'}}</span>
+                            @enderror
                             <x-aaran-ui::input.floating wire:model="whatsapp" label="Whatsapp"/>
                             <x-aaran-ui::input.floating wire:model="contact_person" label="Contact Person"/>
                             <x-aaran-ui::input.floating wire:model.live="gstin" label="GST No"/>
