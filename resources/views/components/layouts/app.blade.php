@@ -29,7 +29,7 @@
      class="min-h-screen bg-white print:bg-white">
     <div class="flex-1">
 
-        <x-aaran-ui::menu.app.top-menu>{{$header}}</x-aaran-ui::menu.app.top-menu>
+        <x-aaran-ui::menu.app.top-menu class="py-10">{{$header}}</x-aaran-ui::menu.app.top-menu>
         <x-aaran-ui::menu.app.side-menu/>
 
         <!-- Page Content -->

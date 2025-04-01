@@ -21,7 +21,7 @@ shadow-md print:hidden">
             </div>
             <!-- Page Heading -->
             <div
-                class=" font-semibold sm:text-xl text-md text-gray-800 leading-tight sm:px-0 px-2 self-start">
+                class="mt-2 font-semibold sm:text-xl text-md text-gray-800 leading-tight sm:px-0 px-2 self-start">
 
                 {{$slot ?? 'Dashboard'}}
             </div>
