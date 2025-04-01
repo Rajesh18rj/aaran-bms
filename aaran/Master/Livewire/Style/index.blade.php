@@ -43,14 +43,16 @@
                         <x-aaran-ui::table.cell-text>{{$index+1}}</x-aaran-ui::table.cell-text>
 
                         <x-aaran-ui::table.cell-text>
-{{--                            <img src="{{ \Illuminate\Support\Facades\Storage::url('images/'.$row->image) }}" alt="image"--}}
-{{--                            <img src="{{ asset('storage/images/'.$row->image) }}" alt="image"--}}
-                            <img src="{{ Storage::url('images/'.$row->image) }}" alt="image"
-
-
-                            class="flex w-10 h-10"
-                            />
+                            @if(empty($row->image) || $row->image === 'no image')
+                                <img src="{{ asset('storage/images/no_image.jpg') }}" alt="No Image"
+                                     class="flex w-10 h-10" />
+                            @else
+                                <img src="{{ Storage::url('images/'.$row->image) }}" alt="image"
+                                     class="flex w-10 h-10" />
+                            @endif
                         </x-aaran-ui::table.cell-text>
+
+
 
                         <x-aaran-ui::table.cell-text left>{{$row->vname}}</x-aaran-ui::table.cell-text>
 
