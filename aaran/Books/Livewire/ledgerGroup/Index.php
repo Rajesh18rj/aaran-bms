@@ -20,9 +20,17 @@ class Index extends Component
     public $current;
     #endregion
 
+    public function rules(): array
+    {
+        return [
+            'common.vname' => 'required|unique:ledger_groups,vname',
+        ];
+    }
+
     #region[getSave]
     public function getSave(): void
     {
+        $this->validate($this->rules());
         if ($this->common->vid == '') {
             $LedgerGroup = new LedgerGroup();
             $extraFields = [

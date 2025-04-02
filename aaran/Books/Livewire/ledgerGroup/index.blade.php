@@ -86,7 +86,12 @@
                     </div>
                 </x-aaran-ui::dropdown.wrapper>
 
-                <x-aaran-ui::input.floating wire:model="common.vname" label="Name"/>
+                <div>
+                    <x-aaran-ui::input.floating wire:model="common.vname" label="Name"/>
+                    @error('common.vname')
+                        <span class="text-red-400 text-xs">{{'Name is Required'}}</span>
+                    @enderror
+                </div>
 
                 <x-aaran-ui::input.lookup-text wire:model="description" label="Desc"/>
 
